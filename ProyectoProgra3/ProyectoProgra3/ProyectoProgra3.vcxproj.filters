@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Figuras">
+      <UniqueIdentifier>{7516258a-99ea-41e7-9809-7ebdf8155984}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Figuras\Header">
+      <UniqueIdentifier>{27bcf53e-6d74-4e07-9783-87d4b098833f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Figuras\Resource">
+      <UniqueIdentifier>{8286c77b-b245-4ae6-ae34-b070d8532d5f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C_Curva.h">
+      <Filter>Figuras\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="C_Elipse.h">
+      <Filter>Figuras\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="C_Linea.h">
+      <Filter>Figuras\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="C_Poligono.h">
+      <Filter>Figuras\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="C_Rectangulo.h">
+      <Filter>Figuras\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="C_Texto.h">
+      <Filter>Figuras\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="C_TiraLineas.h">
+      <Filter>Figuras\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="C_Triangulo.h">
+      <Filter>Figuras\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="C_RRedondeado.h">
+      <Filter>Figuras\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="C_Dibujable.h">
+      <Filter>Figuras</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ProyectoProgra3.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C_Curva.cpp">
+      <Filter>Figuras\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="C_Elipse.cpp">
+      <Filter>Figuras\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="C_Linea.cpp">
+      <Filter>Figuras\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="C_Poligono.cpp">
+      <Filter>Figuras\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="C_Rectangulo.cpp">
+      <Filter>Figuras\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="C_Texto.cpp">
+      <Filter>Figuras\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="C_TiraLineas.cpp">
+      <Filter>Figuras\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="C_Triangulo.cpp">
+      <Filter>Figuras\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="C_RRedondeado.cpp">
+      <Filter>Figuras\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="C_Dibujable.cpp">
+      <Filter>Figuras</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
