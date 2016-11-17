@@ -1,0 +1,22 @@
+1)Todos los atributos privados de las clases llevan un "_" antes del nombre:
+ej.
+class algo
+{
+   int _otro;
+public:
+   void algo();
+}
+
+2)Escribiremos todo en Español. (excepciones: termino "factory")
+
+3)Cada quien trabajara en su propia "branch"
+
+4)IDs:
+Curva 1
+Elipse 2
+Linea 3
+Poligono 4
+RRedondeado 5
+Texto 6
+TiraLineas 7
+Triangulo 8

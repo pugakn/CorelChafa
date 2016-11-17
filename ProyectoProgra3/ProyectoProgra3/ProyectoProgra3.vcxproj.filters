@@ -63,6 +63,18 @@
     <ClInclude Include="C_Dibujable.h">
       <Filter>Figuras</Filter>
     </ClInclude>
+    <ClInclude Include="C_Capa.h">
+      <Filter>Figuras</Filter>
+    </ClInclude>
+    <ClInclude Include="C_Figura.h">
+      <Filter>Figuras</Filter>
+    </ClInclude>
+    <ClInclude Include="C_Seleccionable.h">
+      <Filter>Figuras</Filter>
+    </ClInclude>
+    <ClInclude Include="Factory.h">
+      <Filter>Figuras</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -99,6 +111,18 @@
       <Filter>Figuras\Resource</Filter>
     </ClCompile>
     <ClCompile Include="C_Dibujable.cpp">
+      <Filter>Figuras</Filter>
+    </ClCompile>
+    <ClCompile Include="C_Capa.cpp">
+      <Filter>Figuras</Filter>
+    </ClCompile>
+    <ClCompile Include="C_Figura.cpp">
+      <Filter>Figuras</Filter>
+    </ClCompile>
+    <ClCompile Include="C_Seleccionable.cpp">
+      <Filter>Figuras</Filter>
+    </ClCompile>
+    <ClCompile Include="Factory.cpp">
       <Filter>Figuras</Filter>
     </ClCompile>
   </ItemGroup>

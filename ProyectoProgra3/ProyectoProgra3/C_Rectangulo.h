@@ -1,5 +1,6 @@
 #pragma once
-#include "C_Dibujable.h"
+#include "C_Figura.h"
+#define ClassID_Rectangulo 5
 
 class C_Rectangulo : public C_Figura
 {

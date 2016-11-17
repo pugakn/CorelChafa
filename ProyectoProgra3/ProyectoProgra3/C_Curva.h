@@ -1,5 +1,6 @@
 #pragma once
-#include "C_Dibujable.h"
+#include "C_Figura.h"
+#define ClassID_Curva 1
 
 class C_Curva : public C_Figura
 {
