@@ -1,15 +1,21 @@
 #pragma once
 #include "C_Seleccionable.h"
+#include "SFML\Graphics.hpp"
 
 class C_Figura : public C_Seleccionable
 {
-public:
+protected:
 	bool Seleccionado;
 	long ID;
-	C_Figura();
-	~C_Figura();
-	//RBG_Triple Color_Relleno;
-	//Point Posicion;
-	//RGB_Triple Color_Linea;
-	//Set o Get Accesores necesarios
+	sf::Color _colorRelleno;
+	sf::Color _colorLinea;
+	sf::Vector2f _posicion;
+public:
+	virtual bool setPosicion(sf::Vector2f posicion) = 0;
+	virtual sf::Vector2f getPosicion();
+	virtual void setColorRelleno(sf::Color) = 0;
+	virtual sf::Color getColorRelleno();
+	virtual void setColorLinea(sf::Color) = 0;
+	virtual sf::Color getColorLinea();
+	virtual ~C_Figura();
 };
