@@ -39,18 +39,6 @@ bool C_Poligono::setPosicion(sf::Vector2f posicion)
 	return false;
 }
 
-int C_Poligono::GetClassID()
-{
-	return 0;
-}
-
-void C_Poligono::Guardar()
-{
-}
-
-void C_Poligono::Cargar()
-{
-}
 
 bool C_Poligono::HitTest()
 {
