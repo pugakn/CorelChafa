@@ -6,4 +6,5 @@ public:
 	bool Bloqueado;
 	bool Visible;
 	virtual bool HitTest() = 0;
+
 };

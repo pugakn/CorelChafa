@@ -12,6 +12,11 @@ public:
 	void Eliminar();
 	void Subir();
 	void Bajar();
+	//Guardar Cargar
+	int GetCLSID();
+	void Guardar(ofstream &out);
+	void Cargar(ifstream &in);
+	//Guardar Cargar
 	C_Capa();
 	~C_Capa();
 };
