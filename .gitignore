@@ -279,3 +279,5 @@ __pycache__/
 ProyectoProgra3/.vs/ProyectoProgra3/v14/.suo
 *.vcxproj
 *.vcxproj
+*.VC.opendb
+*.VC.db
