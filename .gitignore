@@ -273,3 +273,7 @@ __pycache__/
 
 # Cake - Uncomment if you are using it
 # tools/
+*.log
+*.log
+*.db
+ProyectoProgra3/.vs/ProyectoProgra3/v14/.suo
