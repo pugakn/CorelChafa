@@ -9,6 +9,11 @@ private:
 	float _radio;
 	sf::CircleShape _shape;
 public:
+	//Guardar Cargar
+	int GetCLSID();
+	void Guardar(ofstream &out);
+	void Cargar(ifstream &in);
+	//Guardar Cargar
 	C_Poligono();
 	C_Poligono(std::size_t  lados, float radio);
 	~C_Poligono();

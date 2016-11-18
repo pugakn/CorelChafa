@@ -8,6 +8,19 @@ sf::Vector2f operator/(sf::Vector2f A, sf::Vector2f B) {
 	return sf::Vector2f(A.x/B.x, A.y/B.y);
 }
 
+int C_Triangulo::GetCLSID()
+{
+	return 0;
+}
+
+void C_Triangulo::Guardar(ofstream & out)
+{
+}
+
+void C_Triangulo::Cargar(ifstream & in)
+{
+}
+
 C_Triangulo::C_Triangulo()
 {
 }
@@ -62,18 +75,6 @@ bool C_Triangulo::setPosicion(sf::Vector2f posicion)
 	return false;
 }
 
-int C_Triangulo::GetClassID()
-{
-	return 0;
-}
-
-void C_Triangulo::Guardar()
-{
-}
-
-void C_Triangulo::Cargar()
-{
-}
 
 bool C_Triangulo::HitTest()
 {
