@@ -277,3 +277,5 @@ __pycache__/
 *.log
 *.db
 ProyectoProgra3/.vs/ProyectoProgra3/v14/.suo
+*.vcxproj
+*.vcxproj
