@@ -9,6 +9,27 @@ int C_Curva::GetCLSID()
 
 void C_Curva::Guardar(ofstream & out)
 {
+	out << ID << endl;
+
+	out << _p1.x << endl;
+	out << _p1.y << endl;
+	out << _p2.x << endl;
+	out << _p2.y << endl;
+	out << _c1.x << endl;
+	out << _c1.y << endl;
+	out << _c2.x << endl;
+	out << _c2.y << endl;
+
+	out << _colorLinea.r << endl;
+	out << _colorLinea.g << endl;
+	out << _colorLinea.b << endl;
+
+	out << _colorRelleno.r << endl;
+	out << _colorRelleno.g << endl;
+	out << _colorRelleno.b << endl;
+
+	out << _posicion.x << endl;
+	out << _posicion.y << endl;
 }
 
 void C_Curva::Cargar(ifstream & in)

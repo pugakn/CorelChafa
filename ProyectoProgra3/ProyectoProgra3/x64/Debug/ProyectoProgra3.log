@@ -15,4 +15,4 @@
   C_Curva.cpp
   C_Capa.cpp
   Generating Code...
-LINK : fatal error LNK1104: cannot open file 'sfml-graphics-d.lib sfml-window-d.lib sfml-system-d.lib'
+sfml-graphics-d.lib(sfml-graphics-d-2.dll) : fatal error LNK1112: module machine type 'X86' conflicts with target machine type 'x64'
