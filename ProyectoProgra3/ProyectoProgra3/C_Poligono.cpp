@@ -47,11 +47,13 @@ bool C_Poligono::HitTest()
 
 void C_Poligono::setColorRelleno(sf::Color color)
 {
+	_colorRelleno = color;
 	_shape.setFillColor(color);
 }
 
 void C_Poligono::setColorLinea(sf::Color color)
 {
+	_colorLinea = color;
 	_shape.setOutlineColor(color);
 }
 

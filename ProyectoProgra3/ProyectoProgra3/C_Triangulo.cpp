@@ -36,6 +36,12 @@ C_Triangulo::C_Triangulo(float l1, float l2)
 	_shape[0].position = sf::Vector2f(l1 * -.5f,0);
 	_shape[1].position = sf::Vector2f(l1 * .5f, 0);
 	_shape[2].position = sf::Vector2f(l1 * .5f, -l2);
+
+	_originalPos.clear();
+	_originalPos.resize(3);
+	_originalPos[0] = _shape[0].position - _shape[0].position;
+	_originalPos[1] = _shape[1].position - _shape[0].position;
+	_originalPos[2] = _shape[2].position - _shape[0].position;
 	//Centrar en el origen
 	_shape[0] = sf::Vector2f( _shape[0].position.x, _shape[0].position.y - _shape[2].position.y *0.5f);
 	_shape[1] = sf::Vector2f(_shape[1].position.x, _shape[1].position.y - _shape[2].position.y *0.5f);
@@ -62,14 +68,14 @@ bool C_Triangulo::setPosicion(sf::Vector2f posicion)
 {
 	if (posicion.x > 0 && posicion.y > 0) {
 		_posicion = posicion;
-		_shape[0].position += posicion;
-		_shape[1].position += posicion;
-		_shape[2].position += posicion;
+		_shape[0].position = _originalPos[0] + posicion;
+		_shape[1].position = _originalPos[1] + posicion;
+		_shape[2].position = _originalPos[2] + posicion;
 
-		_linea[0].position += posicion;
-		_linea[1].position += posicion;
-		_linea[2].position += posicion;
-		_linea[3].position += posicion;
+		_linea[0].position = _originalPos[0] + posicion;
+		_linea[1].position = _originalPos[1] + posicion;
+		_linea[2].position = _originalPos[2] + posicion;
+		_linea[3].position = _originalPos[0] + posicion;
 		return true;
 	}
 	return false;
@@ -83,6 +89,7 @@ bool C_Triangulo::HitTest()
 
 void C_Triangulo::setColorRelleno(sf::Color color)
 {
+	_colorRelleno = color;
 	for (int i = 0; i < 3;i++) {
 		_shape[i].color = color;
 	}
@@ -91,6 +98,7 @@ void C_Triangulo::setColorRelleno(sf::Color color)
 
 void C_Triangulo::setColorLinea(sf::Color color)
 {
+	_colorLinea = color;
 	for (int i = 0; i < 4; i++) {
 		_linea[i].color = color;
 	}

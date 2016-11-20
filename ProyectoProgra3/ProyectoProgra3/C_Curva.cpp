@@ -28,8 +28,11 @@ C_Curva::C_Curva(sf::Vector2f p1, sf::Vector2f p2, sf::Vector2f c1, sf::Vector2f
 	_vertices = sf::VertexArray (sf::LinesStrip, 0);
 	std::vector<sf::Vector2f> points =
 		CalcCubicBezier(p1,p2,c1,c2,40);
-	for (auto it = points.begin(); it != points.end(); ++it)
+	for (auto it = points.begin(); it != points.end(); ++it) {
 		_vertices.append(sf::Vertex(*it));
+		_originalPos.push_back(*it - _vertices[0].position);
+	}
+		
 }
 
 
@@ -68,9 +71,22 @@ void C_Curva::setColorRelleno(sf::Color color)
 
 void C_Curva::setColorLinea(sf::Color color)
 {
+	_colorLinea = color;
+	for (int i = 0; i < _vertices.getVertexCount(); i++)
+	{
+		_vertices[i].color = color;
+	}
 }
 
 bool C_Curva::setPosicion(sf::Vector2f posicion)
 {
+	if (posicion.x > 0 && posicion.y > 0) {
+		_posicion = posicion;
+		for (int i = 0; i < _vertices.getVertexCount(); i++)
+		{
+				_vertices[i].position = _originalPos[i] + posicion;
+		}
+		return true;
+	}
 	return false;
 }
