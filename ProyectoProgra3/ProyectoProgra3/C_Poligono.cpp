@@ -4,22 +4,39 @@
 
 int C_Poligono::GetCLSID()
 {
-	return 0;
+	return ClassID_Poligono;
 }
 
 void C_Poligono::Guardar(ofstream & out)
 {
+	out << ID << endl;
+
+	out << _lados << endl;
+	out << _radio << endl;
+
+	out << _colorLinea.r << endl;
+	out << _colorLinea.g << endl;
+	out << _colorLinea.b << endl;
+
+	out << _colorRelleno.r << endl;
+	out << _colorRelleno.g << endl;
+	out << _colorRelleno.b << endl;
+
+	out << _posicion.x << endl;
+	out << _posicion.y << endl;
 }
 
 void C_Poligono::Cargar(ifstream & in)
 {
+	
+	
 }
 
 C_Poligono::C_Poligono()
 {
 }
 
-C_Poligono::C_Poligono(std::size_t  lados, float radio)
+C_Poligono::C_Poligono(int lados, float radio)
 {
 	_shape = sf::CircleShape(radio, lados);
 }

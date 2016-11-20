@@ -2,6 +2,8 @@
 #include <list>
 #include "C_Seleccionable.h"
 #include "C_Figura.h"
+#include "Factory.h"
+#define ClassID_Capa 10
 
 class C_Capa : public C_Seleccionable
 {

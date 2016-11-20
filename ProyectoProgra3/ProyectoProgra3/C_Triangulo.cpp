@@ -15,6 +15,21 @@ int C_Triangulo::GetCLSID()
 
 void C_Triangulo::Guardar(ofstream & out)
 {
+	out << ID << endl;
+
+	out << _l1 << endl;
+	out << _l2 << endl;
+
+	out << _colorLinea.r << endl;
+	out << _colorLinea.g << endl;
+	out << _colorLinea.b << endl;
+
+	out << _colorRelleno.r << endl;
+	out << _colorRelleno.g << endl;
+	out << _colorRelleno.b << endl;
+
+	out << _posicion.x << endl;
+	out << _posicion.y << endl;
 }
 
 void C_Triangulo::Cargar(ifstream & in)
