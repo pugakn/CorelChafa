@@ -8,6 +8,7 @@ public: //private
 	sf::Vector2f _p1, _p2;
 	sf::Vector2f _c1, _c2;
 	sf::VertexArray _vertices;
+	std::vector<sf::Vector2f> _originalPos;
 public:
 	//Guardar Cargar
 	int GetCLSID();
