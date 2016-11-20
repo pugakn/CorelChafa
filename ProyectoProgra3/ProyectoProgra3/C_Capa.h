@@ -8,10 +8,10 @@
 class C_Capa : public C_Seleccionable
 {
 	list<C_Figura *> Figuras;
-	C_Figura * Figura_Actual;
+	C_Figura * _figuraActual;
 public:
-	void Insertar();
-	void Eliminar();
+	void Insertar(int ClsID);
+	void Eliminar(C_Figura* item);
 	void Subir();
 	void Bajar();
 	//Guardar Cargar

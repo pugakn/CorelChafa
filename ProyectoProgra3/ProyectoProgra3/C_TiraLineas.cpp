@@ -42,7 +42,7 @@ void C_TiraLineas::setColorRelleno(sf::Color color)
 void C_TiraLineas::setColorLinea(sf::Color color)
 {
 	_colorLinea = color;
-	for (int i = 0; i < _shape.getVertexCount(); i++) {
+	for (unsigned i = 0; i < _shape.getVertexCount(); i++) {
 		_shape[i].color = color;
 	}
 }
@@ -51,7 +51,7 @@ bool C_TiraLineas::setPosicion(sf::Vector2f vector)
 {
 	_posicion = vector;
 	if (vector.x > 0 && vector.y > 0) {
-		for (int i = 0; i < _shape.getVertexCount(); i++)
+		for (unsigned i = 0; i < _shape.getVertexCount(); i++)
 		{
 			_shape[i].position = _originalPos[i] + vector;
 		}
