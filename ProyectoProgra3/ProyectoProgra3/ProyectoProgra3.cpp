@@ -34,7 +34,7 @@ int main()
 	cpa._figuraActual = cpa.Figuras.back();
 	cpa.Figuras.back()->setColorRelleno(sf::Color::Red);
 	cpa.Subir();
-	cpa.Eliminar(cpa._figuraActual);
+	cpa.Eliminar();
 	while (window.isOpen())
 	{
 		sf::Event event;
