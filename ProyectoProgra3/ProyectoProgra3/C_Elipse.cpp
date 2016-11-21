@@ -30,7 +30,7 @@ C_Elipse::C_Elipse(float ra, float rb)
 
 void C_Elipse::setColorRelleno(sf::Color color)
 {
-	for ( int it = 0; it < _shape.getVertexCount(); ++it)
+	for ( unsigned it = 0; it < _shape.getVertexCount(); ++it)
 	{
 		_shape[it].color = color;
 	}
