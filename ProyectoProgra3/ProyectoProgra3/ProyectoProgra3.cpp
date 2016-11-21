@@ -8,11 +8,12 @@
 #include "C_Elipse.h"
 #include "C_Linea.h"
 #include "C_TiraLineas.h"
+#include "C_Capa.h"
 
 int main()
 {
 	sf::RenderWindow window(sf::VideoMode(1024, 768), "Tocino hiperespacial");
-	//sf::CircleShape shape(100.f);
+	/*//sf::CircleShape shape(100.f);
 	//shape.setFillColor(sf::Color::Green);
 	//C_Linea lineatest(sf::Vector2f(800.f, 600.f),sf::Vector2f(900.f,700.f));
 	C_Elipse figuratest(200.f, 100.f);
@@ -24,7 +25,16 @@ int main()
 	tiralineas.nuevoVertice(sf::Vector2f(10, 10));
 	tiralineas.setColorLinea(sf::Color::Red);
 	testcur.setPosicion(sf::Vector2f(500,500));
-	tiralineas.setPosicion(sf::Vector2f(100,100));
+	tiralineas.setPosicion(sf::Vector2f(100,100));*/
+	C_Capa cpa;
+	cpa.InsertarTriangulo(200.f, 500.f);
+	cpa.InsertarTriangulo(150, 600);
+	cpa._figuraActual = cpa.Figuras.back();
+	cpa.InsertarTriangulo(100, 800);
+	cpa._figuraActual = cpa.Figuras.back();
+	cpa.Figuras.back()->setColorRelleno(sf::Color::Red);
+	cpa.Subir();
+	cpa.Eliminar(cpa._figuraActual);
 	while (window.isOpen())
 	{
 		sf::Event event;
@@ -35,11 +45,14 @@ int main()
 		}
 
 		window.clear();
-		window.draw(test._shape);
+		for (auto &item : cpa.Figuras) {
+			window.draw(((C_Triangulo*)item)->_shape);
+		}
+		/*window.draw(test._shape);
 		window.draw(test._linea);
 		window.draw(testcur._vertices);
 		window.draw(figuratest._shape);
-		window.draw(tiralineas._shape);
+		window.draw(tiralineas._shape);*/
 		window.display();
 	}
     return 0;
