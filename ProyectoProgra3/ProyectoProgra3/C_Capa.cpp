@@ -3,10 +3,10 @@
 
 
 
-void C_Capa::Eliminar(C_Figura* item)
+void C_Capa::Eliminar()
 {
-	Figuras.remove(item);
-	delete item;
+	Figuras.remove(_figuraActual);
+	delete _figuraActual;
 }
 
 void C_Capa::Subir()

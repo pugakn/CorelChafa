@@ -4,8 +4,8 @@
 class C_Documento : public C_Dibujable
 {
 private:
-	//std::list<C_Capa> _lista;
-	//C_Capa* _actual;
+	std::list<C_Capa*> _lista;
+	C_Capa* _actual;
 public:
 	void Insertar();
 	void Eliminar();

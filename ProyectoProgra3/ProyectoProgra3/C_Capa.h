@@ -21,7 +21,7 @@ public:
 	void InsertarPoligono(int lados, float radio);
 	//void InsertarTexto();
 
-	void Eliminar(C_Figura* item);
+	void Eliminar();
 	void Subir();
 	void Bajar();
 	//Guardar Cargar
