@@ -27,11 +27,44 @@ void C_Poligono::Guardar(ofstream & out)
 
 	out << _posicion.x << endl;
 	out << _posicion.y << endl;
+	out << Bloqueado << endl;
+	out << Visible << endl;
 }
 
 void C_Poligono::Cargar(ifstream & in)
 {
-	
+	string str;
+	getline(in, str);
+	ID = stoi(str);
+
+	getline(in, str);
+	_lados = stoi(str);
+	getline(in, str);
+	_radio = stoi(str);
+
+	getline(in, str);
+	_colorLinea.r = stoi(str);
+	getline(in, str);
+	_colorLinea.g = stoi(str);
+	getline(in, str);
+	_colorLinea.b = stoi(str);
+
+	getline(in, str);
+	_colorRelleno.r = stoi(str);
+	getline(in, str);
+	_colorRelleno.g = stoi(str);
+	getline(in, str);
+	_colorRelleno.b = stoi(str);
+
+	getline(in, str);
+	_posicion.x = stoi(str);
+	getline(in, str);
+	_posicion.y = stoi(str);
+
+	getline(in, str);
+	Bloqueado = stoi(str);
+	getline(in, str);
+	Visible = stoi(str);
 	
 }
 
