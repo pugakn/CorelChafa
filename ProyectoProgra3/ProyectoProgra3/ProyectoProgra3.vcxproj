@@ -164,6 +164,7 @@
     <ClInclude Include="C_Capa.h" />
     <ClInclude Include="C_Curva.h" />
     <ClInclude Include="C_Dibujable.h" />
+    <ClInclude Include="C_Documento.h" />
     <ClInclude Include="C_Elipse.h" />
     <ClInclude Include="C_Figura.h" />
     <ClInclude Include="C_Linea.h" />
@@ -182,6 +183,7 @@
     <ClCompile Include="C_Capa.cpp" />
     <ClCompile Include="C_Curva.cpp" />
     <ClCompile Include="C_Dibujable.cpp" />
+    <ClCompile Include="C_Documento.cpp" />
     <ClCompile Include="C_Elipse.cpp" />
     <ClCompile Include="C_Figura.cpp" />
     <ClCompile Include="C_Linea.cpp" />

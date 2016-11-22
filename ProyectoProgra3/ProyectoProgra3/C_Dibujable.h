@@ -10,4 +10,5 @@ public:
 	virtual int GetCLSID() = 0;
 	virtual void Guardar(ofstream &out) = 0;
 	virtual void Cargar(ifstream &in) = 0;
+	//virtual void Dibujar() = 0;
 };
