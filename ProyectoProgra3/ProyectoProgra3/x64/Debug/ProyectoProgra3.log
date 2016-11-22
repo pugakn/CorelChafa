@@ -1,18 +1,25 @@
-﻿  stdafx.cpp
-  ProyectoProgra3.cpp
-  Factory.cpp
-  C_Triangulo.cpp
-  C_TiraLineas.cpp
-  C_Texto.cpp
-  C_Seleccionable.cpp
-  C_RRedondeado.cpp
-  C_Rectangulo.cpp
-  C_Poligono.cpp
-  C_Linea.cpp
-  C_Figura.cpp
-  C_Elipse.cpp
-  C_Dibujable.cpp
-  C_Curva.cpp
-  C_Capa.cpp
-  Generating Code...
-LINK : fatal error LNK1104: cannot open file 'sfml-graphics-d.lib sfml-window-d.lib sfml-system-d.lib'
+﻿Build started 11/18/2016 1:20:20 PM.
+     1>Project "C:\Users\Kevin\Documents\GitHub\CorelChafa\ProyectoProgra3\ProyectoProgra3\ProyectoProgra3.vcxproj" on node 2 (Build target(s)).
+     1>Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Kevin\Documents\GitHub\CorelChafa\ProyectoProgra3\x64\Debug\ProyectoProgra3.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Users\Kevin\Pictures\SFML-2.4.0\lib" "sfml-graphics-d.lib" "sfml-window-d.lib" "sfml-system-d.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"C:\Users\Kevin\Documents\GitHub\CorelChafa\ProyectoProgra3\x64\Debug\ProyectoProgra3.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Kevin\Documents\GitHub\CorelChafa\ProyectoProgra3\x64\Debug\ProyectoProgra3.lib" /MACHINE:X64 x64\Debug\C_Capa.obj
+         x64\Debug\C_Curva.obj
+         x64\Debug\C_Dibujable.obj
+         x64\Debug\C_Elipse.obj
+         x64\Debug\C_Figura.obj
+         x64\Debug\C_Linea.obj
+         x64\Debug\C_Poligono.obj
+         x64\Debug\C_Rectangulo.obj
+         x64\Debug\C_RRedondeado.obj
+         x64\Debug\C_Seleccionable.obj
+         x64\Debug\C_Texto.obj
+         x64\Debug\C_TiraLineas.obj
+         x64\Debug\C_Triangulo.obj
+         x64\Debug\Factory.obj
+         x64\Debug\ProyectoProgra3.obj
+         x64\Debug\stdafx.obj
+     1>sfml-graphics-d.lib(sfml-graphics-d-2.dll) : fatal error LNK1112: module machine type 'X86' conflicts with target machine type 'x64'
+     1>Done Building Project "C:\Users\Kevin\Documents\GitHub\CorelChafa\ProyectoProgra3\ProyectoProgra3\ProyectoProgra3.vcxproj" (Build target(s)) -- FAILED.
+
+Build FAILED.
+
+Time Elapsed 00:00:00.19
