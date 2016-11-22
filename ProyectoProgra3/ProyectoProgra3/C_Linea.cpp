@@ -28,7 +28,7 @@ bool C_Linea::setPosicion(sf::Vector2f vector)
 	return false;
 }
 
-bool C_Linea::HitTest()
+bool C_Linea::HitTest(sf::Vector2i point)
 {
 	return false;
 }

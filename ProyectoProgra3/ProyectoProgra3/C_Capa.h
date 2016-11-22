@@ -29,7 +29,7 @@ public:
 	void Guardar(ofstream &out);
 	void Cargar(ifstream &in);
 	//Guardar Cargar
-	bool HitTest();
+	bool HitTest(sf::Vector2i point);
 	C_Capa();
 	~C_Capa();
 };

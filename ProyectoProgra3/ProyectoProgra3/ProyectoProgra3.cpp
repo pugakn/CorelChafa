@@ -26,15 +26,20 @@ int main()
 	tiralineas.setColorLinea(sf::Color::Red);
 	testcur.setPosicion(sf::Vector2f(500,500));
 	tiralineas.setPosicion(sf::Vector2f(100,100));*/
+	C_Poligono poli(5,50);
 	C_Capa cpa;
 	cpa.InsertarTriangulo(200.f, 500.f);
-	cpa.InsertarTriangulo(150, 600);
+	/*cpa.InsertarTriangulo(150, 600);
 	cpa._figuraActual = cpa.Figuras.back();
-	cpa.InsertarTriangulo(100, 800);
+	cpa.InsertarTriangulo(100, 800);*/
 	cpa._figuraActual = cpa.Figuras.back();
 	cpa.Figuras.back()->setColorRelleno(sf::Color::Red);
-	cpa.Subir();
-	cpa.Eliminar(cpa._figuraActual);
+	//cpa.Subir();
+	//cpa.Eliminar();
+	C_TiraLineas tiral(sf::Vector2f(0,0), sf::Vector2f(500,500));
+	tiral.nuevoVertice(sf::Vector2f(200,800));
+	poli.setPosicion(sf::Vector2f(500, 500));
+	C_Curva testcur(sf::Vector2f(0, 100), sf::Vector2f(300, 200), sf::Vector2f(0, 150), sf::Vector2f(300, 150));
 	while (window.isOpen())
 	{
 		sf::Event event;
@@ -47,7 +52,12 @@ int main()
 		window.clear();
 		for (auto &item : cpa.Figuras) {
 			window.draw(((C_Triangulo*)item)->_shape);
+			item->HitTest(sf::Mouse::getPosition(window));
 		}
+		window.draw(tiral._shape);
+		window.draw(testcur._vertices);
+		testcur.HitTest(sf::Mouse::getPosition(window));
+		//tiral.HitTest(sf::Mouse::getPosition(window));
 		/*window.draw(test._shape);
 		window.draw(test._linea);
 		window.draw(testcur._vertices);

@@ -45,7 +45,7 @@ bool C_Elipse::setPosicion(sf::Vector2f vector)
 	return false;
 }
 
-bool C_Elipse::HitTest()
+bool C_Elipse::HitTest(sf::Vector2i point)
 {
 	return false;
 }

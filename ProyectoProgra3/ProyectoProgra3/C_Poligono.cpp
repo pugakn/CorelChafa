@@ -1,5 +1,8 @@
 #include "stdafx.h"
 #include "C_Poligono.h"
+#include "VECTOR.h"
+
+#include <iostream>
 
 
 int C_Poligono::GetCLSID()
@@ -38,7 +41,17 @@ C_Poligono::C_Poligono()
 
 C_Poligono::C_Poligono(int lados, float radio)
 {
+	_lados = lados;
+	_radio = radio;
 	_shape = sf::CircleShape(radio, lados);
+	_originalPos.clear();
+	_originalPos.resize(_lados);
+	for (int i = 0; i < _lados;i++) {
+		float rad = (3.141592f )* 2 / _lados * i;
+		_vertices.push_back(sf::Vector2f(_radio+(_radio*cosf(rad + 1.570796f)),_radio-(_radio*sinf(rad + 1.570796f))));
+		std::cout << _vertices.back().x <<" " <<_vertices.back().y <<"                        ";
+		_originalPos[i] = _vertices[i];
+	}
 }
 
 
@@ -51,15 +64,27 @@ bool C_Poligono::setPosicion(sf::Vector2f posicion)
 	if (posicion.x > 0 && posicion.y > 0) {
 		_posicion = posicion;
 		_shape.setPosition(posicion);
+		for (int i = 0; i < _lados; i++) {
+			_vertices[i] = _originalPos[i] + posicion;
+		}
 		return true;
 	}
 	return false;
 }
 
 
-bool C_Poligono::HitTest()
+bool C_Poligono::HitTest(sf::Vector2i point)
 {
-	return false;
+	
+	std::vector<sf::Vector3f> c;
+	for (int i = 0; i < _lados-1;i++) {
+		c.push_back( Cross(_vertices[i + 1] - _vertices[i], (sf::Vector2f)point - _vertices[i]));
+		if (c[i].z > 0) return false;
+	}
+	c.push_back( Cross(_vertices[0] - _vertices[_lados -1], (sf::Vector2f)point - _vertices[_lados -1]));
+	if (c[_lados-1].z > 0) return false;
+	std::cout << "YEI";
+	return true;
 }
 
 void C_Poligono::setColorRelleno(sf::Color color)

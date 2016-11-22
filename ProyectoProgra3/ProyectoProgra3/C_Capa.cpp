@@ -73,7 +73,7 @@ void C_Capa::Cargar(ifstream & in)
 	}
 }
 
-bool C_Capa::HitTest()
+bool C_Capa::HitTest(sf::Vector2i point)
 {
 	return false;
 }

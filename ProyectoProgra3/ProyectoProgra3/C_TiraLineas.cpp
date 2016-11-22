@@ -1,5 +1,7 @@
 #include "stdafx.h"
 #include "C_TiraLineas.h"
+#include "VECTOR.h"
+#include <iostream>
 
 
 int C_TiraLineas::GetCLSID()
@@ -61,8 +63,35 @@ bool C_TiraLineas::setPosicion(sf::Vector2f vector)
 	return false;
 }
 
-bool C_TiraLineas::HitTest()
+bool C_TiraLineas::HitTest(sf::Vector2i point)
 {
+	/*std::vector<sf::Vector3f> c;
+	int k = 0;
+	int i = 0;
+	for (; i < _shape.getVertexCount()-1; i++) {
+		c.push_back(Cross((_shape[i + 1].position + sf::Vector2f(0,15)) - (_shape[i].position + sf::Vector2f(0, 15)), (sf::Vector2f)point -( _shape[i].position + sf::Vector2f(0, 15))));
+		//if (c[k].z > 0) return false;
+		k++;
+	}
+	c.push_back(Cross((_shape[i].position - sf::Vector2f(0, 15)) - (_shape[i].position + sf::Vector2f(0, 15)), (sf::Vector2f)point - (_shape[i].position + sf::Vector2f(0, 15))));
+	//if (c[k].z > 0) return false;
+	k++;
+	for (i = _shape.getVertexCount() - 1; i > 0; i--) {
+		c.push_back(Cross((_shape[i - 1].position - sf::Vector2f(0, 15)) - (_shape[i].position - sf::Vector2f(0, 15)), (sf::Vector2f)point - (_shape[i].position - sf::Vector2f(0, 15))));
+		if (c[k].z > 0) return false;
+		k++;
+	}
+	c.push_back(Cross((_shape[0].position + sf::Vector2f(0, 15)) - (_shape[0].position - sf::Vector2f(0, 15)), (sf::Vector2f)point - (_shape[0].position - sf::Vector2f(0, 15))));
+	if (c[k ].z > 0) return false;
+	k++;*/
+
+	for (int i = 0; i < _shape.getVertexCount()-1;i++) {
+		if(HitTestTTriangle(_shape[i].position + sf::Vector2f(0, 15), _shape[i + 1].position + sf::Vector2f(0, 15), _shape[i].position - sf::Vector2f(0, 15),(sf::Vector2f)point))
+			return true;
+		if (HitTestTTriangle(_shape[i + 1].position + sf::Vector2f(0, 15), _shape[i + 1].position - sf::Vector2f(0, 15), _shape[i].position - sf::Vector2f(0, 15), (sf::Vector2f)point))
+			return true;
+	}
+	std::cout << "YEI";
 	return false;
 }
 

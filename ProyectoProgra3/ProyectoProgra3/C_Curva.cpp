@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "C_Curva.h"
+#include <iostream>
 
 
 int C_Curva::GetCLSID()
@@ -80,8 +81,15 @@ std::vector<sf::Vector2f> CalcCubicBezier(
 	return ret;
 }
 
-bool C_Curva::HitTest()
+bool C_Curva::HitTest(sf::Vector2i point)
 {
+	for (int i = 0; i < _vertices.getVertexCount() - 1; i++) {
+		if (HitTestTTriangle(_vertices[i].position + sf::Vector2f(0, 15), _vertices[i + 1].position + sf::Vector2f(0, 15), _vertices[i].position - sf::Vector2f(0, 15), (sf::Vector2f)point))
+			return true;
+		if (HitTestTTriangle(_vertices[i + 1].position + sf::Vector2f(0, 15), _vertices[i + 1].position - sf::Vector2f(0, 15), _vertices[i].position - sf::Vector2f(0, 15), (sf::Vector2f)point))
+			return true;
+	}
+	std::cout << "YEI";
 	return false;
 }
 

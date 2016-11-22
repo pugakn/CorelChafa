@@ -4,10 +4,12 @@
 
 class C_Poligono : public C_Figura
 {
-private:
+public: //private
+	std::vector<sf::Vector2f> _vertices;
 	int _lados;
 	float _radio;
 	sf::CircleShape _shape;
+	std::vector<sf::Vector2f> _originalPos;
 public:
 	//Guardar Cargar
 	int GetCLSID();
@@ -18,7 +20,7 @@ public:
 	C_Poligono(int lados, float radio);
 	~C_Poligono();
 	bool setPosicion(sf::Vector2f posicion);
-	bool HitTest();
+	bool HitTest(sf::Vector2i point);
 	void setColorRelleno(sf::Color color);
 	void setColorLinea(sf::Color color);
 };
