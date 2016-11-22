@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "C_Figura.h"
+#include "VECTOR.h"
 
 
 
@@ -21,4 +22,20 @@ sf::Color C_Figura::getColorLinea()
 
 C_Figura::~C_Figura()
 {
+}
+
+bool HitTestTTriangle(sf::Vector2f v0, sf::Vector2f v1, sf::Vector2f v2, sf::Vector2f point)
+{
+	sf::Vector2f u = v1 - v0;
+	sf::Vector2f p = (sf::Vector2f)point - v0;
+	sf::Vector3f c1 = Cross(u, p);
+
+	u = v2 - v1;
+	p = (sf::Vector2f)point - v1;
+	sf::Vector3f c2 = Cross(u, p);
+
+	u = v0 - v2;
+	p = (sf::Vector2f)point - v2;
+	sf::Vector3f c3 = Cross(u, p);
+	return (((c1.z < 0) && (c2.z < 0) && (c3.z < 0)) || ((c1.z > 0) && (c2.z > 0) && (c3.z > 0)));
 }

@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "C_Curva.h"
+#include <iostream>
 
 
 int C_Curva::GetCLSID()
@@ -30,10 +31,59 @@ void C_Curva::Guardar(ofstream & out)
 
 	out << _posicion.x << endl;
 	out << _posicion.y << endl;
+	out << Bloqueado << endl;
+	out << Visible << endl;
 }
 
 void C_Curva::Cargar(ifstream & in)
 {
+	string str;
+	getline(in, str);
+	ID = stoi(str);
+
+	getline(in, str);
+	_p1.x = stoi(str);
+	getline(in, str);
+	_p1.y = stoi(str);
+	getline(in, str);
+	_p2.x = stoi(str);
+	getline(in, str);
+	_p2.y = stoi(str);
+	getline(in, str);
+	_c1.x = stoi(str);
+	getline(in, str);
+	_c1.y = stoi(str);
+	getline(in, str);
+	_c2.x = stoi(str);
+	getline(in, str);
+	_c2.y = stoi(str);
+
+	getline(in, str);
+	_colorLinea.r = stoi(str);
+	getline(in, str);
+	_colorLinea.g = stoi(str);
+	getline(in, str);
+	_colorLinea.b = stoi(str);
+
+	getline(in, str);
+	_colorRelleno.r = stoi(str);
+	getline(in, str);
+	_colorRelleno.g = stoi(str);
+	getline(in, str);
+	_colorRelleno.b = stoi(str);
+
+	getline(in, str);
+	_posicion.x = stoi(str);
+	getline(in, str);
+	_posicion.y = stoi(str);
+
+	getline(in, str);
+	Bloqueado = stoi(str);
+	getline(in, str);
+	Visible = stoi(str);
+
+	
+
 }
 
 C_Curva::C_Curva()
@@ -80,8 +130,15 @@ std::vector<sf::Vector2f> CalcCubicBezier(
 	return ret;
 }
 
-bool C_Curva::HitTest()
+bool C_Curva::HitTest(sf::Vector2i point)
 {
+	for (int i = 0; i < _vertices.getVertexCount() - 1; i++) {
+		if (HitTestTTriangle(_vertices[i].position + sf::Vector2f(0, 15), _vertices[i + 1].position + sf::Vector2f(0, 15), _vertices[i].position - sf::Vector2f(0, 15), (sf::Vector2f)point))
+			return true;
+		if (HitTestTTriangle(_vertices[i + 1].position + sf::Vector2f(0, 15), _vertices[i + 1].position - sf::Vector2f(0, 15), _vertices[i].position - sf::Vector2f(0, 15), (sf::Vector2f)point))
+			return true;
+	}
+	std::cout << "YEI";
 	return false;
 }
 

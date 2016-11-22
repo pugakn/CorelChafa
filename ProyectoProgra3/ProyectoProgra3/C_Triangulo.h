@@ -20,7 +20,7 @@ public:
 	C_Triangulo(float l1, float l2);
 	~C_Triangulo();
 	bool setPosicion(sf::Vector2f posicion);
-	bool HitTest();
+	bool HitTest(sf::Vector2i point);
 	void setColorRelleno(sf::Color color);
 	void setColorLinea(sf::Color color);
 };

@@ -16,7 +16,7 @@ public:
 	void setColorRelleno(sf::Color color);
 	void setColorLinea(sf::Color color);
 	bool setPosicion(sf::Vector2f vector);
-	bool HitTest();
+	bool HitTest(sf::Vector2i point);
 	C_Linea(sf::Vector2f a, sf::Vector2f b);
 	C_Linea();
 	~C_Linea();

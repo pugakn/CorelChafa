@@ -17,7 +17,7 @@ public:
 	void setColorRelleno(sf::Color color);
 	void setColorLinea(sf::Color color);
 	bool setPosicion(sf::Vector2f vector);
-	bool HitTest();
+	bool HitTest(sf::Vector2i point);
 	C_Elipse();
 	~C_Elipse();
 };

@@ -1,12 +1,8 @@
 #include "stdafx.h"
 #include "C_Triangulo.h"
+#include "VECTOR.h"
 
-sf::Vector2f operator*(sf::Vector2f A, sf::Vector2f B) {
-	return sf::Vector2f(A.x*B.x, A.y*B.y);
-}
-sf::Vector2f operator/(sf::Vector2f A, sf::Vector2f B) {
-	return sf::Vector2f(A.x/B.x, A.y/B.y);
-}
+#include <iostream>
 
 int C_Triangulo::GetCLSID()
 {
@@ -30,10 +26,44 @@ void C_Triangulo::Guardar(ofstream & out)
 
 	out << _posicion.x << endl;
 	out << _posicion.y << endl;
+	out << Bloqueado << endl;
+	out << Visible << endl;
 }
 
 void C_Triangulo::Cargar(ifstream & in)
 {
+	string str;
+	getline(in, str);
+	ID = stoi(str);
+
+	getline(in, str);
+	_l1 = stoi(str);
+	getline(in, str);
+	_l2 = stoi(str);
+
+	getline(in, str);
+	_colorLinea.r = stoi(str);
+	getline(in, str);
+	_colorLinea.g = stoi(str);
+	getline(in, str);
+	_colorLinea.b = stoi(str);
+
+	getline(in, str);
+	_colorRelleno.r = stoi(str);
+	getline(in, str);
+	_colorRelleno.g = stoi(str);
+	getline(in, str);
+	_colorRelleno.b = stoi(str);
+
+	getline(in, str);
+	_posicion.x = stoi(str);
+	getline(in, str);
+	_posicion.y = stoi(str);
+
+	getline(in, str);
+	Bloqueado = stoi(str);
+	getline(in, str);
+	Visible = stoi(str);
 }
 
 C_Triangulo::C_Triangulo()
@@ -97,8 +127,27 @@ bool C_Triangulo::setPosicion(sf::Vector2f posicion)
 }
 
 
-bool C_Triangulo::HitTest()
+bool C_Triangulo::HitTest(sf::Vector2i point)
 {
+	/*sf::Vector2f u = _shape[1].position - _shape[0].position;
+	sf::Vector2f p = (sf::Vector2f)point - _shape[0].position;
+	sf::Vector3f c1 = Cross(u, p);
+
+	u =_shape[2].position - _shape[1].position;
+	p = (sf::Vector2f)point - _shape[1].position;
+	sf::Vector3f c2 = Cross(u, p);
+
+	u = _shape[0].position -_shape[2].position;
+	p = (sf::Vector2f)point - _shape[2].position;
+	sf::Vector3f c3 = Cross(u, p);
+	if ((c1.z < 0) && (c2.z < 0) && (c3.z < 0)) { //DEBUG
+		std::cout << "YEI";
+	}
+	return ((c1.z < 0) && (c2.z < 0) && (c3.z < 0));*/
+	if (HitTestTTriangle(_shape[0].position, _shape[1].position, _shape[2].position, (sf::Vector2f) point)) {
+		std::cout << "YEI";
+		return true;
+	}
 	return false;
 }
 
