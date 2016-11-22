@@ -5,8 +5,8 @@
   C_TiraLineas.cpp
   C_Texto.cpp
   C_Seleccionable.cpp
-  C_RRedondeado.cpp
   C_Rectangulo.cpp
+  C_RRedondeado.cpp
   C_Poligono.cpp
   C_Linea.cpp
   C_Figura.cpp
