@@ -15,12 +15,13 @@ public:
 	int GetCLSID();
 	void Guardar(ofstream &out);
 	void Cargar(ifstream &in);
-	//Guardar Cargar
+	void Inicializar();
+
 	C_Triangulo();
 	C_Triangulo(float l1, float l2);
 	~C_Triangulo();
 	bool setPosicion(sf::Vector2f posicion);
-	bool HitTest();
+	bool HitTest(sf::Vector2i point);
 	void setColorRelleno(sf::Color color);
 	void setColorLinea(sf::Color color);
 };

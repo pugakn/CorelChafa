@@ -5,6 +5,7 @@
 class C_TiraLineas : public C_Figura
 {
 public:
+	sf::Vector2f _a, _b;
 	sf::VertexArray _shape;
 	std::vector<sf::Vector2f> _originalPos;
 public:
@@ -12,14 +13,15 @@ public:
 	int GetCLSID();
 	void Guardar(ofstream &out);
 	void Cargar(ifstream &in);
-	//Guardar Cargar
+	void Inicializar();
+
 	C_TiraLineas();
 	C_TiraLineas(sf::Vector2f a, sf::Vector2f b);
 	void nuevoVertice(sf::Vector2f vertice);
 	void setColorRelleno(sf::Color color);
 	void setColorLinea(sf::Color color);
 	bool setPosicion(sf::Vector2f vector);
-	bool HitTest();
+	bool HitTest(sf::Vector2i point);
 	~C_TiraLineas();
 };
 

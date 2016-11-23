@@ -12,12 +12,13 @@ public:
 	int GetCLSID();
 	void Guardar(ofstream &out);
 	void Cargar(ifstream &in);
-	//Guardar Cargar
+	void Inicializar();
+
 	C_Elipse(float ra, float rb);
 	void setColorRelleno(sf::Color color);
 	void setColorLinea(sf::Color color);
 	bool setPosicion(sf::Vector2f vector);
-	bool HitTest();
+	bool HitTest(sf::Vector2i point);
 	C_Elipse();
 	~C_Elipse();
 };

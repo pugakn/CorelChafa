@@ -19,3 +19,5 @@ public:
 	virtual sf::Color getColorLinea();
 	virtual ~C_Figura();
 };
+
+bool HitTestTTriangle(sf::Vector2f v0, sf::Vector2f v1,sf::Vector2f v2, sf::Vector2f point);

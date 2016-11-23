@@ -8,6 +8,7 @@
 class C_Capa : public C_Seleccionable
 {
 public: //private
+	int ID;
 	list<C_Figura *> Figuras;
 	C_Figura * _figuraActual;
 public:
@@ -28,8 +29,9 @@ public:
 	int GetCLSID();
 	void Guardar(ofstream &out);
 	void Cargar(ifstream &in);
-	//Guardar Cargar
-	bool HitTest();
+	void Inicializar();
+
+	bool HitTest(sf::Vector2i point);
 	C_Capa();
 	~C_Capa();
 };

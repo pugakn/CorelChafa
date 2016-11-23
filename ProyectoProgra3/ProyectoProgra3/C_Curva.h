@@ -14,11 +14,12 @@ public:
 	int GetCLSID();
 	void Guardar(ofstream &out);
 	void Cargar(ifstream &in);
-	//Guardar Cargar
+	void Inicializar();
+
 	C_Curva();
 	C_Curva(sf::Vector2f p1, sf::Vector2f p2, sf::Vector2f c1, sf::Vector2f c2);
 	~C_Curva();
-	bool HitTest();
+	bool HitTest(sf::Vector2i point);
 	void setColorRelleno(sf::Color color);
 	void setColorLinea(sf::Color color);
 	bool setPosicion(sf::Vector2f posicion);
