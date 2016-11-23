@@ -44,7 +44,7 @@ int C_Capa::GetCLSID()
 
 void C_Capa::Guardar(ofstream & out)
 {
-	out << ClassID_Capa << endl;
+	out << ID << endl;
 	out << Figuras.size() << endl;
 	out << Bloqueado << endl;
 	out << Visible << endl;
@@ -62,12 +62,13 @@ void C_Capa::Guardar(ofstream & out)
 void C_Capa::Cargar(ifstream & in)
 {
 	string str;
-	int ID = ClassID_Capa;
+	int size;
 
 	getline(in, str);
 	ID = stoi(str);
+
 	getline(in, str);
-	int size = stoi(str);
+	size = stoi(str);
 
 	getline(in, str);
 	Bloqueado = stoi(str);
@@ -85,6 +86,10 @@ void C_Capa::Cargar(ifstream & in)
 			Figuras.push_back(newItem);
 		}
 	}
+}
+
+void C_Capa::Inicializar()
+{
 }
 
 bool C_Capa::HitTest(sf::Vector2i point)

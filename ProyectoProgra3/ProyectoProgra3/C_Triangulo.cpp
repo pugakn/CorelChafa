@@ -64,6 +64,42 @@ void C_Triangulo::Cargar(ifstream & in)
 	Bloqueado = stoi(str);
 	getline(in, str);
 	Visible = stoi(str);
+
+	Inicializar();
+}
+
+void C_Triangulo::Inicializar()
+{
+	sf::Vector2f origen(500, 500);
+
+	_posicion = sf::Vector2f(0, 0);
+	_shape = sf::VertexArray(sf::Triangles, 3);
+	_shape[0].position = sf::Vector2f(_l1 * -.5f, 0);
+	_shape[1].position = sf::Vector2f(_l1 * .5f, 0);
+	_shape[2].position = sf::Vector2f(_l1 * .5f, -_l2);
+
+	_originalPos.clear();
+	_originalPos.resize(3);
+	_originalPos[0] = _shape[0].position - _shape[0].position;
+	_originalPos[1] = _shape[1].position - _shape[0].position;
+	_originalPos[2] = _shape[2].position - _shape[0].position;
+	//Centrar en el origen
+	_shape[0] = sf::Vector2f(_shape[0].position.x, _shape[0].position.y - _shape[2].position.y *0.5f);
+	_shape[1] = sf::Vector2f(_shape[1].position.x, _shape[1].position.y - _shape[2].position.y *0.5f);
+	_shape[2] = sf::Vector2f(_shape[2].position.x, _shape[2].position.y - _shape[2].position.y *0.5f);
+
+	//LINEA
+	_linea = sf::VertexArray(sf::LinesStrip, 4);
+	_linea[0].position = _shape[0].position;
+	_linea[1].position = _shape[1].position;
+	_linea[2].position = _shape[2].position;
+	_linea[3] = _linea[0];
+
+
+	this->setPosicion(origen);
+
+	setColorLinea(_colorLinea);
+	setColorRelleno(_colorRelleno);
 }
 
 C_Triangulo::C_Triangulo()

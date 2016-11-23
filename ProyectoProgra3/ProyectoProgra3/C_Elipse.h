@@ -12,7 +12,8 @@ public:
 	int GetCLSID();
 	void Guardar(ofstream &out);
 	void Cargar(ifstream &in);
-	//Guardar Cargar
+	void Inicializar();
+
 	C_Elipse(float ra, float rb);
 	void setColorRelleno(sf::Color color);
 	void setColorLinea(sf::Color color);

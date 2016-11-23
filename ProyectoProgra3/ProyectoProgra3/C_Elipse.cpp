@@ -9,10 +9,75 @@ int C_Elipse::GetCLSID()
 
 void C_Elipse::Guardar(ofstream & out)
 {
+	out << ID << endl;
+
+	out << _ra << endl;
+	out << _rb << endl;
+
+	out << _colorLinea.r << endl;
+	out << _colorLinea.g << endl;
+	out << _colorLinea.b << endl;
+
+	out << _colorRelleno.r << endl;
+	out << _colorRelleno.g << endl;
+	out << _colorRelleno.b << endl;
+
+	out << _posicion.x << endl;
+	out << _posicion.y << endl;
+	out << Bloqueado << endl;
+	out << Visible << endl;
 }
 
 void C_Elipse::Cargar(ifstream & in)
 {
+	string str;
+	getline(in, str);
+	ID = stoi(str);
+
+	getline(in, str);
+	_ra = stoi(str);
+	getline(in, str);
+	_rb = stoi(str);
+
+	getline(in, str);
+	_colorLinea.r = stoi(str);
+	getline(in, str);
+	_colorLinea.g = stoi(str);
+	getline(in, str);
+	_colorLinea.b = stoi(str);
+
+	getline(in, str);
+	_colorRelleno.r = stoi(str);
+	getline(in, str);
+	_colorRelleno.g = stoi(str);
+	getline(in, str);
+	_colorRelleno.b = stoi(str);
+
+	getline(in, str);
+	_posicion.x = stoi(str);
+	getline(in, str);
+	_posicion.y = stoi(str);
+
+	getline(in, str);
+	Bloqueado = stoi(str);
+	getline(in, str);
+	Visible = stoi(str);
+
+	Inicializar();
+}
+
+void C_Elipse::Inicializar()
+{
+	_shape = sf::VertexArray(sf::TrianglesFan, 0);
+	std::vector<sf::Vector2f> points = CaclVertex(_ra, _rb);
+	_shape.append(sf::Vertex(sf::Vector2f(0, 0)));
+	for (auto it = points.begin(); it != points.end(); ++it)
+	{
+		_shape.append(sf::Vertex(*it));
+	}
+
+	setColorLinea(_colorLinea);
+	setColorRelleno(_colorRelleno);
 }
 
 C_Elipse::C_Elipse(float ra, float rb)

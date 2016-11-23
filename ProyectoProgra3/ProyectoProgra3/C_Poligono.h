@@ -15,6 +15,7 @@ public:
 	int GetCLSID();
 	void Guardar(ofstream &out);
 	void Cargar(ifstream &in);
+	void Inicializar();
 
 	C_Poligono();
 	C_Poligono(int lados, float radio);

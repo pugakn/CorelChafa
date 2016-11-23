@@ -9,10 +9,80 @@ int C_Linea::GetCLSID()
 
 void C_Linea::Guardar(ofstream & out)
 {
+	out << ID << endl;
+
+	out << _a.x << endl;
+	out << _a.y << endl;
+	out << _b.x << endl;
+	out << _a.y << endl;
+
+	out << _colorLinea.r << endl;
+	out << _colorLinea.g << endl;
+	out << _colorLinea.b << endl;
+
+	out << _colorRelleno.r << endl;
+	out << _colorRelleno.g << endl;
+	out << _colorRelleno.b << endl;
+
+	out << _posicion.x << endl;
+	out << _posicion.y << endl;
+	out << Bloqueado << endl;
+	out << Visible << endl;
+
+
 }
 
 void C_Linea::Cargar(ifstream & in)
 {
+	string str;
+	getline(in, str);
+	ID = stoi(str);
+
+	getline(in, str);
+	_a.x = stoi(str);
+	getline(in, str);
+	_a.y = stoi(str);
+	getline(in, str);
+	_b.x = stoi(str);
+	getline(in, str);
+	_b.y = stoi(str);
+
+	getline(in, str);
+	_colorLinea.r = stoi(str);
+	getline(in, str);
+	_colorLinea.g = stoi(str);
+	getline(in, str);
+	_colorLinea.b = stoi(str);
+
+	getline(in, str);
+	_colorRelleno.r = stoi(str);
+	getline(in, str);
+	_colorRelleno.g = stoi(str);
+	getline(in, str);
+	_colorRelleno.b = stoi(str);
+
+	getline(in, str);
+	_posicion.x = stoi(str);
+	getline(in, str);
+	_posicion.y = stoi(str);
+
+	getline(in, str);
+	Bloqueado = stoi(str);
+	getline(in, str);
+	Visible = stoi(str);
+
+	Inicializar();
+	
+}
+
+void C_Linea::Inicializar()
+{
+	_shape = sf::VertexArray(sf::Lines, 2);
+	_shape[0].position = _a;
+	_shape[1].position = _b;
+
+	setColorLinea(_colorLinea);
+	setColorRelleno(_colorRelleno);
 }
 
 void C_Linea::setColorRelleno(sf::Color color)

@@ -15,7 +15,8 @@ public:
 	int GetCLSID();
 	void Guardar(ofstream &out);
 	void Cargar(ifstream &in);
-	//Guardar Cargar
+	void Inicializar();
+
 	C_Triangulo();
 	C_Triangulo(float l1, float l2);
 	~C_Triangulo();

@@ -82,8 +82,22 @@ void C_Curva::Cargar(ifstream & in)
 	getline(in, str);
 	Visible = stoi(str);
 
-	
+	Inicializar();
 
+}
+
+void C_Curva::Inicializar()
+{
+	_vertices = sf::VertexArray(sf::LinesStrip, 0);
+	std::vector<sf::Vector2f> points =
+		CalcCubicBezier(_p1, _p2, _c1, _c2, 40);
+	for (auto it = points.begin(); it != points.end(); ++it) {
+		_vertices.append(sf::Vertex(*it));
+		_originalPos.push_back(*it - _vertices[0].position);
+	}
+
+	setColorLinea(_colorLinea);
+	setColorRelleno(_colorRelleno);
 }
 
 C_Curva::C_Curva()

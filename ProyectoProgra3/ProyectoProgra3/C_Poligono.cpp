@@ -17,13 +17,13 @@ void C_Poligono::Guardar(ofstream & out)
 	out << _lados << endl;
 	out << _radio << endl;
 
-	out << _colorLinea.r << endl;
-	out << _colorLinea.g << endl;
-	out << _colorLinea.b << endl;
+	out << (int)_colorLinea.r << endl;
+	out << (int)_colorLinea.g << endl;
+	out << (int)_colorLinea.b << endl;
 
-	out << _colorRelleno.r << endl;
-	out << _colorRelleno.g << endl;
-	out << _colorRelleno.b << endl;
+	out << (int)_colorRelleno.r << endl;
+	out << (int)_colorRelleno.g << endl;
+	out << (int)_colorRelleno.b << endl;
 
 	out << _posicion.x << endl;
 	out << _posicion.y << endl;
@@ -65,7 +65,25 @@ void C_Poligono::Cargar(ifstream & in)
 	Bloqueado = stoi(str);
 	getline(in, str);
 	Visible = stoi(str);
+
+	Inicializar();
 	
+}
+
+void C_Poligono::Inicializar()
+{
+	_shape = sf::CircleShape(_radio, _lados);
+	_originalPos.clear();
+	_originalPos.resize(_lados);
+	for (int i = 0; i < _lados; i++) {
+		float rad = (3.141592f) * 2 / _lados * i;
+		_vertices.push_back(sf::Vector2f(_radio + (_radio*cosf(rad + 1.570796f)), _radio - (_radio*sinf(rad + 1.570796f))));
+		std::cout << _vertices.back().x << " " << _vertices.back().y << "                        ";
+		_originalPos[i] = _vertices[i];
+	}
+
+	setColorLinea(_colorLinea);
+	setColorRelleno(_colorRelleno);
 }
 
 C_Poligono::C_Poligono()
@@ -76,6 +94,7 @@ C_Poligono::C_Poligono(int lados, float radio)
 {
 	_lados = lados;
 	_radio = radio;
+	ID = 9;
 	_shape = sf::CircleShape(radio, lados);
 	_originalPos.clear();
 	_originalPos.resize(_lados);
@@ -130,5 +149,6 @@ void C_Poligono::setColorLinea(sf::Color color)
 {
 	_colorLinea = color;
 	_shape.setOutlineColor(color);
+	_shape.setOutlineThickness(1);
 }
 
