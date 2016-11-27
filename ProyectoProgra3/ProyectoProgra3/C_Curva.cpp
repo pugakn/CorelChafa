@@ -182,3 +182,12 @@ bool C_Curva::setPosicion(sf::Vector2f posicion)
 	}
 	return false;
 }
+
+void C_Curva::setSize(sf::Vector2f size)
+{
+}
+
+void C_Curva::Dibujar(sf::RenderWindow& window)
+{
+	window.draw(_vertices);
+}

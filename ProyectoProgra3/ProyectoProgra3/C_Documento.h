@@ -4,6 +4,7 @@
 class C_Documento : public C_Dibujable
 {
 private:
+	friend class DrawArea;
 	std::list<C_Capa*> _lista;
 	C_Capa* _actual;
 public:
@@ -16,6 +17,8 @@ public:
 	void Guardar(ofstream &out);
 	void Cargar(ifstream &in);
 	//Guardar Cargar
+	void Inicializar();
+	void Dibujar(sf::RenderWindow& window);
 	C_Documento();
 	~C_Documento();
 };

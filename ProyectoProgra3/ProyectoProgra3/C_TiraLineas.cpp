@@ -134,6 +134,10 @@ bool C_TiraLineas::setPosicion(sf::Vector2f vector)
 	return false;
 }
 
+void C_TiraLineas::setSize(sf::Vector2f size)
+{
+}
+
 bool C_TiraLineas::HitTest(sf::Vector2i point)
 {
 	/*std::vector<sf::Vector3f> c;
@@ -164,6 +168,11 @@ bool C_TiraLineas::HitTest(sf::Vector2i point)
 	}
 	std::cout << "YEI";
 	return false;
+}
+
+void C_TiraLineas::Dibujar(sf::RenderWindow & window)
+{
+	window.draw(_shape);
 }
 
 

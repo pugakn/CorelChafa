@@ -30,6 +30,7 @@ public:
 	void Guardar(ofstream &out);
 	void Cargar(ifstream &in);
 	void Inicializar();
+	void Dibujar(sf::RenderWindow& window);
 
 	bool HitTest(sf::Vector2i point);
 	C_Capa();

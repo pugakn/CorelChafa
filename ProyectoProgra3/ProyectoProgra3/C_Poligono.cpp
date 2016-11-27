@@ -152,3 +152,13 @@ void C_Poligono::setColorLinea(sf::Color color)
 	_shape.setOutlineThickness(1);
 }
 
+void C_Poligono::setSize(sf::Vector2f size)
+{
+	_shape.setRadius(size.x);
+}
+
+void C_Poligono::Dibujar(sf::RenderWindow & window)
+{
+	window.draw(_shape);
+}
+

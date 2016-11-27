@@ -21,7 +21,9 @@ public:
 	void setColorRelleno(sf::Color color);
 	void setColorLinea(sf::Color color);
 	bool setPosicion(sf::Vector2f vector);
+	void setSize(sf::Vector2f size);
 	bool HitTest(sf::Vector2i point);
+	void Dibujar(sf::RenderWindow& window);
 	~C_TiraLineas();
 };
 

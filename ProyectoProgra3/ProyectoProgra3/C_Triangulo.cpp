@@ -204,3 +204,12 @@ void C_Triangulo::setColorLinea(sf::Color color)
 	}
 }
 
+void C_Triangulo::setSize(sf::Vector2f size)
+{
+}
+
+void C_Triangulo::Dibujar(sf::RenderWindow & window)
+{
+	window.draw(_shape);
+}
+

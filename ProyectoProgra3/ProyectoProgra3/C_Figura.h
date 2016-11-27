@@ -17,6 +17,7 @@ public:
 	virtual sf::Color getColorRelleno();
 	virtual void setColorLinea(sf::Color) = 0;
 	virtual sf::Color getColorLinea();
+	virtual void setSize(sf::Vector2f size) = 0;
 	virtual ~C_Figura();
 };
 

@@ -98,9 +98,18 @@ bool C_Linea::setPosicion(sf::Vector2f vector)
 	return false;
 }
 
+void C_Linea::setSize(sf::Vector2f size)
+{
+}
+
 bool C_Linea::HitTest(sf::Vector2i point)
 {
 	return false;
+}
+
+void C_Linea::Dibujar(sf::RenderWindow & window)
+{
+	window.draw(_shape);
 }
 
 C_Linea::C_Linea(sf::Vector2f a, sf::Vector2f b)

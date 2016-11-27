@@ -2,6 +2,19 @@
 #include "C_Documento.h"
 
 
+void C_Documento::Inicializar()
+{
+	Insertar();
+	_actual = _lista.back();
+}
+
+void C_Documento::Dibujar(sf::RenderWindow & window)
+{
+	for (auto &item : _lista) {
+		item->Dibujar(window);
+	}
+}
+
 C_Documento::C_Documento()
 {
 }

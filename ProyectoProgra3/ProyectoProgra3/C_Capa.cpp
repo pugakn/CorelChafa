@@ -92,6 +92,13 @@ void C_Capa::Inicializar()
 {
 }
 
+void C_Capa::Dibujar(sf::RenderWindow & window)
+{
+	for (auto &item : Figuras) {
+		item->Dibujar(window);
+	}
+}
+
 bool C_Capa::HitTest(sf::Vector2i point)
 {
 	return false;

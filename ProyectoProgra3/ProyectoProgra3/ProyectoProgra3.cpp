@@ -15,12 +15,15 @@
 #include "OptionsBar.h"
 #include "LayerBar.h"
 #include "InfoBar.h"
+#include "DrawArea.h"
 using namespace std;
 
 int main()
 {
 	sf::RenderWindow window(sf::VideoMode(1366, 768), "Tocino hiperespacial");
+	window.setFramerateLimit(60);
 	Toolbar* toolbar = Toolbar::Instance();
+	DrawArea* drawArea = DrawArea::Instance();
 	OptionsBar optionsBar;
 	LayerBar layerBar;
 	InfoBar infoBar;
@@ -36,6 +39,7 @@ int main()
 			if (event.type == sf::Event::Closed)
 				window.close();
 			toolbar->Update(event, window);
+			drawArea->Update(event, window);
 
 			if (event.type == sf::Event::MouseMoved) {
 
@@ -49,6 +53,7 @@ int main()
 		window.draw(layerBar._background);
 		window.draw(infoBar._background);
 
+		drawArea->Draw(window);
 		toolbar->Draw(window);
 		window.display();
 		}

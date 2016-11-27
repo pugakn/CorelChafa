@@ -175,6 +175,7 @@
     <ClInclude Include="C_Texto.h" />
     <ClInclude Include="C_TiraLineas.h" />
     <ClInclude Include="C_Triangulo.h" />
+    <ClInclude Include="DrawArea.h" />
     <ClInclude Include="Factory.h" />
     <ClInclude Include="InfoBar.h" />
     <ClInclude Include="LayerBar.h" />
@@ -202,6 +203,7 @@
     <ClCompile Include="C_Texto.cpp" />
     <ClCompile Include="C_TiraLineas.cpp" />
     <ClCompile Include="C_Triangulo.cpp" />
+    <ClCompile Include="DrawArea.cpp" />
     <ClCompile Include="Factory.cpp" />
     <ClCompile Include="InfoBar.cpp" />
     <ClCompile Include="LayerBar.cpp" />
