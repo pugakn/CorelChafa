@@ -1,6 +1,20 @@
 #pragma once
 #include "sfButton.h"
 #include <vector>
+enum Tools
+{
+	CURSOR,
+	CURVA,
+	ELIPSE,
+	LINEA,
+	POLIGONO,
+	RECTANGULO,
+	RREDONDEADO,
+	TEXTO,
+	TIRA,
+	TRIANGULO
+};
+
 class Toolbar
 {
 private:
@@ -11,9 +25,11 @@ private:
 protected:
 	Toolbar();
 public:
+	static Tools _actualTool;
 	static Toolbar* Instance();
 	void Draw(sf::RenderWindow&);
 	void Update(sf::Event& event, sf::RenderWindow& window);
 	~Toolbar();
 };
+
 

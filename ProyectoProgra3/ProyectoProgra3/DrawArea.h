@@ -9,7 +9,7 @@ protected:
 private:
 	C_Documento _documento;
 	sf::Color _fillColor = sf::Color::Black;
-	sf::Color _borderColor = sf::Color::Black;
+	sf::Color _borderColor = sf::Color::Red;
 	static DrawArea* _instance;
 	bool _buttonClicked{false};
 public:

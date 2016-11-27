@@ -11,7 +11,7 @@ void sfButton::onDown()
 void sfButton::onHover()
 {
 	//_rectangle.setTexture(&_hoverTexture);
-	_rectangle.setFillColor(sf::Color::Transparent);
+	_rectangle.setFillColor(sf::Color::Red);
 }
 
 void sfButton::onHoverExit()

@@ -136,6 +136,7 @@ bool C_TiraLineas::setPosicion(sf::Vector2f vector)
 
 void C_TiraLineas::setSize(sf::Vector2f size)
 {
+	_shape[_shape.getVertexCount() - 1].position = size;
 }
 
 bool C_TiraLineas::HitTest(sf::Vector2i point)

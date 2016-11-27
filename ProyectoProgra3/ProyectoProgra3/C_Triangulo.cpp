@@ -124,9 +124,9 @@ C_Triangulo::C_Triangulo(float l1, float l2)
 	_originalPos[1] = _shape[1].position - _shape[0].position;
 	_originalPos[2] = _shape[2].position - _shape[0].position;
 	//Centrar en el origen
-	_shape[0] = sf::Vector2f( _shape[0].position.x, _shape[0].position.y - _shape[2].position.y *0.5f);
-	_shape[1] = sf::Vector2f(_shape[1].position.x, _shape[1].position.y - _shape[2].position.y *0.5f);
-	_shape[2] = sf::Vector2f(_shape[2].position.x, _shape[2].position.y - _shape[2].position.y *0.5f);
+	//_shape[0] = sf::Vector2f( _shape[0].position.x, _shape[0].position.y - _shape[2].position.y *0.5f);
+	//_shape[1] = sf::Vector2f(_shape[1].position.x, _shape[1].position.y - _shape[2].position.y *0.5f);
+	//_shape[2] = sf::Vector2f(_shape[2].position.x, _shape[2].position.y - _shape[2].position.y *0.5f);
 
 	//LINEA
 	_linea = sf::VertexArray(sf::LinesStrip, 4);
@@ -206,10 +206,19 @@ void C_Triangulo::setColorLinea(sf::Color color)
 
 void C_Triangulo::setSize(sf::Vector2f size)
 {
+	_l1 = size.x;
+	_l2 = size.y;
+	_shape[1].position = sf::Vector2f(_shape[0].position.x + size.x,  _shape[1].position.y);
+	_shape[2].position = sf::Vector2f(_shape[0].position.x + size.x * .5f, _shape[0].position.y + size.y);
+
+	_linea[1].position = sf::Vector2f(_linea[0].position.x + size.x, _linea[1].position.y);
+	_linea[2].position = sf::Vector2f(_linea[0].position.x + size.x * .5f, _linea[0].position.y + size.y);
+
 }
 
 void C_Triangulo::Dibujar(sf::RenderWindow & window)
 {
 	window.draw(_shape);
+	window.draw(_linea);
 }
 

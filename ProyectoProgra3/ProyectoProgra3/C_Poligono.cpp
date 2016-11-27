@@ -154,6 +154,7 @@ void C_Poligono::setColorLinea(sf::Color color)
 
 void C_Poligono::setSize(sf::Vector2f size)
 {
+	_radio = size.x;
 	_shape.setRadius(size.x);
 }
 

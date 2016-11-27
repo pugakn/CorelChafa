@@ -2,6 +2,7 @@
 #include "Toolbar.h"
 
 Toolbar* Toolbar::_instance = 0;
+Tools Toolbar::_actualTool = Tools::CURSOR;
 
 Toolbar * Toolbar::Instance()
 {
@@ -35,7 +36,7 @@ Toolbar::Toolbar()
 	temp->_rectangle.setSize(sf::Vector2f(50, 50));
 	temp->_rectangle.setPosition(_ItemsPosition);
 	temp->Callback = []() {
-
+		_actualTool = Tools::CURSOR;
 	};
 	_buttons.push_back(temp);
 
@@ -44,7 +45,7 @@ Toolbar::Toolbar()
 	temp->_rectangle.setSize(sf::Vector2f(50, 50));
 	temp->_rectangle.setPosition(_ItemsPosition.x, _buttons.back()->_rectangle.getPosition().y + _buttons.back()->_rectangle.getSize().y);
 	temp->Callback = []() {
-
+		_actualTool = Tools::CURVA;
 	};
 	_buttons.push_back(temp);
 
@@ -53,7 +54,7 @@ Toolbar::Toolbar()
 	temp->_rectangle.setSize(sf::Vector2f(50, 50));
 	temp->_rectangle.setPosition(_ItemsPosition.x, _buttons.back()->_rectangle.getPosition().y + _buttons.back()->_rectangle.getSize().y);
 	temp->Callback = []() {
-
+		_actualTool = Tools::ELIPSE;
 	};
 	_buttons.push_back(temp);
 
@@ -62,7 +63,7 @@ Toolbar::Toolbar()
 	temp->_rectangle.setSize(sf::Vector2f(50, 50));
 	temp->_rectangle.setPosition(_ItemsPosition.x, _buttons.back()->_rectangle.getPosition().y + _buttons.back()->_rectangle.getSize().y);
 	temp->Callback = []() {
-
+		_actualTool = Tools::LINEA;
 	};
 	_buttons.push_back(temp);
 
@@ -71,7 +72,7 @@ Toolbar::Toolbar()
 	temp->_rectangle.setSize(sf::Vector2f(50, 50));
 	temp->_rectangle.setPosition(_ItemsPosition.x, _buttons.back()->_rectangle.getPosition().y + _buttons.back()->_rectangle.getSize().y);
 	temp->Callback = []() {
-
+		_actualTool = Tools::POLIGONO;
 	};
 	_buttons.push_back(temp);
 
@@ -80,7 +81,7 @@ Toolbar::Toolbar()
 	temp->_rectangle.setSize(sf::Vector2f(50, 50));
 	temp->_rectangle.setPosition(_ItemsPosition.x, _buttons.back()->_rectangle.getPosition().y + _buttons.back()->_rectangle.getSize().y);
 	temp->Callback = []() {
-
+		_actualTool = Tools::RECTANGULO;
 	};
 	_buttons.push_back(temp);
 
@@ -89,7 +90,7 @@ Toolbar::Toolbar()
 	temp->_rectangle.setSize(sf::Vector2f(50, 50));
 	temp->_rectangle.setPosition(_ItemsPosition.x, _buttons.back()->_rectangle.getPosition().y + _buttons.back()->_rectangle.getSize().y);
 	temp->Callback = []() {
-
+		_actualTool = Tools::RREDONDEADO;
 	};
 	_buttons.push_back(temp);
 
@@ -98,7 +99,7 @@ Toolbar::Toolbar()
 	temp->_rectangle.setSize(sf::Vector2f(50, 50));
 	temp->_rectangle.setPosition(_ItemsPosition.x, _buttons.back()->_rectangle.getPosition().y + _buttons.back()->_rectangle.getSize().y);
 	temp->Callback = []() {
-
+		_actualTool = Tools::TEXTO;
 	};
 	_buttons.push_back(temp);
 
@@ -107,7 +108,7 @@ Toolbar::Toolbar()
 	temp->_rectangle.setSize(sf::Vector2f(50, 50));
 	temp->_rectangle.setPosition(_ItemsPosition.x, _buttons.back()->_rectangle.getPosition().y + _buttons.back()->_rectangle.getSize().y);
 	temp->Callback = []() {
-
+		_actualTool = Tools::TIRA;
 	};
 	_buttons.push_back(temp);
 
@@ -116,7 +117,7 @@ Toolbar::Toolbar()
 	temp->_rectangle.setSize(sf::Vector2f(50, 50));
 	temp->_rectangle.setPosition(_ItemsPosition.x, _buttons.back()->_rectangle.getPosition().y + _buttons.back()->_rectangle.getSize().y);
 	temp->Callback = []() {
-
+		_actualTool = Tools::TRIANGULO;
 	};
 	_buttons.push_back(temp);
 
