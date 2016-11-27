@@ -44,7 +44,7 @@ int C_Capa::GetCLSID()
 
 void C_Capa::Guardar(ofstream & out)
 {
-	out << ID << endl;
+	out << GetCLSID() << endl;
 	out << Figuras.size() << endl;
 	out << Bloqueado << endl;
 	out << Visible << endl;
@@ -63,9 +63,6 @@ void C_Capa::Cargar(ifstream & in)
 {
 	string str;
 	int size;
-
-	getline(in, str);
-	ID = stoi(str);
 
 	getline(in, str);
 	size = stoi(str);

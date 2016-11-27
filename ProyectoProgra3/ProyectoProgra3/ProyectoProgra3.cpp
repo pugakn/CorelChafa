@@ -69,41 +69,40 @@ int main()
 	}*/
 
 	C_Capa capa1;
-	ofstream File("Archivo.txt");
-	//ifstream Cargar;
-	//Cargar.open("Archivo.txt", ios::in);
+	//ofstream File("Archivo.txt");
+	ifstream Cargar;
+	Cargar.open("Archivo.txt", ios::in);
 	string str;
 	
 	/*C_Poligono piligonotest(5, 50);
 	piligonotest.setColorLinea(sf::Color::Red);
 	piligonotest.setColorRelleno(sf::Color::Blue);
 	piligonotest.setPosicion(sf::Vector2f(500, 500));*/
-	capa1.ID = 99;
-	capa1.Visible = true;
+	/*capa1.Visible = true;
 	capa1.Bloqueado = false;
 	capa1.InsertarPoligono(5, 50);
 	capa1.Figuras.back()->setColorLinea(sf::Color::Red);
 	capa1.Figuras.back()->setColorRelleno(sf::Color::Blue);
 	capa1.Figuras.back()->setPosicion(sf::Vector2f(500, 500));
 	capa1.Figuras.back()->Visible = true;
-	capa1.Figuras.back()->Bloqueado = false;
+	capa1.Figuras.back()->Bloqueado = false;*/
 
-	/*while (getline(Cargar, str))
+	while (getline(Cargar, str))
 	{
 		cout << str << endl;
 
-		if (str == "99")
+		if (stoi(str) == ClassID_Capa)
 		{
 			capa1.Cargar(Cargar);
 		}
-	}*/
+	}
 	
 
-	if (File.is_open())
+	/*if (File.is_open())
 	{
 		capa1.Guardar(File);
 		File.close();
-	}
+	}*/
 
 
 	while (window.isOpen())
