@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "C_Rectangulo.h"
+#include <iostream>
 
 
 int C_Rectangulo::GetCLSID()
@@ -45,12 +46,21 @@ void C_Rectangulo::setColorLinea(sf::Color color)
 
 bool C_Rectangulo::setPosicion(sf::Vector2f vector)
 {
+	rectangulo.setPosition(100, 200);
 
 	return false;
 }
 
-bool C_Rectangulo::HitTest()
+bool C_Rectangulo::HitTest(sf::Vector2i point)
 {
+	sf::Vector2f v1 = rectangulo.getPosition();
+	sf::Vector2f v2 = rectangulo.getPosition() + rectangulo.getSize();
+	if (point.x >= rectangulo.getPosition().x && point.x <= rectangulo.getPosition().x + rectangulo.getSize().x && point.y >= rectangulo.getPosition().y && point.y <= rectangulo.getPosition().y + rectangulo.getSize().y)
+	{
+		cout << "allahuakbar";
+		return true;
+	}
+		
 	return false;
 }
 

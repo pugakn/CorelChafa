@@ -7,6 +7,8 @@ class C_Linea : public C_Figura
 public:
 	sf::VertexArray _shape;
 	sf::Vector2f _a, _b;
+	std::vector<sf::Vector2f> _originalPos;
+	sf::RectangleShape rectangulo;
 public:
 	//Guardar Cargar
 	int GetCLSID();

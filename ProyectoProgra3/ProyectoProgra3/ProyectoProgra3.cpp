@@ -9,6 +9,7 @@
 #include "C_Linea.h"
 #include "C_TiraLineas.h"
 #include "C_Capa.h"
+#include "C_Rectangulo.h"
 #include <iostream>
 using namespace std;
 
@@ -67,7 +68,7 @@ int main()
 		window.draw(tiralineas._shape);
 		window.display();
 	}*/
-
+	
 	C_Capa capa1;
 	ofstream File("Archivo.txt");
 	//ifstream Cargar;
@@ -81,12 +82,14 @@ int main()
 	capa1.ID = 99;
 	capa1.Visible = true;
 	capa1.Bloqueado = false;
-	capa1.InsertarPoligono(5, 50);
+	capa1.InsertarLinea(sf::Vector2f (50,50), sf::Vector2f (100,100));
 	capa1.Figuras.back()->setColorLinea(sf::Color::Red);
-	capa1.Figuras.back()->setColorRelleno(sf::Color::Blue);
+	//capa1.Figuras.back()->setColorRelleno(sf::Color::Blue);
 	capa1.Figuras.back()->setPosicion(sf::Vector2f(500, 500));
 	capa1.Figuras.back()->Visible = true;
 	capa1.Figuras.back()->Bloqueado = false;
+
+
 
 	/*while (getline(Cargar, str))
 	{
@@ -115,7 +118,7 @@ int main()
 				window.close();
 		}
 		window.clear();
-		window.draw(((C_Poligono*)capa1.Figuras.back())->_shape);
+		window.draw(((C_Linea*)capa1.Figuras.back())->_shape);
 		
 		window.display();
 		}

@@ -130,3 +130,11 @@ void C_Capa::InsertarPoligono(int lados, float radio)
 {
 	Figuras.push_back(new C_Poligono(lados, radio));
 }
+
+void C_Capa::InsertarLinea(sf::Vector2f a, sf::Vector2f b)
+{
+	Figuras.push_back(new C_Linea(a,b));
+}
+
+
+

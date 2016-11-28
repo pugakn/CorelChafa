@@ -5,6 +5,7 @@
 class C_RRedondeado : public C_Rectangulo
 {
 public:
+	sf::RectangleShape _shape;
 	//Guardar Cargar
 	int GetCLSID();
 	void Guardar(ofstream &out);
