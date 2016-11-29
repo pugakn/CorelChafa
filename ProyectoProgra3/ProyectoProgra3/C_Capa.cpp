@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "C_Capa.h"
+#include "C_Documento.h"
 
 
 
@@ -113,9 +114,12 @@ C_Capa::~C_Capa()
 {
 }
 
-void C_Capa::InsertarTriangulo(float l1, float l2)
+void C_Capa::InsertarTriangulo(float l1, float l2, string type, long id)
 {
 	Figuras.push_back(new C_Triangulo(l1,l2));
+	Figuras.back()->setType(type);
+	Figuras.back()->setID(id);
+	C_Documento::Instance()->Notify();
 }
 
 void C_Capa::InsertarTiraDeLineas(sf::Vector2f a, sf::Vector2f b)

@@ -28,7 +28,7 @@ public:
 	static Tools _actualTool;
 	static Toolbar* Instance();
 	void Draw(sf::RenderWindow&);
-	void Update(sf::Event& event, sf::RenderWindow& window);
+	void Inputs(sf::Event& event, sf::RenderWindow& window);
 	~Toolbar();
 };
 

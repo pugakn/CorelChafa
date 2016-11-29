@@ -7,7 +7,9 @@ protected:
 	DrawArea();
 	sf::FloatRect _drawAreaLimits;
 private:
-	C_Documento _documento;
+	long _triangleID = 0;
+	long _elipseID = 0;
+	C_Documento* _documento;
 	sf::Color _fillColor = sf::Color::Black;
 	sf::Color _borderColor = sf::Color::Red;
 	static DrawArea* _instance;
@@ -15,7 +17,7 @@ private:
 public:
 	static DrawArea* Instance();
 	void Draw(sf::RenderWindow& window);
-	void Update(sf::Event& event, sf::RenderWindow& window);
+	void Inputs(sf::Event& event, sf::RenderWindow& window);
 	~DrawArea();
 };
 

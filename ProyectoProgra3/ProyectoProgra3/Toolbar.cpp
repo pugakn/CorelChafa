@@ -128,7 +128,7 @@ Toolbar::Toolbar()
 
 }
 
-void Toolbar::Update(sf::Event & event, sf::RenderWindow& window)
+void Toolbar::Inputs(sf::Event & event, sf::RenderWindow& window)
 {
 	if (event.type == sf::Event::MouseMoved) {
 		for (auto &item : _buttons)

@@ -11,7 +11,8 @@ DrawArea::DrawArea()
 	_drawAreaLimits.width = 1024;
 
 	//Inicializar documento
-	_documento.Inicializar();
+	_documento = C_Documento::Instance();
+	_documento->Inicializar();
 
 
 }
@@ -27,10 +28,10 @@ DrawArea * DrawArea::Instance()
 
 void DrawArea::Draw(sf::RenderWindow & window)
 {
-	_documento.Dibujar(window);
+	_documento->Dibujar(window);
 }
 
-void DrawArea::Update(sf::Event & event, sf::RenderWindow & window)
+void DrawArea::Inputs(sf::Event & event, sf::RenderWindow & window)
 {
 	static bool first = true;//TODO: Fix
 	static sf::Vector2f initialPos;
@@ -44,12 +45,12 @@ void DrawArea::Update(sf::Event & event, sf::RenderWindow & window)
 			case Tools::CURVA:
 				break;
 			case Tools::ELIPSE:
-				_documento._actual->InsertarElipse(50,50);
+				_documento->_actual->InsertarElipse(50,50);
 				break;
 			case Tools::LINEA:
 				break;
 			case Tools::POLIGONO:
-				_documento._actual->InsertarPoligono(5, 50);
+				_documento->_actual->InsertarPoligono(5, 50);
 				break;
 			case Tools::RECTANGULO:
 				break;
@@ -60,16 +61,16 @@ void DrawArea::Update(sf::Event & event, sf::RenderWindow & window)
 			case Tools::TIRA:
 			{
 				if (first) {
-					_documento._actual->InsertarTiraDeLineas((sf::Vector2f)sf::Mouse::getPosition(window), (sf::Vector2f)sf::Mouse::getPosition(window));
+					_documento->_actual->InsertarTiraDeLineas((sf::Vector2f)sf::Mouse::getPosition(window), (sf::Vector2f)sf::Mouse::getPosition(window));
 					first = false;
 				}
 				else {
-					((C_TiraLineas*)_documento._actual->Figuras.back())->nuevoVertice((sf::Vector2f)sf::Mouse::getPosition(window));
+					((C_TiraLineas*)_documento->_actual->Figuras.back())->nuevoVertice((sf::Vector2f)sf::Mouse::getPosition(window));
 				}
 			}
 				break;
 			case Tools::TRIANGULO:
-				_documento._actual->InsertarTriangulo(50, 50);
+				_documento->_actual->InsertarTriangulo(50, 50, "Triangle",_triangleID++);
 				break;
 			default:
 				break;
@@ -77,11 +78,11 @@ void DrawArea::Update(sf::Event & event, sf::RenderWindow & window)
 			if (Toolbar::_actualTool != Tools::CURSOR) {
 				
 				_buttonClicked = true;
-				_documento._actual->Figuras.back()->setColorRelleno(_fillColor);
-				_documento._actual->Figuras.back()->setColorLinea(_borderColor);
+				_documento->_actual->Figuras.back()->setColorRelleno(_fillColor);
+				_documento->_actual->Figuras.back()->setColorLinea(_borderColor);
 				if (Toolbar::_actualTool != Tools::TIRA) {
 					initialPos = (sf::Vector2f)sf::Mouse::getPosition(window);
-					_documento._actual->Figuras.back()->setPosicion((sf::Vector2f)sf::Mouse::getPosition(window));
+					_documento->_actual->Figuras.back()->setPosicion((sf::Vector2f)sf::Mouse::getPosition(window));
 				}
 			}
 		}
@@ -92,12 +93,12 @@ void DrawArea::Update(sf::Event & event, sf::RenderWindow & window)
 	}
 	if (event.type == sf::Event::MouseMoved) {
 		if (Toolbar::_actualTool == Tools::TIRA && !first) {
-			_documento._actual->Figuras.back()->setSize((sf::Vector2f)sf::Mouse::getPosition(window));
+			_documento->_actual->Figuras.back()->setSize((sf::Vector2f)sf::Mouse::getPosition(window));
 		}
 		else
 		if (_buttonClicked) {
 			deltPos = (sf::Vector2f)sf::Mouse::getPosition(window) - initialPos;
-			_documento._actual->Figuras.back()->setSize(deltPos);
+			_documento->_actual->Figuras.back()->setSize(deltPos);
 			//_documento._actual->Figuras.back()->setPosicion((sf::Vector2f)sf::Mouse::getPosition(window));
 		}
 	}

@@ -5,6 +5,26 @@
 
 
 
+void C_Figura::setType(string type)
+{
+	_type = type;
+}
+
+string C_Figura::getType()
+{
+	return _type;
+}
+
+void C_Figura::setID(long id)
+{
+	ID = id;
+}
+
+long C_Figura::getID()
+{
+	return ID;
+}
+
 sf::Vector2f C_Figura::getPosicion()
 {
 	return _posicion;

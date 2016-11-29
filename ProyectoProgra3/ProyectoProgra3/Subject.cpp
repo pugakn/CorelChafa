@@ -4,7 +4,7 @@
 
 void Subject::Notify()
 {
-	for (auto &item : _list) {
+	for (auto &item : _observers) {
 		item->Update();
 	}
 }

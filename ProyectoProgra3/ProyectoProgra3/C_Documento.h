@@ -1,12 +1,18 @@
 #pragma once
 #include "C_Dibujable.h"
 #include "C_Capa.h"
-class C_Documento : public C_Dibujable
+#include "Subject.h"
+class C_Documento : public Subject
 {
 private:
+	static C_Documento* _instance;
+	friend class LayerBar;
+	friend class InfoBar;
 	friend class DrawArea;
 	std::list<C_Capa*> _lista;
 	C_Capa* _actual;
+protected:
+	C_Documento();
 public:
 	void Insertar();
 	void Eliminar();
@@ -19,7 +25,13 @@ public:
 	//Guardar Cargar
 	void Inicializar();
 	void Dibujar(sf::RenderWindow& window);
-	C_Documento();
+
+	void Attach(Observer& observer);
+	void Detach(Observer& observer);
+	void Notify();
 	~C_Documento();
+
+	static C_Documento* Instance();
+	
 };
 

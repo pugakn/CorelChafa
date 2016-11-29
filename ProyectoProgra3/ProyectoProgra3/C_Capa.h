@@ -14,7 +14,7 @@ public: //private
 public:
 	//void InsertarRectangulo();
 	//void InsertarRectanguloRed();
-	void InsertarTriangulo(float l1, float l2);
+	void InsertarTriangulo(float l1, float l2, string type, long id);
 	//void InsertarLinea();
 	void InsertarTiraDeLineas(sf::Vector2f a, sf::Vector2f b);
 	void InsertarElipse(float ra, float rb);

@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "C_Triangulo.h"
 #include "VECTOR.h"
+#include "C_Documento.h"
 
 #include <iostream>
 
@@ -136,7 +137,7 @@ C_Triangulo::C_Triangulo(float l1, float l2)
 	_linea[3] = _linea[0];
 
 
-	this->setPosicion(origen);
+	//this->setPosicion(origen);
 
 }
 
@@ -149,6 +150,7 @@ bool C_Triangulo::setPosicion(sf::Vector2f posicion)
 {
 	if (posicion.x > 0 && posicion.y > 0) {
 		_posicion = posicion;
+		C_Documento::Instance()->Notify();
 		_shape[0].position = _originalPos[0] + posicion;
 		_shape[1].position = _originalPos[1] + posicion;
 		_shape[2].position = _originalPos[2] + posicion;

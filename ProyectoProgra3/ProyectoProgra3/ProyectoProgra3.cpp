@@ -16,20 +16,20 @@
 #include "LayerBar.h"
 #include "InfoBar.h"
 #include "DrawArea.h"
+#include "C_Documento.h"
 using namespace std;
 
 int main()
 {
 	sf::RenderWindow window(sf::VideoMode(1366, 768), "Tocino hiperespacial");
 	window.setFramerateLimit(60);
+	C_Documento* document = C_Documento::Instance();
+
 	Toolbar* toolbar = Toolbar::Instance();
 	DrawArea* drawArea = DrawArea::Instance();
-	OptionsBar optionsBar;
-	LayerBar layerBar;
-	InfoBar infoBar;
-
-	
-	
+	InfoBar* infoBar = InfoBar::Instance();
+	OptionsBar* optionsBar = OptionsBar::Instance();
+	LayerBar* layerBar = LayerBar::Instance();;
 
 	while (window.isOpen())
 	{
@@ -38,23 +38,21 @@ int main()
 		{
 			if (event.type == sf::Event::Closed)
 				window.close();
-			toolbar->Update(event, window);
-			drawArea->Update(event, window);
-
-			if (event.type == sf::Event::MouseMoved) {
-
-			}
-			if (event.type == sf::Event::MouseButtonPressed) {
-
-			}
+			/********************* Inputs********************/
+			toolbar->Inputs(event, window);
+			drawArea->Inputs(event, window);
+			optionsBar->Inputs(event,window);
+			layerBar->Inputs(event,window);
+			/***********************************************/
 		}
 		window.clear(sf::Color::White);
-		window.draw(optionsBar._background);
-		window.draw(layerBar._background);
-		window.draw(infoBar._background);
-
+		/**********Dibijar**********/
 		drawArea->Draw(window);
 		toolbar->Draw(window);
+		infoBar->Draw(window);
+		layerBar->Draw(window);
+		optionsBar->Draw(window);
+		/***************************/
 		window.display();
 		}
     return 0;

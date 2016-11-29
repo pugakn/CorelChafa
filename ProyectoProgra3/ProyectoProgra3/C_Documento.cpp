@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "C_Documento.h"
 
+C_Documento* C_Documento::_instance = 0;
 
 void C_Documento::Inicializar()
 {
@@ -15,6 +16,23 @@ void C_Documento::Dibujar(sf::RenderWindow & window)
 	}
 }
 
+void C_Documento::Attach(Observer & observer)
+{
+	_observers.push_back(&observer);
+}
+
+void C_Documento::Detach(Observer & observer)
+{
+	_observers.remove(&observer);
+}
+
+void C_Documento::Notify()
+{
+	for (auto &it : _observers) {
+		it->Update();
+	}
+}
+
 C_Documento::C_Documento()
 {
 }
@@ -22,6 +40,14 @@ C_Documento::C_Documento()
 
 C_Documento::~C_Documento()
 {
+}
+
+C_Documento * C_Documento::Instance()
+{
+	if (_instance == 0) {
+		_instance = new C_Documento;
+	}
+	return _instance;
 }
 
 void C_Documento::Insertar()
