@@ -21,15 +21,19 @@ void LayerBar::Update()
 		Size = C_Documento::Instance()->_actual->Figuras.size();
 		_txtButtons.clear();
 		sfTextButton temp ("Capa 1", _font);
-		temp._rectangle.setSize(sf::Vector2f(200, 25));
-		temp._rectangle.setPosition(_ItemsPosition);
-		temp._txt.setPosition(_ItemsPosition);
-		temp._txt.setCharacterSize(14);
-		temp._txt.setFillColor(sf::Color::Black);
-		temp.Callback = []() {
 
-		};
-		_txtButtons.push_back(temp);
+		//if (_capas->size() == 1) {
+			temp._rectangle.setSize(sf::Vector2f(200, 25));
+			temp._rectangle.setPosition(_ItemsPosition);
+			temp._txt.setPosition(_ItemsPosition);
+			temp._txt.setCharacterSize(14);
+			temp._txt.setFillColor(sf::Color::Black);
+			temp.Callback = []() {
+
+			};
+			_txtButtons.push_back(temp);
+		//}
+
 		for (auto& layer: *_capas)
 		{
 			if (_capas->size()>1) { //Inicializar botones de capas
