@@ -33,6 +33,7 @@ public:
 	void Dibujar(sf::RenderWindow& window);
 
 	bool HitTest(sf::Vector2i point);
+	void SetActual(C_Figura* actual);
 	C_Capa();
 	~C_Capa();
 };

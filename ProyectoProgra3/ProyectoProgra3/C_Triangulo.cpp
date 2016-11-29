@@ -136,9 +136,6 @@ C_Triangulo::C_Triangulo(float l1, float l2)
 	_linea[2].position = _shape[2].position;
 	_linea[3] = _linea[0];
 
-
-	//this->setPosicion(origen);
-
 }
 
 
@@ -192,6 +189,7 @@ bool C_Triangulo::HitTest(sf::Vector2i point)
 void C_Triangulo::setColorRelleno(sf::Color color)
 {
 	_colorRelleno = color;
+	C_Documento::Instance()->Notify();
 	for (int i = 0; i < 3;i++) {
 		_shape[i].color = color;
 	}
@@ -201,6 +199,7 @@ void C_Triangulo::setColorRelleno(sf::Color color)
 void C_Triangulo::setColorLinea(sf::Color color)
 {
 	_colorLinea = color;
+	C_Documento::Instance()->Notify();
 	for (int i = 0; i < 4; i++) {
 		_linea[i].color = color;
 	}
@@ -210,6 +209,7 @@ void C_Triangulo::setSize(sf::Vector2f size)
 {
 	_l1 = size.x;
 	_l2 = size.y;
+	C_Documento::Instance()->Notify();
 	_shape[1].position = sf::Vector2f(_shape[0].position.x + size.x,  _shape[1].position.y);
 	_shape[2].position = sf::Vector2f(_shape[0].position.x + size.x * .5f, _shape[0].position.y + size.y);
 

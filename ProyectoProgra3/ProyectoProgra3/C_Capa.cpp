@@ -105,6 +105,12 @@ bool C_Capa::HitTest(sf::Vector2i point)
 	return false;
 }
 
+void C_Capa::SetActual(C_Figura * actual)
+{
+	_figuraActual = actual;
+	C_Documento::Instance()->Notify();
+}
+
 C_Capa::C_Capa()
 {
 }
@@ -119,6 +125,7 @@ void C_Capa::InsertarTriangulo(float l1, float l2, string type, long id)
 	Figuras.push_back(new C_Triangulo(l1,l2));
 	Figuras.back()->setType(type);
 	Figuras.back()->setID(id);
+	_figuraActual = Figuras.back();
 	C_Documento::Instance()->Notify();
 }
 

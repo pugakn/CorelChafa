@@ -4,6 +4,7 @@
 #include "sfButton.h"
 #include "sfTextButton.h"
 #include "C_Figura.h"
+#include "C_Capa.h"
 class LayerBar : public Observer 
 {
 private:
@@ -13,7 +14,9 @@ private:
 	sf::Vector2f _ItemsPosition;
 	sf::RectangleShape _background;
 
+	bool layerSelected = true;
 	list<C_Figura*>* _figuras;
+	list<C_Capa*>* _capas;
 
 	sf::Font _font;
 protected:

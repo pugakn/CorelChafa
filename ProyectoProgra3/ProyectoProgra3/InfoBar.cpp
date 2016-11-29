@@ -17,8 +17,9 @@ InfoBar * InfoBar::Instance()
 
 void InfoBar::Update()
 {
+	//TODO: Sólo cuando haya cambios en posicion, color,etc...
 	//if (_actual != C_Documento::Instance()->_actual->Figuras.back()) {
-		_actual = C_Documento::Instance()->_actual->Figuras.back();
+		_actual = C_Documento::Instance()->_actual->_figuraActual;
 		_positionString = "POSICION: [" + to_string(_actual->getPosicion().x)
 			+ "," + to_string(_actual->getPosicion().y) + "]";
 		_positionTXT.setString(_positionString);

@@ -41,6 +41,13 @@ void DrawArea::Inputs(sf::Event & event, sf::RenderWindow & window)
 			switch (Toolbar::_actualTool)
 			{
 			case Tools::CURSOR:
+				for (auto& it : C_Documento::Instance()->_lista) {
+					for (auto& item : it->Figuras) {
+						if (item->HitTest(sf::Mouse::getPosition(window)) && !item->Bloqueado) {
+							C_Documento::Instance()->_actual->SetActual(item);
+						}
+					}
+				}
 				break;
 			case Tools::CURVA:
 				break;
