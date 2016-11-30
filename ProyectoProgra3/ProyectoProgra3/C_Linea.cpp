@@ -89,7 +89,7 @@ void C_Linea::Inicializar()
 
 void C_Linea::setColorRelleno(sf::Color color)
 {
-	sf::RectangleShape rectangulo;
+	//sf::RectangleShape rectangulo;
 	//rectangulo.setPosition(rectangulo.getPosition(), rectangulo.getPosition() + rectangulo.getSize());
 }
 
@@ -110,7 +110,8 @@ bool C_Linea::setPosicion(sf::Vector2f posicion)
 		_posicion = posicion;
 		_shape[0].position = _originalPos[0] + posicion;
 		_shape[1].position = _originalPos[1] + posicion;
-
+		_a = _shape[0].position;
+		_b = _shape[1].position;
 		return true;
 	}
 	return false;
@@ -118,25 +119,60 @@ bool C_Linea::setPosicion(sf::Vector2f posicion)
 
 bool C_Linea::HitTest(sf::Vector2i point)
 {
-	sf::Vector2f v1 = rectangulo.getPosition();
-	sf::Vector2f v2 = rectangulo.getPosition() + rectangulo.getSize();
-	if (point.x >= rectangulo.getPosition().x && point.x <= rectangulo.getPosition().x + rectangulo.getSize().x && point.y >= rectangulo.getPosition().y && point.y <= rectangulo.getPosition().y + rectangulo.getSize().y)
+	sf::Vector2f p1, p2, p3, p4;
+	if (angulo <= 45 && angulo >= -45)
 	{
-		cout << "allahuakbar";
+		sf::Vector2f p1(_a.x - 15, _a.y);
+		sf::Vector2f p2(_a.x + 15, _a.y);
+		sf::Vector2f p3(_b.x - 15, _b.y);
+		sf::Vector2f p4(_b.x + 15, _b.y);
+	}
+	else
+	{
+		sf::Vector2f p1(_a.x, _a.y-15);
+		sf::Vector2f p2(_a.x, _a.y+15);
+		sf::Vector2f p3(_b.x, _b.y-15);
+		sf::Vector2f p4(_b.x, _b.y+15);
+	}
+
+
+	bool prueba1 = HitTestTTriangle(p4, p2, p1, (sf::Vector2f)point);
+	bool prueba2 = HitTestTTriangle(p3, p4, p1, (sf::Vector2f)point);
+	if (prueba1 == true) 
+	{
+		cout << "allahu akbar";
 		return true;
 	}
+
+	if (prueba2 == true) 
+	{
+		cout << "allahu akbar";
+		return true;
+	}
+
+
 	return false;
 }
+
+
+
 
 C_Linea::C_Linea(sf::Vector2f a, sf::Vector2f b)
 {
 	_a = a;
 	_b = b;
+	pendiente = (_b.y - _a.y) / (_b.x - _a.x);
+	angulo = atanf(pendiente);
+	angulo = angulo * 180 / 3.141592;
+	cout << angulo;
+
 	_shape = sf::VertexArray(sf::Lines, 2);
 	_shape[0].position = a;
 	_shape[1].position = b;
 	_originalPos.push_back(a);
 	_originalPos.push_back(b);
+
+//	rectangulo.setSize(sf::Vector2f(10, 0));
 }
 
 C_Linea::C_Linea()

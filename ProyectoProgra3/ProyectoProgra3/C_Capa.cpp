@@ -106,6 +106,11 @@ C_Capa::~C_Capa()
 {
 }
 
+//void C_Capa::InsertarRectangulo()
+//{
+//	Figuras.push_back(new C_Rectangulo);
+//}
+
 void C_Capa::InsertarTriangulo(float l1, float l2)
 {
 	Figuras.push_back(new C_Triangulo(l1,l2));
@@ -135,6 +140,8 @@ void C_Capa::InsertarLinea(sf::Vector2f a, sf::Vector2f b)
 {
 	Figuras.push_back(new C_Linea(a,b));
 }
+
+
 
 
 

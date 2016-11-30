@@ -16,6 +16,7 @@ using namespace std;
 int main()
 {
 	sf::RenderWindow window(sf::VideoMode(1024, 768), "Tocino hiperespacial");
+
 	/*sf::CircleShape shape(100.f);
 	//shape.setFillColor(sf::Color::Green);
 	//C_Linea lineatest(sf::Vector2f(800.f, 600.f),sf::Vector2f(900.f,700.f));
@@ -68,7 +69,14 @@ int main()
 		window.draw(tiralineas._shape);
 		window.display();
 	}*/
-	
+
+	C_Linea lineatest(sf::Vector2f(50, 50), sf::Vector2f(100, 100));
+	C_Linea lineatest2(sf::Vector2f(50,50 ), sf::Vector2f(100, 50));
+	C_Linea lineatest(sf::Vector2f(50, ), sf::Vector2f(100, 100));
+	lineatest.Visible = true;
+	lineatest.Bloqueado = false;
+	lineatest.setPosicion(sf::Vector2f(400, 400));
+
 	C_Capa capa1;
 	ofstream File("Archivo.txt");
 	//ifstream Cargar;
@@ -83,6 +91,7 @@ int main()
 	capa1.Visible = true;
 	capa1.Bloqueado = false;
 	capa1.InsertarLinea(sf::Vector2f (50,50), sf::Vector2f (100,100));
+	//capa1.InsertarRectangulo();
 	capa1.Figuras.back()->setColorLinea(sf::Color::Red);
 	//capa1.Figuras.back()->setColorRelleno(sf::Color::Blue);
 	capa1.Figuras.back()->setPosicion(sf::Vector2f(500, 500));
@@ -119,6 +128,9 @@ int main()
 		}
 		window.clear();
 		window.draw(((C_Linea*)capa1.Figuras.back())->_shape);
+		window.draw(lineatest._shape);
+		lineatest.HitTest(sf::Mouse::getPosition(window));
+		//cout << sf::Mouse::getPosition(window).x << " ," <<sf::Mouse::getPosition(window).y <<endl;
 		
 		window.display();
 		}
