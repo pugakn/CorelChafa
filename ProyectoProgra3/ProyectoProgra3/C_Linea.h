@@ -8,7 +8,7 @@ public:
 	sf::VertexArray _shape;
 	sf::Vector2f _a, _b;
 	std::vector<sf::Vector2f> _originalPos;
-	float pendiente,angulo;
+	float _pendiente, _angulo;
 public:
 	//Guardar Cargar
 	int GetCLSID();

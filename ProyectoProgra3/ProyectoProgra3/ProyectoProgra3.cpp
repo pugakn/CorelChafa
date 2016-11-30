@@ -70,12 +70,18 @@ int main()
 		window.display();
 	}*/
 
-	C_Linea lineatest(sf::Vector2f(50, 50), sf::Vector2f(100, 100));
-	C_Linea lineatest2(sf::Vector2f(50,50 ), sf::Vector2f(100, 50));
-	C_Linea lineatest(sf::Vector2f(50, ), sf::Vector2f(100, 100));
+	C_Linea lineatest(sf::Vector2f(50, 100), sf::Vector2f(100, 50));
 	lineatest.Visible = true;
 	lineatest.Bloqueado = false;
 	lineatest.setPosicion(sf::Vector2f(400, 400));
+	C_Linea lineatest2(sf::Vector2f(50, 50), sf::Vector2f(100, 50));
+	lineatest2.Visible = true;
+	lineatest2.Bloqueado = false;
+	lineatest2.setPosicion(sf::Vector2f(200, 200));
+	C_Linea lineatest3(sf::Vector2f(49, 50), sf::Vector2f(50, 100));
+	lineatest3.Visible = true;
+	lineatest3.Bloqueado = false;
+	lineatest3.setPosicion(sf::Vector2f(400, 200));
 
 	C_Capa capa1;
 	ofstream File("Archivo.txt");
@@ -129,7 +135,11 @@ int main()
 		window.clear();
 		window.draw(((C_Linea*)capa1.Figuras.back())->_shape);
 		window.draw(lineatest._shape);
+		window.draw(lineatest2._shape);
+		window.draw(lineatest3._shape);
 		lineatest.HitTest(sf::Mouse::getPosition(window));
+		lineatest2.HitTest(sf::Mouse::getPosition(window));
+		lineatest3.HitTest(sf::Mouse::getPosition(window));
 		//cout << sf::Mouse::getPosition(window).x << " ," <<sf::Mouse::getPosition(window).y <<endl;
 		
 		window.display();

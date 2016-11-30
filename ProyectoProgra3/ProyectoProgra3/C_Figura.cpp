@@ -3,8 +3,6 @@
 #include "VECTOR.h"
 
 
-
-
 sf::Vector2f C_Figura::getPosicion()
 {
 	return _posicion;
@@ -39,3 +37,4 @@ bool HitTestTTriangle(sf::Vector2f v0, sf::Vector2f v1, sf::Vector2f v2, sf::Vec
 	sf::Vector3f c3 = Cross(u, p);
 	return (((c1.z < 0) && (c2.z < 0) && (c3.z < 0)) || ((c1.z > 0) && (c2.z > 0) && (c3.z > 0)));
 }
+

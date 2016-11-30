@@ -92,6 +92,7 @@ C_Elipse::C_Elipse(float ra, float rb)
 	{
 		_shape.append(sf::Vertex(*it));
 	}
+	_shape[0].position.x += ra;
 }
 
 void C_Elipse::setColorRelleno(sf::Color color)

@@ -119,38 +119,37 @@ bool C_Linea::setPosicion(sf::Vector2f posicion)
 
 bool C_Linea::HitTest(sf::Vector2i point)
 {
-	sf::Vector2f p1, p2, p3, p4;
-	if (angulo <= 45 && angulo >= -45)
+	bool prueba1 = false, prueba2 = false;
+	if (fabs(_angulo) >= 45) //vertical
 	{
 		sf::Vector2f p1(_a.x - 15, _a.y);
 		sf::Vector2f p2(_a.x + 15, _a.y);
 		sf::Vector2f p3(_b.x - 15, _b.y);
 		sf::Vector2f p4(_b.x + 15, _b.y);
+		prueba1 = HitTestTTriangle(p4, p2, p1, (sf::Vector2f)point);
+		prueba2 = HitTestTTriangle(p3, p4, p1, (sf::Vector2f)point);
 	}
-	else
+	else //horizontal
 	{
-		sf::Vector2f p1(_a.x, _a.y-15);
-		sf::Vector2f p2(_a.x, _a.y+15);
-		sf::Vector2f p3(_b.x, _b.y-15);
-		sf::Vector2f p4(_b.x, _b.y+15);
+		sf::Vector2f p1(_a.x, _a.y - 15);
+		sf::Vector2f p2(_a.x, _a.y + 15);
+		sf::Vector2f p3(_b.x, _b.y - 15);
+		sf::Vector2f p4(_b.x, _b.y + 15);
+		prueba1 = HitTestTTriangle(p4, p2, p1, (sf::Vector2f)point);
+		prueba2 = HitTestTTriangle(p3, p4, p1, (sf::Vector2f)point);
 	}
 
-
-	bool prueba1 = HitTestTTriangle(p4, p2, p1, (sf::Vector2f)point);
-	bool prueba2 = HitTestTTriangle(p3, p4, p1, (sf::Vector2f)point);
-	if (prueba1 == true) 
-	{
-		cout << "allahu akbar";
-		return true;
-	}
-
-	if (prueba2 == true) 
+	if (prueba1 == true)
 	{
 		cout << "allahu akbar";
 		return true;
 	}
 
-
+	if (prueba2 == true)
+	{
+		cout << "allahu akbar";
+		return true;
+	}
 	return false;
 }
 
@@ -161,11 +160,9 @@ C_Linea::C_Linea(sf::Vector2f a, sf::Vector2f b)
 {
 	_a = a;
 	_b = b;
-	pendiente = (_b.y - _a.y) / (_b.x - _a.x);
-	angulo = atanf(pendiente);
-	angulo = angulo * 180 / 3.141592;
-	cout << angulo;
-
+	_pendiente = (_b.y - _a.y) / (_b.x - _a.x);
+	_angulo = atanf(_pendiente);
+	_angulo = _angulo * 180 / 3.141592;
 	_shape = sf::VertexArray(sf::Lines, 2);
 	_shape[0].position = a;
 	_shape[1].position = b;
