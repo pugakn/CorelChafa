@@ -70,13 +70,14 @@ int main()
 		window.display();
 	}*/
 
-	C_Linea lineatest(sf::Vector2f(50, 50), sf::Vector2f(100, 100));
-	C_Linea lineatest2(sf::Vector2f(50,50 ), sf::Vector2f(100, 50));
-	C_Linea lineatest(sf::Vector2f(50, ), sf::Vector2f(100, 100));
-	lineatest.Visible = true;
-	lineatest.Bloqueado = false;
-	lineatest.setPosicion(sf::Vector2f(400, 400));
-
+	//C_Linea lineatest(sf::Vector2f(50, 50), sf::Vector2f(100, 100));
+	//C_Linea lineatest2(sf::Vector2f(50,50 ), sf::Vector2f(100, 50));
+	//C_Linea lineatest(sf::Vector2f(50, ), sf::Vector2f(100, 100));
+	//lineatest.Visible = true;
+	//lineatest.Bloqueado = false;
+	//lineatest.setPosicion(sf::Vector2f(400, 400));
+	C_Elipse elipsetest(70, 50);
+	elipsetest.setPosicion(sf::Vector2f(500,500));
 	C_Capa capa1;
 	ofstream File("Archivo.txt");
 	//ifstream Cargar;
@@ -90,7 +91,7 @@ int main()
 	capa1.ID = 99;
 	capa1.Visible = true;
 	capa1.Bloqueado = false;
-	capa1.InsertarLinea(sf::Vector2f (50,50), sf::Vector2f (100,100));
+	capa1.InsertarElipse(70,50);
 	//capa1.InsertarRectangulo();
 	capa1.Figuras.back()->setColorLinea(sf::Color::Red);
 	//capa1.Figuras.back()->setColorRelleno(sf::Color::Blue);
@@ -127,9 +128,9 @@ int main()
 				window.close();
 		}
 		window.clear();
-		window.draw(((C_Linea*)capa1.Figuras.back())->_shape);
-		window.draw(lineatest._shape);
-		lineatest.HitTest(sf::Mouse::getPosition(window));
+		//window.draw(((C_Elipse*)capa1.Figuras.back())->_shape);
+		window.draw(elipsetest._shape);
+		elipsetest.HitTest(sf::Mouse::getPosition(window));
 		//cout << sf::Mouse::getPosition(window).x << " ," <<sf::Mouse::getPosition(window).y <<endl;
 		
 		window.display();

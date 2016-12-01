@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "C_Elipse.h"
+#include <iostream>
 #define Pi 3.141592
 
 int C_Elipse::GetCLSID()
@@ -68,6 +69,7 @@ void C_Elipse::Cargar(ifstream & in)
 
 void C_Elipse::Inicializar()
 {
+	_centro = sf::Vector2f(0, 0);
 	_shape = sf::VertexArray(sf::TrianglesFan, 0);
 	std::vector<sf::Vector2f> points = CaclVertex(_ra, _rb);
 	_shape.append(sf::Vertex(sf::Vector2f(0, 0)));
@@ -85,6 +87,7 @@ C_Elipse::C_Elipse(float ra, float rb)
 
 	_ra = ra;
 	_rb = rb;
+	_centro = sf::Vector2f(0,0);
 	_shape = sf::VertexArray(sf::TrianglesFan,0);
 	std::vector<sf::Vector2f> points = CaclVertex(ra, rb);
 	_shape.append(sf::Vertex(sf::Vector2f(0, 0)));
@@ -92,6 +95,8 @@ C_Elipse::C_Elipse(float ra, float rb)
 	{
 		_shape.append(sf::Vertex(*it));
 	}
+
+	//_shape[0].position.x += ra;
 }
 
 void C_Elipse::setColorRelleno(sf::Color color)
@@ -104,19 +109,21 @@ void C_Elipse::setColorRelleno(sf::Color color)
 
 void C_Elipse::setColorLinea(sf::Color color)
 {
-	//std::vector<sf::Vector2f> temp;
+
+	std::vector<sf::Vector2f> temp;
 	//sf::VertexArray(sf::LinesStrip, /**/);
-	//for (int i = 0; i < 40; i++)
-	//{
-	//	float rad = (3.141592f * 2 / 40 * i);
-	//	temp.push_back(sf::Vector2f(ra*cosf(rad), rb*sinf(rad)));
-	//}
+	for (int i = 0; i < 40; i++)
+	{
+		float rad = (3.141592f * 2 / 40 * i);
+		//temp.push_back(sf::Vector2f(ra*cosf(rad), rb*sinf(rad)));
+	}
 	
 }
 
 bool C_Elipse::setPosicion(sf::Vector2f posicion)
 {
 	int i = 0;
+	_centro += posicion;
 	for (i = 0; i <= 40; i++)
 	{
 		_shape[i].position.x += posicion.x;
@@ -132,7 +139,17 @@ bool C_Elipse::setPosicion(sf::Vector2f posicion)
 
 bool C_Elipse::HitTest(sf::Vector2i point)
 {
-	
+	//sf::Vector2f _centro;
+	sf::Vector2f foco1(_centro.x - abs( sqrt((_ra*_ra) - (_rb*_rb))),abs(_centro.y));
+	sf::Vector2f foco2(_centro.x + abs(sqrt((_ra*_ra) - (_rb*_rb))), abs(_centro.y));
+	sf::Vector2f v1 = (sf::Vector2f) point - foco1;
+	sf::Vector2f v2 = (sf::Vector2f) point - foco2;
+	float distancia = sqrt((v1.x*v1.x) + (v1.y*v1.y))+ sqrt((v2.x*v2.x) + (v2.y*v2.y));
+	if (distancia < _ra)
+	{
+		std::cout << "allahu akbar";
+		return true;
+	}
 	return false;
 }
 
