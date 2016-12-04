@@ -10,7 +10,6 @@ public: //private
 	sf::ConvexShape _shape;
 	std::vector<sf::Vector2f> _originalpos;
 public:
-	sf::RectangleShape _shape;
 	//Guardar Cargar
 	int GetCLSID();
 	void Guardar(ofstream &out);
