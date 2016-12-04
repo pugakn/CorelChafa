@@ -115,6 +115,7 @@ void C_Elipse::setColorLinea(sf::Color color)
 	for (int i = 0; i < 40; i++)
 	{
 		float rad = (3.141592f * 2 / 40 * i);
+		_shape[i].color = color;  //?
 		//temp.push_back(sf::Vector2f(ra*cosf(rad), rb*sinf(rad)));
 	}
 	

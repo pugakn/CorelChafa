@@ -15,7 +15,14 @@ using namespace std;
 
 int main()
 {
+	sf::RectangleShape Rectangletest (sf::Vector2f(50, 100));
+	Rectangletest.setPosition(200, 200);
+
 	sf::RenderWindow window(sf::VideoMode(1024, 768), "Tocino hiperespacial");
+
+	window.clear();
+	window.draw(Rectangletest);
+	window.display();
 
 	/*sf::CircleShape shape(100.f);
 	//shape.setFillColor(sf::Color::Green);
@@ -94,7 +101,7 @@ int main()
 	capa1.InsertarElipse(70,50);
 	//capa1.InsertarRectangulo();
 	capa1.Figuras.back()->setColorLinea(sf::Color::Red);
-	//capa1.Figuras.back()->setColorRelleno(sf::Color::Blue);
+	capa1.Figuras.back()->setColorRelleno(sf::Color::Blue);
 	capa1.Figuras.back()->setPosicion(sf::Vector2f(500, 500));
 	capa1.Figuras.back()->Visible = true;
 	capa1.Figuras.back()->Bloqueado = false;
