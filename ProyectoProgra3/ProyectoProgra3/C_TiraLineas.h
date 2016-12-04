@@ -8,6 +8,8 @@ public:
 	sf::Vector2f _a, _b;
 	sf::VertexArray _shape;
 	std::vector<sf::Vector2f> _originalPos;
+	std::vector<float> _pendientes;
+	std::vector<float> _angulos;
 public:
 	//Guardar Cargar
 	int GetCLSID();

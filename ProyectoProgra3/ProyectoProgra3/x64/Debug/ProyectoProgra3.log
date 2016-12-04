@@ -1,18 +1,2 @@
-﻿  stdafx.cpp
-  ProyectoProgra3.cpp
-  Factory.cpp
-  C_Triangulo.cpp
-  C_TiraLineas.cpp
-  C_Texto.cpp
-  C_Seleccionable.cpp
-  C_RRedondeado.cpp
-  C_Rectangulo.cpp
-  C_Poligono.cpp
-  C_Linea.cpp
-  C_Figura.cpp
-  C_Elipse.cpp
-  C_Dibujable.cpp
-  C_Curva.cpp
-  C_Capa.cpp
-  Generating Code...
-LINK : fatal error LNK1104: cannot open file 'sfml-graphics-d.lib sfml-window-d.lib sfml-system-d.lib'
+﻿  ProyectoProgra3.cpp
+sfml-graphics-d.lib(sfml-graphics-d-2.dll) : fatal error LNK1112: module machine type 'X86' conflicts with target machine type 'x64'
