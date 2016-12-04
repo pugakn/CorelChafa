@@ -18,8 +18,10 @@ LayerBar * LayerBar::Instance()
 void LayerBar::Update()
 {
 	static int Size;
-	if (Size!= C_Documento::Instance()->_actual->Figuras.size() + C_Documento::Instance()->_lista.size()) {
+	static C_Capa* capaActual;
+	if (Size!= C_Documento::Instance()->_actual->Figuras.size() + C_Documento::Instance()->_lista.size() || (C_Documento::Instance()->_actual != capaActual)) {
 		Size = C_Documento::Instance()->_actual->Figuras.size() + C_Documento::Instance()->_lista.size();
+		capaActual = C_Documento::Instance()->_actual;
 		_txtButtons.clear();
 		sfTextButton temp ("Capa 1", _font);
 
@@ -154,9 +156,9 @@ LayerBar::LayerBar()
 	button._rectangle.setPosition(1266 + 50, 720);
 	button.Callback = []() {
 		if (LayerBar::Instance()->_layerSelected == true)
-			C_Documento::Instance()->_actual->Visible = !C_Documento::Instance()->_actual->Bloqueado;
+			C_Documento::Instance()->_actual->Bloqueado = !C_Documento::Instance()->_actual->Bloqueado;
 		else
-			C_Documento::Instance()->_actual->_figuraActual->Visible = !C_Documento::Instance()->_actual->_figuraActual->Bloqueado;
+			C_Documento::Instance()->_actual->_figuraActual->Bloqueado = !C_Documento::Instance()->_actual->_figuraActual->Bloqueado;
 	};
 	_buttons.push_back(button);
 	//Up Slider

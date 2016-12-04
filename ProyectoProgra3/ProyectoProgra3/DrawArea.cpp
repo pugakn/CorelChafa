@@ -102,7 +102,7 @@ void DrawArea::Inputs(sf::Event & event, sf::RenderWindow & window)
 	}
 	if (event.type == sf::Event::MouseMoved) {
 		if (Toolbar::_actualTool == Tools::TIRA && !first) {
-			((C_TiraLineas*)_documento->_actual->Figuras.back())->SetLastPointPosition((sf::Vector2f)sf::Mouse::getPosition(window)); //Not Size >:X
+			((C_TiraLineas*)_documento->_actual->Figuras.back())->SetLastPointPosition((sf::Vector2f)sf::Mouse::getPosition(window));
 		}
 		else
 		if (_buttonClicked) {

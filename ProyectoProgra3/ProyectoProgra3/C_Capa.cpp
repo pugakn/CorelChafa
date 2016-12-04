@@ -6,36 +6,44 @@
 
 void C_Capa::Eliminar()
 {
-	Figuras.remove(_figuraActual);
-	delete _figuraActual;
+	if (!_figuraActual->Bloqueado) {
+		Figuras.remove(_figuraActual);
+		delete _figuraActual;
+		_figuraActual = Figuras.back();
+		C_Documento::Instance()->Notify();
+	}
 }
 
 void C_Capa::Subir()
 {
-	auto it = Figuras.begin();
-	for (; it != Figuras.end(); ++it) {
-		if (*it == _figuraActual) {
-			break;
+	if (!_figuraActual->Bloqueado) {
+		auto it = Figuras.begin();
+		for (; it != Figuras.end(); ++it) {
+			if (*it == _figuraActual) {
+				break;
+			}
 		}
+		auto it2 = it;
+		it2++;
+		if (it2 != Figuras.end())
+			Figuras.splice(it2, Figuras, it);
 	}
-	auto it2 = it;
-	it2++; 
-	if (it2 != Figuras.end())
-		Figuras.splice(it2, Figuras, it);
 }
 
 void C_Capa::Bajar()
 {
-	auto it = Figuras.begin();
-	for (; it != Figuras.end(); ++it) {
-		if (*it == _figuraActual) {
-			break;
+	if (!_figuraActual->Bloqueado) {
+		auto it = Figuras.begin();
+		for (; it != Figuras.end(); ++it) {
+			if (*it == _figuraActual) {
+				break;
+			}
 		}
+		auto it2 = it;
+		it2--;
+		if (it2 != Figuras.end())
+			Figuras.splice(it2, Figuras, it);
 	}
-	auto it2 = it;
-	it2--;
-	if (it2 != Figuras.end())
-		Figuras.splice(it2, Figuras, it);
 }
 
 int C_Capa::GetCLSID()
@@ -96,12 +104,16 @@ void C_Capa::Inicializar()
 void C_Capa::Dibujar(sf::RenderWindow & window)
 {
 	for (auto &item : Figuras) {
-		item->Dibujar(window);
+		if (item->Visible)
+			item->Dibujar(window);
 	}
 }
 
 bool C_Capa::HitTest(sf::Vector2i point)
 {
+	for (auto &item : Figuras) {
+		if (item->HitTest(point)) return true;
+	}
 	return false;
 }
 
@@ -160,3 +172,5 @@ void C_Capa::InsertarPoligono(int lados, float radio,  string type, long id)
 	_figuraActual = Figuras.back();
 	C_Documento::Instance()->Notify();
 }
+// TODO: SetBolqueado para todas las figuras
+// TODO: Error al eliminar capa por figura actual
