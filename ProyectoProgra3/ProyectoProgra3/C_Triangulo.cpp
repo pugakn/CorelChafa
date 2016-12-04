@@ -158,6 +158,7 @@ bool C_Triangulo::setPosicion(sf::Vector2f posicion)
 		_linea[2].position = _originalPos[2] + posicion;
 		_linea[3].position = _originalPos[0] + posicion;
 		return true;
+
 	}
 	return false;
 }

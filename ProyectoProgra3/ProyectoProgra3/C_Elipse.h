@@ -7,6 +7,7 @@ class C_Elipse : public C_Figura
 public:
 	float _ra, _rb;
 	sf::VertexArray _shape;
+	sf::Vector2f _centro;
 public:
 	//Guardar Cargar
 	int GetCLSID();

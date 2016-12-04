@@ -9,12 +9,17 @@
 #include "C_Linea.h"
 #include "C_TiraLineas.h"
 #include "C_Capa.h"
+#include "C_Rectangulo.h"
 #include <iostream>
 using namespace std;
 
 int main()
 {
+
+
 	sf::RenderWindow window(sf::VideoMode(1024, 768), "Tocino hiperespacial");
+
+
 	/*sf::CircleShape shape(100.f);
 	//shape.setFillColor(sf::Color::Green);
 	//C_Linea lineatest(sf::Vector2f(800.f, 600.f),sf::Vector2f(900.f,700.f));
@@ -68,6 +73,14 @@ int main()
 		window.display();
 	}*/
 
+	//C_Linea lineatest(sf::Vector2f(50, 50), sf::Vector2f(100, 100));
+	//C_Linea lineatest2(sf::Vector2f(50,50 ), sf::Vector2f(100, 50));
+	//C_Linea lineatest(sf::Vector2f(50, ), sf::Vector2f(100, 100));
+	//lineatest.Visible = true;
+	//lineatest.Bloqueado = false;
+	//lineatest.setPosicion(sf::Vector2f(400, 400));
+	C_Elipse elipsetest(70, 50);
+	elipsetest.setPosicion(sf::Vector2f(500,500));
 	C_Capa capa1;
 	ofstream File("Archivo.txt");
 	//ifstream Cargar;
@@ -81,12 +94,15 @@ int main()
 	capa1.ID = 99;
 	capa1.Visible = true;
 	capa1.Bloqueado = false;
-	capa1.InsertarPoligono(5, 50);
+	capa1.InsertarElipse(70,50);
+	//capa1.InsertarRectangulo();
 	capa1.Figuras.back()->setColorLinea(sf::Color::Red);
 	capa1.Figuras.back()->setColorRelleno(sf::Color::Blue);
 	capa1.Figuras.back()->setPosicion(sf::Vector2f(500, 500));
 	capa1.Figuras.back()->Visible = true;
 	capa1.Figuras.back()->Bloqueado = false;
+
+
 
 	/*while (getline(Cargar, str))
 	{
@@ -115,7 +131,10 @@ int main()
 				window.close();
 		}
 		window.clear();
-		window.draw(((C_Poligono*)capa1.Figuras.back())->_shape);
+		//window.draw(((C_Elipse*)capa1.Figuras.back())->_shape);
+		window.draw(elipsetest._shape);
+		elipsetest.HitTest(sf::Mouse::getPosition(window));
+		//cout << sf::Mouse::getPosition(window).x << " ," <<sf::Mouse::getPosition(window).y <<endl;
 		
 		window.display();
 		}
