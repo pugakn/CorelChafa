@@ -5,12 +5,12 @@
 
 int C_Elipse::GetCLSID()
 {
-	return 0;
+	return ClassID_Elipse;
 }
 
 void C_Elipse::Guardar(ofstream & out)
 {
-	out << ID << endl;
+	out << GetCLSID() << endl;
 
 	out << _ra << endl;
 	out << _rb << endl;
@@ -32,8 +32,6 @@ void C_Elipse::Guardar(ofstream & out)
 void C_Elipse::Cargar(ifstream & in)
 {
 	string str;
-	getline(in, str);
-	ID = stoi(str);
 
 	getline(in, str);
 	_ra = stoi(str);
@@ -80,6 +78,7 @@ void C_Elipse::Inicializar()
 
 	setColorLinea(_colorLinea);
 	setColorRelleno(_colorRelleno);
+	setPosicion(_posicion);
 }
 
 C_Elipse::C_Elipse(float ra, float rb)

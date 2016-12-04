@@ -6,12 +6,12 @@
 
 int C_TiraLineas::GetCLSID()
 {
-	return 0;
+	return ClassID_TiraLineas;
 }
 
 void C_TiraLineas::Guardar(ofstream & out)
 {
-	out << ID << endl;
+	out << GetCLSID() << endl;
 
 	out << _a.x << endl;
 	out << _a.y << endl;
@@ -35,8 +35,6 @@ void C_TiraLineas::Guardar(ofstream & out)
 void C_TiraLineas::Cargar(ifstream & in)
 {
 	string str;
-	getline(in, str);
-	ID = stoi(str);
 
 	getline(in, str);
 	_a.x = stoi(str);
@@ -84,6 +82,7 @@ void C_TiraLineas::Inicializar()
 
 	setColorLinea(_colorLinea);
 	setColorRelleno(_colorRelleno);
+	setPosicion(_posicion);
 }
 
 C_TiraLineas::C_TiraLineas()

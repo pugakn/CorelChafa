@@ -5,12 +5,12 @@
 
 int C_Curva::GetCLSID()
 {
-	return 0;
+	return ClassID_Curva;
 }
 
 void C_Curva::Guardar(ofstream & out)
 {
-	out << ID << endl;
+	out << GetCLSID() << endl;
 
 	out << _p1.x << endl;
 	out << _p1.y << endl;
@@ -38,8 +38,6 @@ void C_Curva::Guardar(ofstream & out)
 void C_Curva::Cargar(ifstream & in)
 {
 	string str;
-	getline(in, str);
-	ID = stoi(str);
 
 	getline(in, str);
 	_p1.x = stoi(str);
@@ -98,6 +96,7 @@ void C_Curva::Inicializar()
 
 	setColorLinea(_colorLinea);
 	setColorRelleno(_colorRelleno);
+	setPosicion(_posicion);
 }
 
 C_Curva::C_Curva()

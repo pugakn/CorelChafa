@@ -5,12 +5,12 @@
 
 int C_Linea::GetCLSID()
 {
-	return 0;
+	return ClassID_Linea;
 }
 
 void C_Linea::Guardar(ofstream & out)
 {
-	out << ID << endl;
+	out << GetCLSID() << endl;
 
 	out << _a.x << endl;
 	out << _a.y << endl;
@@ -36,8 +36,6 @@ void C_Linea::Guardar(ofstream & out)
 void C_Linea::Cargar(ifstream & in)
 {
 	string str;
-	getline(in, str);
-	ID = stoi(str);
 
 	getline(in, str);
 	_a.x = stoi(str);
@@ -85,6 +83,7 @@ void C_Linea::Inicializar()
 
 	setColorLinea(_colorLinea);
 	setColorRelleno(_colorRelleno);
+	setPosicion(_posicion);
 }
 
 void C_Linea::setColorRelleno(sf::Color color)

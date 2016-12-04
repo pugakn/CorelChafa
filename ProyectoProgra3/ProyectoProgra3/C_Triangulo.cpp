@@ -6,12 +6,12 @@
 
 int C_Triangulo::GetCLSID()
 {
-	return 0;
+	return ClassID_Triangulo;
 }
 
 void C_Triangulo::Guardar(ofstream & out)
 {
-	out << ID << endl;
+	out << GetCLSID() << endl;
 
 	out << _l1 << endl;
 	out << _l2 << endl;
@@ -33,8 +33,6 @@ void C_Triangulo::Guardar(ofstream & out)
 void C_Triangulo::Cargar(ifstream & in)
 {
 	string str;
-	getline(in, str);
-	ID = stoi(str);
 
 	getline(in, str);
 	_l1 = stoi(str);
@@ -100,6 +98,7 @@ void C_Triangulo::Inicializar()
 
 	setColorLinea(_colorLinea);
 	setColorRelleno(_colorRelleno);
+	setPosicion(_posicion);
 }
 
 C_Triangulo::C_Triangulo()
