@@ -5,15 +5,21 @@ C_Documento* C_Documento::_instance = 0;
 
 void C_Documento::Inicializar()
 {
-	Insertar();
+	Insertar(1);
 	_actual = _lista.back();
 }
 
 void C_Documento::Dibujar(sf::RenderWindow & window)
 {
 	for (auto &item : _lista) {
-		item->Dibujar(window);
+		if (item->Visible)
+			item->Dibujar(window);
 	}
+}
+
+void C_Documento::SetActual(C_Capa *actual)
+{
+	_actual = actual;
 }
 
 void C_Documento::Attach(Observer & observer)
@@ -50,15 +56,23 @@ C_Documento * C_Documento::Instance()
 	return _instance;
 }
 
-void C_Documento::Insertar()
+void C_Documento::Insertar(int ID)
 {
 	_lista.push_back(new C_Capa());
+	_lista.back()->ID = ID;
+	//_actual = _lista.back();
+	Notify();
 }
 
 void C_Documento::Eliminar()
 {
-	_lista.remove(_actual);
-	delete _actual;
+	if (_lista.size()>1) {
+		_lista.remove(_actual);
+		delete _actual;
+		_actual = _lista.back();
+		Notify();
+	}
+
 }
 
 void C_Documento::Subir()
@@ -73,6 +87,7 @@ void C_Documento::Subir()
 	it2++;
 	if (it2 != _lista.end())
 		_lista.splice(it2, _lista, it);
+	Notify();
 }
 
 void C_Documento::Bajar()
@@ -87,6 +102,7 @@ void C_Documento::Bajar()
 	it2--;
 	if (it2 != _lista.end())
 		_lista.splice(it2, _lista, it);
+	Notify();
 }
 
 int C_Documento::GetCLSID()

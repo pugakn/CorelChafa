@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "C_Curva.h"
 #include <iostream>
+#include "C_Documento.h"
 
 
 int C_Curva::GetCLSID()
@@ -168,6 +169,7 @@ void C_Curva::setColorLinea(sf::Color color)
 	{
 		_vertices[i].color = color;
 	}
+	C_Documento::Instance()->Notify();
 }
 
 bool C_Curva::setPosicion(sf::Vector2f posicion)
@@ -178,6 +180,7 @@ bool C_Curva::setPosicion(sf::Vector2f posicion)
 		{
 				_vertices[i].position = _originalPos[i] + posicion;
 		}
+		C_Documento::Instance()->Notify();
 		return true;
 	}
 	return false;
@@ -185,6 +188,8 @@ bool C_Curva::setPosicion(sf::Vector2f posicion)
 
 void C_Curva::setSize(sf::Vector2f size)
 {
+
+	C_Documento::Instance()->Notify();
 }
 
 void C_Curva::Dibujar(sf::RenderWindow& window)

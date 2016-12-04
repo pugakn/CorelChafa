@@ -2,6 +2,7 @@
 #include "C_TiraLineas.h"
 #include "VECTOR.h"
 #include <iostream>
+#include "C_Documento.h"
 
 
 int C_TiraLineas::GetCLSID()
@@ -106,6 +107,7 @@ void C_TiraLineas::nuevoVertice(sf::Vector2f vertice)
 {
 	_shape.append(vertice);
 	_originalPos.push_back(vertice - _shape[0].position);
+
 }
 
 void C_TiraLineas::setColorRelleno(sf::Color color)
@@ -118,6 +120,7 @@ void C_TiraLineas::setColorLinea(sf::Color color)
 	for (unsigned i = 0; i < _shape.getVertexCount(); i++) {
 		_shape[i].color = color;
 	}
+	C_Documento::Instance()->Notify();
 }
 
 bool C_TiraLineas::setPosicion(sf::Vector2f vector)
@@ -128,7 +131,7 @@ bool C_TiraLineas::setPosicion(sf::Vector2f vector)
 		{
 			_shape[i].position = _originalPos[i] + vector;
 		}
-		
+		C_Documento::Instance()->Notify();
 		return true;
 	}
 	return false;
@@ -136,7 +139,14 @@ bool C_TiraLineas::setPosicion(sf::Vector2f vector)
 
 void C_TiraLineas::setSize(sf::Vector2f size)
 {
-	_shape[_shape.getVertexCount() - 1].position = size;
+	std::vector<sf::Vector2f> pos;
+	for (unsigned i = 0; i < _shape.getVertexCount(); i++)
+		pos.push_back(_shape[i].position);
+	for (unsigned i = 1; i < _shape.getVertexCount(); i++)
+	{
+		_shape[i].position = pos[i] + sf::Vector2f(size.x/50,_shape[i].position.y);
+	}
+	C_Documento::Instance()->Notify();
 }
 
 bool C_TiraLineas::HitTest(sf::Vector2i point)
@@ -174,6 +184,12 @@ bool C_TiraLineas::HitTest(sf::Vector2i point)
 void C_TiraLineas::Dibujar(sf::RenderWindow & window)
 {
 	window.draw(_shape);
+}
+
+void C_TiraLineas::SetLastPointPosition(sf::Vector2f size)
+{
+	_shape[_shape.getVertexCount() - 1].position = size;
+	C_Documento::Instance()->Notify();
 }
 
 

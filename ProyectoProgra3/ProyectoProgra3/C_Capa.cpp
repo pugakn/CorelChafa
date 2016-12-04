@@ -129,9 +129,13 @@ void C_Capa::InsertarTriangulo(float l1, float l2, string type, long id)
 	C_Documento::Instance()->Notify();
 }
 
-void C_Capa::InsertarTiraDeLineas(sf::Vector2f a, sf::Vector2f b)
+void C_Capa::InsertarTiraDeLineas(sf::Vector2f a, sf::Vector2f b, string type, long id)
 {
 	Figuras.push_back(new C_TiraLineas(a, b));
+	Figuras.back()->setType(type);
+	Figuras.back()->setID(id);
+	_figuraActual = Figuras.back();
+	C_Documento::Instance()->Notify();
 }
 
 void C_Capa::InsertarElipse(float ra, float rb)
@@ -139,12 +143,20 @@ void C_Capa::InsertarElipse(float ra, float rb)
 	Figuras.push_back(new C_Elipse(ra, rb));
 }
 
-void C_Capa::InsertarCurva(sf::Vector2f p1, sf::Vector2f p2, sf::Vector2f c1, sf::Vector2f c2)
+void C_Capa::InsertarCurva(sf::Vector2f p1, sf::Vector2f p2, sf::Vector2f c1, sf::Vector2f c2, string type, long id)
 {
 	Figuras.push_back(new C_Curva(p1, p2, c1, c2));
+	Figuras.back()->setType(type);
+	Figuras.back()->setID(id);
+	_figuraActual = Figuras.back();
+	C_Documento::Instance()->Notify();
 }
 
-void C_Capa::InsertarPoligono(int lados, float radio)
+void C_Capa::InsertarPoligono(int lados, float radio,  string type, long id)
 {
 	Figuras.push_back(new C_Poligono(lados, radio));
+	Figuras.back()->setType(type);
+	Figuras.back()->setID(id);
+	_figuraActual = Figuras.back();
+	C_Documento::Instance()->Notify();
 }

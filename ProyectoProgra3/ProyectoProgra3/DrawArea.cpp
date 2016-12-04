@@ -50,6 +50,7 @@ void DrawArea::Inputs(sf::Event & event, sf::RenderWindow & window)
 				}
 				break;
 			case Tools::CURVA:
+				//_documento->_actual->InsertarCurva();
 				break;
 			case Tools::ELIPSE:
 				_documento->_actual->InsertarElipse(50,50);
@@ -57,7 +58,7 @@ void DrawArea::Inputs(sf::Event & event, sf::RenderWindow & window)
 			case Tools::LINEA:
 				break;
 			case Tools::POLIGONO:
-				_documento->_actual->InsertarPoligono(5, 50);
+				_documento->_actual->InsertarPoligono(5, 50, "Poligono", _poligonoID++);
 				break;
 			case Tools::RECTANGULO:
 				break;
@@ -68,7 +69,8 @@ void DrawArea::Inputs(sf::Event & event, sf::RenderWindow & window)
 			case Tools::TIRA:
 			{
 				if (first) {
-					_documento->_actual->InsertarTiraDeLineas((sf::Vector2f)sf::Mouse::getPosition(window), (sf::Vector2f)sf::Mouse::getPosition(window));
+					_documento->_actual->InsertarTiraDeLineas((sf::Vector2f)sf::Mouse::getPosition(window), (sf::Vector2f)sf::Mouse::getPosition(window),"Tira Lineas", _tlineasID++);
+					_documento->_actual->Figuras.back()->setPosicion((sf::Vector2f)sf::Mouse::getPosition(window));
 					first = false;
 				}
 				else {
@@ -100,7 +102,7 @@ void DrawArea::Inputs(sf::Event & event, sf::RenderWindow & window)
 	}
 	if (event.type == sf::Event::MouseMoved) {
 		if (Toolbar::_actualTool == Tools::TIRA && !first) {
-			_documento->_actual->Figuras.back()->setSize((sf::Vector2f)sf::Mouse::getPosition(window));
+			((C_TiraLineas*)_documento->_actual->Figuras.back())->SetLastPointPosition((sf::Vector2f)sf::Mouse::getPosition(window)); //Not Size >:X
 		}
 		else
 		if (_buttonClicked) {

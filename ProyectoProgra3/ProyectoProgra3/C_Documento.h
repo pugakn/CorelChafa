@@ -9,12 +9,14 @@ private:
 	friend class LayerBar;
 	friend class InfoBar;
 	friend class DrawArea;
+	friend class OptionsBar;
+	friend class ColorPicker;
 	std::list<C_Capa*> _lista;
 	C_Capa* _actual;
 protected:
 	C_Documento();
 public:
-	void Insertar();
+	void Insertar(int ID);
 	void Eliminar();
 	void Subir();
 	void Bajar();
@@ -25,6 +27,7 @@ public:
 	//Guardar Cargar
 	void Inicializar();
 	void Dibujar(sf::RenderWindow& window);
+	void SetActual(C_Capa*);
 
 	void Attach(Observer& observer);
 	void Detach(Observer& observer);

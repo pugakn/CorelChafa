@@ -3,6 +3,7 @@
 #include "C_Documento.h"
 
 LayerBar* LayerBar::_instance = 0;
+bool LayerBar::_layerSelected = true;
 
 LayerBar * LayerBar::Instance()
 {
@@ -17,14 +18,14 @@ LayerBar * LayerBar::Instance()
 void LayerBar::Update()
 {
 	static int Size;
-	if (Size!= C_Documento::Instance()->_actual->Figuras.size()) {
-		Size = C_Documento::Instance()->_actual->Figuras.size();
+	if (Size!= C_Documento::Instance()->_actual->Figuras.size() + C_Documento::Instance()->_lista.size()) {
+		Size = C_Documento::Instance()->_actual->Figuras.size() + C_Documento::Instance()->_lista.size();
 		_txtButtons.clear();
 		sfTextButton temp ("Capa 1", _font);
 
 		//if (_capas->size() == 1) {
-			temp._rectangle.setSize(sf::Vector2f(200, 25));
-			temp._rectangle.setPosition(_ItemsPosition);
+			temp._rectangle.setSize(sf::Vector2f(150, 25));
+			//temp._rectangle.setPosition(_ItemsPosition - sf::Vector2f(50,50));
 			temp._txt.setPosition(_ItemsPosition);
 			temp._txt.setCharacterSize(14);
 			temp._txt.setFillColor(sf::Color::Black);
@@ -36,29 +37,31 @@ void LayerBar::Update()
 
 		for (auto& layer: *_capas)
 		{
-			if (_capas->size()>1) { //Inicializar botones de capas
-				temp =  sfTextButton("LAYER", _font);
+			//if (_capas->size()>1) { //Inicializar botones de capas
+				temp =  sfTextButton("Capa " + to_string(layer->ID), _font);
 				//temp->LoadTexture("Assets/ico_cursor.png");
-				temp._rectangle.setSize(sf::Vector2f(200, 25));
+				temp._rectangle.setSize(sf::Vector2f(150, 25));
 				temp._rectangle.setPosition(_ItemsPosition.x, _txtButtons.back()._rectangle.getPosition().y + _txtButtons.back()._rectangle.getSize().y);
-				temp._txt.setPosition(_ItemsPosition.x, _txtButtons.back()._rectangle.getPosition().y + _txtButtons.back()._rectangle.getSize().y);
+				//temp._txt.setPosition(_ItemsPosition.x, _txtButtons.back()._rectangle.getPosition().y + _txtButtons.back()._rectangle.getSize().y);
 				temp._txt.setCharacterSize(14);
 				temp._txt.setFillColor(sf::Color::Black);
 				temp.Callback = [&layer]() {
-					//C_Documento::Instance()->_actual->SetActual(layer);
+					LayerBar::Instance()->_layerSelected = true;
+					C_Documento::Instance()->SetActual(layer);
 				};
 				_txtButtons.push_back(temp);
-			}
+			//}
 			// Inicializar botones de figuras
 			for (auto &it : layer->Figuras) {
 				temp =  sfTextButton(it->getType() + " " + to_string(it->getID()), _font);
 				//temp->LoadTexture("Assets/ico_cursor.png");
-				temp._rectangle.setSize(sf::Vector2f(200, 25));
+				temp._rectangle.setSize(sf::Vector2f(150, 25));
 				temp._rectangle.setPosition(_ItemsPosition.x, _txtButtons.back()._rectangle.getPosition().y + _txtButtons.back()._rectangle.getSize().y);
-				temp._txt.setPosition(_ItemsPosition.x, _txtButtons.back()._rectangle.getPosition().y + _txtButtons.back()._rectangle.getSize().y);
+				//temp._txt.setPosition(_ItemsPosition.x, _txtButtons.back()._rectangle.getPosition().y + _txtButtons.back()._rectangle.getSize().y);
 				temp._txt.setCharacterSize(14);
 				temp._txt.setFillColor(sf::Color::Black);
 				temp.Callback = [&it]() {
+					LayerBar::Instance()->_layerSelected = false;
 					C_Documento::Instance()->_actual->SetActual(it);
 				};
 				_txtButtons.push_back(temp);
@@ -77,11 +80,11 @@ LayerBar::LayerBar()
 	_background.setSize(sf::Vector2f(200, 644));
 	_background.setFillColor(sf::Color(250, 208, 166));
 
-	_ItemsPosition = sf::Vector2f(1166, 124);
+	_ItemsPosition = sf::Vector2f(1166, 124) - sf::Vector2f(0, 25);
 	_font.loadFromFile("Assets/Calibri.ttf");
 
 	sfTextButton temp =  sfTextButton("Capa 1",_font);
-	temp._rectangle.setSize(sf::Vector2f(200, 25));
+	temp._rectangle.setSize(sf::Vector2f(150, 25));
 	temp._rectangle.setPosition(_ItemsPosition);
 	temp._txt.setPosition(_ItemsPosition);
 	temp._txt.setCharacterSize(14);
@@ -96,8 +99,8 @@ LayerBar::LayerBar()
 	sfButton button =  sfButton();
 	button._rectangle.setSize(sf::Vector2f(100, 50));
 	button._rectangle.setPosition(1166,720-50);
-	button.Callback = []() { //Pasarle nombre
-		C_Documento::Instance()->Insertar();
+	button.Callback = [this]() { 
+		C_Documento::Instance()->Insertar(this->_capasID++);
 	};
 	_buttons.push_back(button);
 
@@ -106,7 +109,10 @@ LayerBar::LayerBar()
 	button._rectangle.setSize(sf::Vector2f(100, 50));
 	button._rectangle.setPosition(1266, 720 - 50);
 	button.Callback = []() { //TODO: Capa o Figura
-		C_Documento::Instance()->Eliminar();
+		if (LayerBar::Instance()->_layerSelected == true)
+			C_Documento::Instance()->Eliminar();
+		else
+			C_Documento::Instance()->_actual->Eliminar();
 	};
 	_buttons.push_back(button);
 	//Subir
@@ -114,7 +120,10 @@ LayerBar::LayerBar()
 	button._rectangle.setSize(sf::Vector2f(50, 50));
 	button._rectangle.setPosition(1166, 720);
 	button.Callback = []() {
-		C_Documento::Instance()->Subir();
+		if (LayerBar::Instance()->_layerSelected == true)
+			C_Documento::Instance()->Subir();
+		else
+			C_Documento::Instance()->_actual->Subir();
 	};
 	_buttons.push_back(button);
 	//Bajar
@@ -122,7 +131,10 @@ LayerBar::LayerBar()
 	button._rectangle.setSize(sf::Vector2f(50, 50));
 	button._rectangle.setPosition(1166+50, 720);
 	button.Callback = []() {
-		C_Documento::Instance()->Bajar();
+		if (LayerBar::Instance()->_layerSelected == true)
+			C_Documento::Instance()->Bajar();
+		else
+			C_Documento::Instance()->_actual->Bajar();
 	};
 	_buttons.push_back(button);
 	//Visible
@@ -130,7 +142,10 @@ LayerBar::LayerBar()
 	button._rectangle.setSize(sf::Vector2f(50, 50));
 	button._rectangle.setPosition(1266, 720);
 	button.Callback = []() {
-
+		if (LayerBar::Instance()->_layerSelected == true)
+			C_Documento::Instance()->_actual->Visible = ! C_Documento::Instance()->_actual->Visible;
+		else
+			C_Documento::Instance()->_actual->_figuraActual->Visible = !C_Documento::Instance()->_actual->_figuraActual->Visible;
 	};
 	_buttons.push_back(button);
 	//Lock
@@ -138,19 +153,64 @@ LayerBar::LayerBar()
 	button._rectangle.setSize(sf::Vector2f(50, 50));
 	button._rectangle.setPosition(1266 + 50, 720);
 	button.Callback = []() {
-
+		if (LayerBar::Instance()->_layerSelected == true)
+			C_Documento::Instance()->_actual->Visible = !C_Documento::Instance()->_actual->Bloqueado;
+		else
+			C_Documento::Instance()->_actual->_figuraActual->Visible = !C_Documento::Instance()->_actual->_figuraActual->Bloqueado;
 	};
 	_buttons.push_back(button);
+	//Up Slider
+	button = sfButton();
+	button._rectangle.setSize(sf::Vector2f(50, 25));
+	button._rectangle.setPosition(1166 + 150, 124);
+	button.Callback = [this]() {
+		if (_txtButtons.size()>21)
+			if (this->_sliderCounter > 0) {
+				this->_sliderCounter--;
+			}
+	};
+	_buttons.push_back(button);
+
+	//Down Slider
+	button = sfButton();
+	button._rectangle.setSize(sf::Vector2f(50, 25));
+	button._rectangle.setPosition(1166 + 150, 124+644-123);
+	button.Callback = [this]() {
+		if (_txtButtons.size()>21)
+			//if (this->_sliderCounter < this->_maxSlider) {
+				this->_sliderCounter++;
+			//}
+	};
+	_buttons.push_back(button);
+
 	/********************************/
 }
 
 
 void LayerBar::Draw(sf::RenderWindow &window)
 {
+	
 	window.draw(_background);
-	for (auto& it : _txtButtons) {
-		window.draw(it._rectangle);
-		window.draw(it._txt);
+	//auto it = _txtButtons.begin();
+	int i = 0;
+	if(_txtButtons.size()>21)
+		for ( ; i < _sliderCounter; i++) {
+			//it++;
+		}
+	bool first = true;
+	for (; i < _txtButtons.size();i++) {
+		if (first) {
+			_txtButtons[i]._rectangle.setPosition(_ItemsPosition);
+			_txtButtons[i]._txt.setPosition(_ItemsPosition);
+			first = false;
+		}
+		else {
+			_txtButtons[i]._rectangle.setPosition(_ItemsPosition.x, _txtButtons[i-1]._rectangle.getPosition().y + _txtButtons[i]._rectangle.getSize().y);
+			_txtButtons[i]._txt.setPosition(_ItemsPosition.x, _txtButtons[i-1]._rectangle.getPosition().y + _txtButtons[i]._rectangle.getSize().y);
+		}
+
+		window.draw(_txtButtons[i]._rectangle);
+		window.draw(_txtButtons[i]._txt);
 	}
 	for (auto& it : _buttons) {
 		window.draw(it._rectangle);

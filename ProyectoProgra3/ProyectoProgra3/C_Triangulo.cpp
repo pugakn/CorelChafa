@@ -207,14 +207,18 @@ void C_Triangulo::setColorLinea(sf::Color color)
 
 void C_Triangulo::setSize(sf::Vector2f size)
 {
-	_l1 = size.x;
-	_l2 = size.y;
+	_size = size;
+	//_l1 = size.x;
+	//_l2 = size.y;
 	C_Documento::Instance()->Notify();
 	_shape[1].position = sf::Vector2f(_shape[0].position.x + size.x,  _shape[1].position.y);
 	_shape[2].position = sf::Vector2f(_shape[0].position.x + size.x * .5f, _shape[0].position.y + size.y);
 
 	_linea[1].position = sf::Vector2f(_linea[0].position.x + size.x, _linea[1].position.y);
 	_linea[2].position = sf::Vector2f(_linea[0].position.x + size.x * .5f, _linea[0].position.y + size.y);
+
+	_originalPos[1] = sf::Vector2f(_originalPos[0].x + size.x, _originalPos[1].y);
+	_originalPos[2] = sf::Vector2f(_originalPos[0].x + size.x * .5f, _originalPos[0].y + size.y);
 
 }
 

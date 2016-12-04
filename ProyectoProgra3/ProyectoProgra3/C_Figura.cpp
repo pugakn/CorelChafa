@@ -40,6 +40,11 @@ sf::Color C_Figura::getColorLinea()
 	return _colorLinea;
 }
 
+sf::Vector2f C_Figura::getSize()
+{
+	return _size;
+}
+
 C_Figura::~C_Figura()
 {
 }

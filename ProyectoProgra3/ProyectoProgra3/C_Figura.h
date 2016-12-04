@@ -11,6 +11,7 @@ protected:
 	sf::Color _colorRelleno;
 	sf::Color _colorLinea;
 	sf::Vector2f _posicion;
+	sf::Vector2f _size;
 public:
 	void setType(string type);
 	string getType();
@@ -23,6 +24,7 @@ public:
 	virtual void setColorLinea(sf::Color) = 0;
 	virtual sf::Color getColorLinea();
 	virtual void setSize(sf::Vector2f size) = 0;
+	virtual sf::Vector2f getSize();
 	virtual ~C_Figura();
 };
 

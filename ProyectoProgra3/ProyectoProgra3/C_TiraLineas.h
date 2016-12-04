@@ -25,6 +25,7 @@ public:
 	void setSize(sf::Vector2f size) override;
 	bool HitTest(sf::Vector2i point) override;
 	void Dibujar(sf::RenderWindow& window) override;
+	void SetLastPointPosition(sf::Vector2f size);
 	~C_TiraLineas();
 };
 

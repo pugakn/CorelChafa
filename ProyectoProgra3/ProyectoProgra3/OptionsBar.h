@@ -1,6 +1,7 @@
 #pragma once
 #include "sfButton.h"
 #include "Observer.h"
+#include "ColorPicker.h"
 class OptionsBar : public Observer
 {
 private:
@@ -8,6 +9,7 @@ private:
 	std::vector<sfButton*> _buttons;
 	sf::Vector2f _ItemsPosition;
 	sf::RectangleShape _background;
+	ColorPicker _colorPicker;
 protected:
 	OptionsBar();
 public:

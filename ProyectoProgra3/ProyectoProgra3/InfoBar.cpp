@@ -18,7 +18,7 @@ InfoBar * InfoBar::Instance()
 void InfoBar::Update()
 {
 	//TODO: Sólo cuando haya cambios en posicion, color,etc...
-	//if (_actual != C_Documento::Instance()->_actual->Figuras.back()) {
+	if (_actual != C_Documento::Instance()->_actual->_figuraActual) {
 		_actual = C_Documento::Instance()->_actual->_figuraActual;
 		_positionString = "POSICION: [" + to_string(_actual->getPosicion().x)
 			+ "," + to_string(_actual->getPosicion().y) + "]";
@@ -26,7 +26,7 @@ void InfoBar::Update()
 		_idString = "FIGURA: " + _actual->getType() +" " + to_string(_actual->getID());
 		_idText.setString(_idString);
 
-	//}
+	}
 }
 
 void InfoBar::Draw(sf::RenderWindow &window)
