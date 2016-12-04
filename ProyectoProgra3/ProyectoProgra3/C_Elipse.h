@@ -16,10 +16,12 @@ public:
 	void Inicializar();
 
 	C_Elipse(float ra, float rb);
-	void setColorRelleno(sf::Color color);
-	void setColorLinea(sf::Color color);
-	bool setPosicion(sf::Vector2f vector);
-	bool HitTest(sf::Vector2i point);
+	void setColorRelleno(sf::Color color) override;
+	void setColorLinea(sf::Color color) override;
+	bool setPosicion(sf::Vector2f vector) override;
+	void setSize(sf::Vector2f size) override;
+	bool HitTest(sf::Vector2i point) override;
+	void Dibujar(sf::RenderWindow& window) override;
 	C_Elipse();
 	~C_Elipse();
 };

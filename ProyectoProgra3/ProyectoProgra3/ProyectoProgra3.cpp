@@ -9,36 +9,52 @@
 #include "C_Linea.h"
 #include "C_TiraLineas.h"
 #include "C_Capa.h"
-#include "C_RRedondeado.h"
 #include <iostream>
+#include "sfButton.h"
+#include "Toolbar.h"
+#include "OptionsBar.h"
+#include "LayerBar.h"
+#include "InfoBar.h"
+#include "DrawArea.h"
+#include "C_Documento.h"
 using namespace std;
 
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(1024, 768), "Tocino hiperespacial");
-	
-	/*C_Poligono piligonotest(5, 50);
-	piligonotest.setColorLinea(sf::Color::Red);
-	piligonotest.setColorRelleno(sf::Color::Blue);
-	piligonotest.setPosicion(sf::Vector2f(500, 500));*/
-	C_RRedondeado Rtest(300, 500);
-	Rtest.setColorRelleno(sf::Color::Red);
-	Rtest.setColorLinea(sf::Color::Blue);
-	Rtest.setPosicion(sf::Vector2f(500, 400));
-	
+	sf::RenderWindow window(sf::VideoMode(1366, 768), "Tocino hiperespacial");
+	window.setFramerateLimit(60);
+	C_Documento* document = C_Documento::Instance();
 
+	Toolbar* toolbar = Toolbar::Instance();
+	DrawArea* drawArea = DrawArea::Instance();
+	InfoBar* infoBar = InfoBar::Instance();
+	OptionsBar* optionsBar = OptionsBar::Instance();
+	LayerBar* layerBar = LayerBar::Instance();;
 
 	while (window.isOpen())
 	{
 		sf::Event event;
 		while (window.pollEvent(event))
 		{
+			if (event.type == sf::Event::Resized)
+				window.setView(sf::View(sf::FloatRect(0, 0, event.size.width, event.size.height)));
 			if (event.type == sf::Event::Closed)
 				window.close();
+			/********************* Inputs********************/
+			toolbar->Inputs(event, window);
+			drawArea->Inputs(event, window);
+			optionsBar->Inputs(event,window);
+			layerBar->Inputs(event,window);
+			/***********************************************/
 		}
-		window.clear();
-		window.draw(Rtest._shape);
-		Rtest.HitTest(sf::Mouse::getPosition(window));
+		window.clear(sf::Color::White);
+		/**********Dibijar**********/
+		drawArea->Draw(window);
+		toolbar->Draw(window);
+		infoBar->Draw(window);
+		layerBar->Draw(window);
+		optionsBar->Draw(window);
+		/***************************/
 		window.display();
 		}
     return 0;

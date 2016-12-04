@@ -137,6 +137,10 @@ bool C_Elipse::setPosicion(sf::Vector2f posicion)
 	return false;
 }
 
+void C_Elipse::setSize(sf::Vector2f size)
+{
+}
+
 bool C_Elipse::HitTest(sf::Vector2i point)
 {
 	//sf::Vector2f _centro;
@@ -151,6 +155,11 @@ bool C_Elipse::HitTest(sf::Vector2i point)
 		return true;
 	}
 	return false;
+}
+
+void C_Elipse::Dibujar(sf::RenderWindow & window)
+{
+	window.draw(_shape);
 }
 
 C_Elipse::C_Elipse()

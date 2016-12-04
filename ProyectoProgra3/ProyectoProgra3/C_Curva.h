@@ -23,6 +23,9 @@ public:
 	void setColorRelleno(sf::Color color);
 	void setColorLinea(sf::Color color);
 	bool setPosicion(sf::Vector2f posicion);
+	void setSize(sf::Vector2f size);
+	void Dibujar(sf::RenderWindow& window);
+
 };
 
 std::vector<sf::Vector2f> CalcCubicBezier(
