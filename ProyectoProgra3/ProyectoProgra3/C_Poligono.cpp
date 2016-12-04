@@ -13,7 +13,7 @@ int C_Poligono::GetCLSID()
 
 void C_Poligono::Guardar(ofstream & out)
 {
-	out << ID << endl;
+	out << GetCLSID() << endl;
 
 	out << _lados << endl;
 	out << _radio << endl;
@@ -35,8 +35,6 @@ void C_Poligono::Guardar(ofstream & out)
 void C_Poligono::Cargar(ifstream & in)
 {
 	string str;
-	getline(in, str);
-	ID = stoi(str);
 
 	getline(in, str);
 	_lados = stoi(str);
@@ -85,6 +83,7 @@ void C_Poligono::Inicializar()
 
 	setColorLinea(_colorLinea);
 	setColorRelleno(_colorRelleno);
+	setPosicion(_posicion);
 }
 
 C_Poligono::C_Poligono()
