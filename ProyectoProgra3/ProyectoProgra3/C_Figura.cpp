@@ -3,6 +3,28 @@
 #include "VECTOR.h"
 
 
+
+
+void C_Figura::setType(string type)
+{
+	_type = type;
+}
+
+string C_Figura::getType()
+{
+	return _type;
+}
+
+void C_Figura::setID(long id)
+{
+	ID = id;
+}
+
+long C_Figura::getID()
+{
+	return ID;
+}
+
 sf::Vector2f C_Figura::getPosicion()
 {
 	return _posicion;
@@ -16,6 +38,11 @@ sf::Color C_Figura::getColorRelleno()
 sf::Color C_Figura::getColorLinea()
 {
 	return _colorLinea;
+}
+
+sf::Vector2f C_Figura::getSize()
+{
+	return _size;
 }
 
 C_Figura::~C_Figura()
@@ -37,4 +64,3 @@ bool HitTestTTriangle(sf::Vector2f v0, sf::Vector2f v1, sf::Vector2f v2, sf::Vec
 	sf::Vector3f c3 = Cross(u, p);
 	return (((c1.z < 0) && (c2.z < 0) && (c3.z < 0)) || ((c1.z > 0) && (c2.z > 0) && (c3.z > 0)));
 }
-

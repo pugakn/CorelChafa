@@ -4,8 +4,8 @@
 class C_Seleccionable : public C_Dibujable
 {
 public:
-	bool Bloqueado;
-	bool Visible;
+	bool Bloqueado = false;
+	bool Visible = true;
 	virtual bool HitTest(sf::Vector2i point) = 0;
 
 };

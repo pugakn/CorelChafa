@@ -20,10 +20,14 @@ public:
 	C_TiraLineas();
 	C_TiraLineas(sf::Vector2f a, sf::Vector2f b);
 	void nuevoVertice(sf::Vector2f vertice);
-	void setColorRelleno(sf::Color color);
-	void setColorLinea(sf::Color color);
-	bool setPosicion(sf::Vector2f vector);
-	bool HitTest(sf::Vector2i point);
+	//void setLastVertexPos(sf::Vector2f vertice);
+	void setColorRelleno(sf::Color color) override;
+	void setColorLinea(sf::Color color) override;
+	bool setPosicion(sf::Vector2f vector) override;
+	void setSize(sf::Vector2f size) override;
+	bool HitTest(sf::Vector2i point) override;
+	void Dibujar(sf::RenderWindow& window) override;
+	void SetLastPointPosition(sf::Vector2f size);
 	~C_TiraLineas();
 };
 

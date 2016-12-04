@@ -5,12 +5,12 @@
 
 int C_Linea::GetCLSID()
 {
-	return 0;
+	return ClassID_Linea;
 }
 
 void C_Linea::Guardar(ofstream & out)
 {
-	out << ID << endl;
+	out << GetCLSID() << endl;
 
 	out << _a.x << endl;
 	out << _a.y << endl;
@@ -36,8 +36,6 @@ void C_Linea::Guardar(ofstream & out)
 void C_Linea::Cargar(ifstream & in)
 {
 	string str;
-	getline(in, str);
-	ID = stoi(str);
 
 	getline(in, str);
 	_a.x = stoi(str);
@@ -78,13 +76,13 @@ void C_Linea::Cargar(ifstream & in)
 
 void C_Linea::Inicializar()
 {
-	sf::RectangleShape rectangulo;
 	_shape = sf::VertexArray(sf::Lines, 2);
 	_shape[0].position = _a;
 	_shape[1].position = _b;
 
 	setColorLinea(_colorLinea);
 	setColorRelleno(_colorRelleno);
+	setPosicion(_posicion);
 }
 
 void C_Linea::setColorRelleno(sf::Color color)
@@ -115,6 +113,10 @@ bool C_Linea::setPosicion(sf::Vector2f posicion)
 		return true;
 	}
 	return false;
+}
+
+void C_Linea::setSize(sf::Vector2f size)
+{
 }
 
 bool C_Linea::HitTest(sf::Vector2i point)
@@ -153,8 +155,10 @@ bool C_Linea::HitTest(sf::Vector2i point)
 	return false;
 }
 
-
-
+void C_Linea::Dibujar(sf::RenderWindow & window)
+{
+	window.draw(_shape);
+}
 
 C_Linea::C_Linea(sf::Vector2f a, sf::Vector2f b)
 {
