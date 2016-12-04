@@ -109,9 +109,18 @@ bool C_Elipse::setPosicion(sf::Vector2f vector)
 	return false;
 }
 
+void C_Elipse::setSize(sf::Vector2f size)
+{
+}
+
 bool C_Elipse::HitTest(sf::Vector2i point)
 {
 	return false;
+}
+
+void C_Elipse::Dibujar(sf::RenderWindow & window)
+{
+	window.draw(_shape);
 }
 
 C_Elipse::C_Elipse()

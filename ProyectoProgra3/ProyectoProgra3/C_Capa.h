@@ -14,12 +14,12 @@ public: //private
 public:
 	//void InsertarRectangulo();
 	//void InsertarRectanguloRed();
-	void InsertarTriangulo(float l1, float l2);
+	void InsertarTriangulo(float l1, float l2, string type, long id);
 	//void InsertarLinea();
-	void InsertarTiraDeLineas(sf::Vector2f a, sf::Vector2f b);
+	void InsertarTiraDeLineas(sf::Vector2f a, sf::Vector2f b, string type, long id);
 	void InsertarElipse(float ra, float rb);
-	void InsertarCurva(sf::Vector2f p1, sf::Vector2f p2, sf::Vector2f c1, sf::Vector2f c2);
-	void InsertarPoligono(int lados, float radio);
+	void InsertarCurva(sf::Vector2f p1, sf::Vector2f p2, sf::Vector2f c1, sf::Vector2f c2, string type, long id);
+	void InsertarPoligono(int lados, float radio, string type, long id);
 	//void InsertarTexto();
 
 	void Eliminar();
@@ -30,8 +30,10 @@ public:
 	void Guardar(ofstream &out);
 	void Cargar(ifstream &in);
 	void Inicializar();
+	void Dibujar(sf::RenderWindow& window);
 
 	bool HitTest(sf::Vector2i point);
+	void SetActual(C_Figura* actual);
 	C_Capa();
 	~C_Capa();
 };

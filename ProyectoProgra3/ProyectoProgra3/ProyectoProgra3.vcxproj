@@ -161,6 +161,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ColorPicker.h" />
     <ClInclude Include="C_Capa.h" />
     <ClInclude Include="C_Curva.h" />
     <ClInclude Include="C_Dibujable.h" />
@@ -175,12 +176,23 @@
     <ClInclude Include="C_Texto.h" />
     <ClInclude Include="C_TiraLineas.h" />
     <ClInclude Include="C_Triangulo.h" />
+    <ClInclude Include="DrawArea.h" />
     <ClInclude Include="Factory.h" />
+    <ClInclude Include="InfoBar.h" />
+    <ClInclude Include="LayerBar.h" />
+    <ClInclude Include="Observer.h" />
+    <ClInclude Include="OptionsBar.h" />
+    <ClInclude Include="sfButton.h" />
+    <ClInclude Include="sfTextButton.h" />
+    <ClInclude Include="Slider.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="Subject.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="Toolbar.h" />
     <ClInclude Include="VECTOR.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ColorPicker.cpp" />
     <ClCompile Include="C_Capa.cpp" />
     <ClCompile Include="C_Curva.cpp" />
     <ClCompile Include="C_Dibujable.cpp" />
@@ -195,14 +207,24 @@
     <ClCompile Include="C_Texto.cpp" />
     <ClCompile Include="C_TiraLineas.cpp" />
     <ClCompile Include="C_Triangulo.cpp" />
+    <ClCompile Include="DrawArea.cpp" />
     <ClCompile Include="Factory.cpp" />
+    <ClCompile Include="InfoBar.cpp" />
+    <ClCompile Include="LayerBar.cpp" />
+    <ClCompile Include="Observer.cpp" />
+    <ClCompile Include="OptionsBar.cpp" />
     <ClCompile Include="ProyectoProgra3.cpp" />
+    <ClCompile Include="sfButton.cpp" />
+    <ClCompile Include="sfTextButton.cpp" />
+    <ClCompile Include="Slider.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Subject.cpp" />
+    <ClCompile Include="Toolbar.cpp" />
     <ClCompile Include="VECTOR.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "C_Poligono.h"
 #include "VECTOR.h"
+#include "C_Documento.h"
 
 #include <iostream>
 
@@ -118,6 +119,7 @@ bool C_Poligono::setPosicion(sf::Vector2f posicion)
 		for (int i = 0; i < _lados; i++) {
 			_vertices[i] = _originalPos[i] + posicion;
 		}
+		C_Documento::Instance()->Notify();
 		return true;
 	}
 	return false;
@@ -142,6 +144,7 @@ void C_Poligono::setColorRelleno(sf::Color color)
 {
 	_colorRelleno = color;
 	_shape.setFillColor(color);
+	C_Documento::Instance()->Notify();
 }
 
 void C_Poligono::setColorLinea(sf::Color color)
@@ -149,5 +152,20 @@ void C_Poligono::setColorLinea(sf::Color color)
 	_colorLinea = color;
 	_shape.setOutlineColor(color);
 	_shape.setOutlineThickness(1);
+	C_Documento::Instance()->Notify();
+}
+
+void C_Poligono::setSize(sf::Vector2f size)
+{
+	_size = size;
+	//_shape.setScale(size);
+	//_radio = size.x;
+	_shape.setRadius(size.x/2);
+	C_Documento::Instance()->Notify();
+}
+
+void C_Poligono::Dibujar(sf::RenderWindow & window)
+{
+	window.draw(_shape);
 }
 

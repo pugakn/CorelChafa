@@ -24,5 +24,7 @@ public:
 	bool HitTest(sf::Vector2i point);
 	void setColorRelleno(sf::Color color);
 	void setColorLinea(sf::Color color);
+	void setSize(sf::Vector2f size);
+	void Dibujar(sf::RenderWindow& window);
 };
 
