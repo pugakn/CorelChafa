@@ -15,14 +15,10 @@ using namespace std;
 
 int main()
 {
-	sf::RectangleShape Rectangletest (sf::Vector2f(50, 100));
-	Rectangletest.setPosition(200, 200);
+
 
 	sf::RenderWindow window(sf::VideoMode(1024, 768), "Tocino hiperespacial");
 
-	window.clear();
-	window.draw(Rectangletest);
-	window.display();
 
 	/*sf::CircleShape shape(100.f);
 	//shape.setFillColor(sf::Color::Green);
