@@ -18,16 +18,16 @@ void C_Texto::Cargar(ifstream & in)
 
 void C_Texto::setColorRelleno(sf::Color color)
 {
-	for (int i = 0; i < 4; i++) {
-		_shape[i].color = color;
-	}
+	//for (int i = 0; i < 4; i++) {
+	//	_shape[i].color = color;
+	//}
 }
 
 void C_Texto::setColorLinea(sf::Color color)
 {
-	for (int i = 0; i < 4; i++) {
-		_linea[i].color = color;
-	}
+	//for (int i = 0; i < 4; i++) {
+	//	_linea[i].color = color;
+	//}
 }
 
 bool C_Texto::setPosicion(sf::Vector2f vector)

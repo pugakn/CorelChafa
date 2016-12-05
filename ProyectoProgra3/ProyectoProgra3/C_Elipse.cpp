@@ -95,7 +95,7 @@ C_Elipse::C_Elipse(float ra, float rb)
 		_shape.append(sf::Vertex(*it));
 	}
 
-	//_shape[0].position.x += ra;
+	_shape[0].position.x += ra;
 }
 
 void C_Elipse::setColorRelleno(sf::Color color)
@@ -108,13 +108,13 @@ void C_Elipse::setColorRelleno(sf::Color color)
 
 void C_Elipse::setColorLinea(sf::Color color)
 {
-
-	std::vector<sf::Vector2f> temp;
+	_colorLinea = color;
+	//std::vector<sf::Vector2f> temp;
 	//sf::VertexArray(sf::LinesStrip, /**/);
 	for (int i = 0; i < 40; i++)
 	{
 		float rad = (3.141592f * 2 / 40 * i);
-		_shape[i].color = color;  //?
+		_shape[i].color = color; //?
 		//temp.push_back(sf::Vector2f(ra*cosf(rad), rb*sinf(rad)));
 	}
 	
