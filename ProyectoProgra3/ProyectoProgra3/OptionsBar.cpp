@@ -113,7 +113,7 @@ OptionsBar::OptionsBar()
 	temp->_rectangle.setPosition(_ItemsPosition.x + 420, _ItemsPosition.y);
 	temp->Callback = []() {
 		if (C_Documento::Instance()->_actual->_figuraActual != nullptr)
-			C_Documento::Instance()->_actual->_figuraActual->setSize(C_Documento::Instance()->_actual->_figuraActual->getSize() - sf::Vector2f(0, 10));
+			C_Documento::Instance()->_actual->_figuraActual->setSize(C_Documento::Instance()->_actual->_figuraActual->getSize() + sf::Vector2f(0, 10));
 	};
 	_buttons.push_back(temp);
 	temp = new sfButton;
@@ -122,7 +122,7 @@ OptionsBar::OptionsBar()
 	temp->_rectangle.setPosition(_ItemsPosition.x + 420, _buttons.back()->_rectangle.getPosition().y + _buttons.back()->_rectangle.getSize().y);
 	temp->Callback = []() {
 		if (C_Documento::Instance()->_actual->_figuraActual != nullptr)
-			C_Documento::Instance()->_actual->_figuraActual->setSize(C_Documento::Instance()->_actual->_figuraActual->getSize() + sf::Vector2f(0, 10));
+			C_Documento::Instance()->_actual->_figuraActual->setSize(C_Documento::Instance()->_actual->_figuraActual->getSize() - sf::Vector2f(0, 10));
 	};
 	_buttons.push_back(temp);
 
