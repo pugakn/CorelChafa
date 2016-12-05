@@ -117,6 +117,12 @@ bool C_Linea::setPosicion(sf::Vector2f posicion)
 
 void C_Linea::setSize(sf::Vector2f size)
 {
+	if(!Bloqueado)
+	{
+		_size = size;
+		//_shape[1].position = sf::Vector2f(_shape[1].position.x + size.x * .5f, _shape[1].position.y + size.y);
+		_shape[1].position = _shape[0].position + size;
+	}
 }
 
 bool C_Linea::HitTest(sf::Vector2i point)

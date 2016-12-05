@@ -139,6 +139,21 @@ bool C_Elipse::setPosicion(sf::Vector2f posicion)
 
 void C_Elipse::setSize(sf::Vector2f size)
 {
+	if (!Bloqueado)
+	{
+		
+		_centro = sf::Vector2f(_posicion.x, _posicion.y);
+		_shape = sf::VertexArray(sf::TrianglesFan, 0);
+		std::vector<sf::Vector2f> points = CaclVertex(size.x, size.y);
+		_shape.append(sf::Vertex(sf::Vector2f(0, 0)));
+		for (auto it = points.begin(); it != points.end(); ++it)
+		{
+			_shape.append(sf::Vertex(*it));
+		}
+
+
+	}
+
 }
 
 bool C_Elipse::HitTest(sf::Vector2i point)

@@ -1,25 +1,68 @@
-﻿Build started 11/18/2016 1:20:20 PM.
+﻿Build started 12/4/2016 2:52:31 PM.
      1>Project "C:\Users\Kevin\Documents\GitHub\CorelChafa\ProyectoProgra3\ProyectoProgra3\ProyectoProgra3.vcxproj" on node 2 (Build target(s)).
-     1>Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Kevin\Documents\GitHub\CorelChafa\ProyectoProgra3\x64\Debug\ProyectoProgra3.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Users\Kevin\Pictures\SFML-2.4.0\lib" "sfml-graphics-d.lib" "sfml-window-d.lib" "sfml-system-d.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"C:\Users\Kevin\Documents\GitHub\CorelChafa\ProyectoProgra3\x64\Debug\ProyectoProgra3.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Kevin\Documents\GitHub\CorelChafa\ProyectoProgra3\x64\Debug\ProyectoProgra3.lib" /MACHINE:X64 x64\Debug\C_Capa.obj
-         x64\Debug\C_Curva.obj
-         x64\Debug\C_Dibujable.obj
-         x64\Debug\C_Elipse.obj
-         x64\Debug\C_Figura.obj
-         x64\Debug\C_Linea.obj
-         x64\Debug\C_Poligono.obj
-         x64\Debug\C_Rectangulo.obj
-         x64\Debug\C_RRedondeado.obj
-         x64\Debug\C_Seleccionable.obj
-         x64\Debug\C_Texto.obj
-         x64\Debug\C_TiraLineas.obj
-         x64\Debug\C_Triangulo.obj
-         x64\Debug\Factory.obj
-         x64\Debug\ProyectoProgra3.obj
-         x64\Debug\stdafx.obj
-     1>sfml-graphics-d.lib(sfml-graphics-d-2.dll) : fatal error LNK1112: module machine type 'X86' conflicts with target machine type 'x64'
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\x86_amd64\CL.exe /c /I"C:\SFML-2.4.0\include" /ZI /nologo /W3 /WX- /sdl /Od /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Yc"stdafx.h" /Fp"x64\Debug\ProyectoProgra3.pch" /Fo"x64\Debug\\" /Fd"x64\Debug\vc140.pdb" /Gd /TP /errorReport:prompt stdafx.cpp
+         stdafx.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\x86_amd64\CL.exe /c /I"C:\SFML-2.4.0\include" /ZI /nologo /W3 /WX- /sdl /Od /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Yu"stdafx.h" /Fp"x64\Debug\ProyectoProgra3.pch" /Fo"x64\Debug\\" /Fd"x64\Debug\vc140.pdb" /Gd /TP /errorReport:prompt ColorPicker.cpp C_Capa.cpp C_Curva.cpp C_Dibujable.cpp C_Documento.cpp C_Elipse.cpp C_Figura.cpp C_Linea.cpp C_Poligono.cpp C_Rectangulo.cpp C_RRedondeado.cpp C_Seleccionable.cpp C_Texto.cpp C_TiraLineas.cpp C_Triangulo.cpp DrawArea.cpp Factory.cpp InfoBar.cpp LayerBar.cpp Observer.cpp OptionsBar.cpp ProyectoProgra3.cpp sfButton.cpp sfTextButton.cpp Slider.cpp Subject.cpp Toolbar.cpp VECTOR.cpp
+         VECTOR.cpp
+     1>c:\users\kevin\documents\github\corelchafa\proyectoprogra3\proyectoprogra3\vector.h(2): fatal error C1083: Cannot open include file: 'SFML\System.hpp': No such file or directory
+         Toolbar.cpp
+     1>c:\users\kevin\documents\github\corelchafa\proyectoprogra3\proyectoprogra3\sfbutton.h(2): fatal error C1083: Cannot open include file: 'SFML\Graphics.hpp': No such file or directory
+         Subject.cpp
+     1>c:\users\kevin\documents\github\corelchafa\proyectoprogra3\proyectoprogra3\c_dibujable.h(4): fatal error C1083: Cannot open include file: 'SFML\Graphics.hpp': No such file or directory
+         Slider.cpp
+         sfTextButton.cpp
+     1>c:\users\kevin\documents\github\corelchafa\proyectoprogra3\proyectoprogra3\sftextbutton.h(2): fatal error C1083: Cannot open include file: 'SFML\Graphics.hpp': No such file or directory
+         sfButton.cpp
+     1>c:\users\kevin\documents\github\corelchafa\proyectoprogra3\proyectoprogra3\sfbutton.h(2): fatal error C1083: Cannot open include file: 'SFML\Graphics.hpp': No such file or directory
+         ProyectoProgra3.cpp
+     1>c:\users\kevin\documents\github\corelchafa\proyectoprogra3\proyectoprogra3\proyectoprogra3.cpp(5): fatal error C1083: Cannot open include file: 'SFML/Graphics.hpp': No such file or directory
+         OptionsBar.cpp
+     1>c:\users\kevin\documents\github\corelchafa\proyectoprogra3\proyectoprogra3\sfbutton.h(2): fatal error C1083: Cannot open include file: 'SFML\Graphics.hpp': No such file or directory
+         Observer.cpp
+         LayerBar.cpp
+     1>c:\users\kevin\documents\github\corelchafa\proyectoprogra3\proyectoprogra3\sfbutton.h(2): fatal error C1083: Cannot open include file: 'SFML\Graphics.hpp': No such file or directory
+         InfoBar.cpp
+     1>c:\users\kevin\documents\github\corelchafa\proyectoprogra3\proyectoprogra3\infobar.h(2): fatal error C1083: Cannot open include file: 'SFML\Graphics.hpp': No such file or directory
+         Factory.cpp
+     1>c:\users\kevin\documents\github\corelchafa\proyectoprogra3\proyectoprogra3\c_dibujable.h(4): fatal error C1083: Cannot open include file: 'SFML\Graphics.hpp': No such file or directory
+         DrawArea.cpp
+     1>c:\users\kevin\documents\github\corelchafa\proyectoprogra3\proyectoprogra3\drawarea.h(2): fatal error C1083: Cannot open include file: 'SFML\Graphics.hpp': No such file or directory
+         C_Triangulo.cpp
+     1>c:\users\kevin\documents\github\corelchafa\proyectoprogra3\proyectoprogra3\c_dibujable.h(4): fatal error C1083: Cannot open include file: 'SFML\Graphics.hpp': No such file or directory
+         C_TiraLineas.cpp
+     1>c:\users\kevin\documents\github\corelchafa\proyectoprogra3\proyectoprogra3\c_dibujable.h(4): fatal error C1083: Cannot open include file: 'SFML\Graphics.hpp': No such file or directory
+         C_Texto.cpp
+     1>c:\users\kevin\documents\github\corelchafa\proyectoprogra3\proyectoprogra3\c_dibujable.h(4): fatal error C1083: Cannot open include file: 'SFML\Graphics.hpp': No such file or directory
+         C_Seleccionable.cpp
+     1>c:\users\kevin\documents\github\corelchafa\proyectoprogra3\proyectoprogra3\c_dibujable.h(4): fatal error C1083: Cannot open include file: 'SFML\Graphics.hpp': No such file or directory
+         C_RRedondeado.cpp
+     1>c:\users\kevin\documents\github\corelchafa\proyectoprogra3\proyectoprogra3\c_dibujable.h(4): fatal error C1083: Cannot open include file: 'SFML\Graphics.hpp': No such file or directory
+         C_Rectangulo.cpp
+     1>c:\users\kevin\documents\github\corelchafa\proyectoprogra3\proyectoprogra3\c_dibujable.h(4): fatal error C1083: Cannot open include file: 'SFML\Graphics.hpp': No such file or directory
+         C_Poligono.cpp
+     1>c:\users\kevin\documents\github\corelchafa\proyectoprogra3\proyectoprogra3\c_dibujable.h(4): fatal error C1083: Cannot open include file: 'SFML\Graphics.hpp': No such file or directory
+         Generating Code...
+         Compiling...
+         C_Linea.cpp
+     1>c:\users\kevin\documents\github\corelchafa\proyectoprogra3\proyectoprogra3\c_dibujable.h(4): fatal error C1083: Cannot open include file: 'SFML\Graphics.hpp': No such file or directory
+         C_Figura.cpp
+     1>c:\users\kevin\documents\github\corelchafa\proyectoprogra3\proyectoprogra3\c_dibujable.h(4): fatal error C1083: Cannot open include file: 'SFML\Graphics.hpp': No such file or directory
+         C_Elipse.cpp
+     1>c:\users\kevin\documents\github\corelchafa\proyectoprogra3\proyectoprogra3\c_elipse.cpp(1): fatal error C1041: cannot open program database 'C:\Users\Kevin\Documents\GitHub\CorelChafa\ProyectoProgra3\ProyectoProgra3\x64\Debug\vc140.idb'; if multiple CL.EXE write to the same .PDB file, please use /FS
+         C_Documento.cpp
+     1>c:\users\kevin\documents\github\corelchafa\proyectoprogra3\proyectoprogra3\c_dibujable.h(4): fatal error C1083: Cannot open include file: 'SFML\Graphics.hpp': No such file or directory
+         C_Dibujable.cpp
+     1>c:\users\kevin\documents\github\corelchafa\proyectoprogra3\proyectoprogra3\c_dibujable.h(4): fatal error C1083: Cannot open include file: 'SFML\Graphics.hpp': No such file or directory
+         C_Curva.cpp
+     1>c:\users\kevin\documents\github\corelchafa\proyectoprogra3\proyectoprogra3\c_dibujable.h(4): fatal error C1083: Cannot open include file: 'SFML\Graphics.hpp': No such file or directory
+         C_Capa.cpp
+     1>c:\users\kevin\documents\github\corelchafa\proyectoprogra3\proyectoprogra3\c_dibujable.h(4): fatal error C1083: Cannot open include file: 'SFML\Graphics.hpp': No such file or directory
+         ColorPicker.cpp
+     1>c:\users\kevin\documents\github\corelchafa\proyectoprogra3\proyectoprogra3\colorpicker.h(2): fatal error C1083: Cannot open include file: 'SFML\Graphics.hpp': No such file or directory
+         Generating Code...
      1>Done Building Project "C:\Users\Kevin\Documents\GitHub\CorelChafa\ProyectoProgra3\ProyectoProgra3\ProyectoProgra3.vcxproj" (Build target(s)) -- FAILED.
 
 Build FAILED.
 
-Time Elapsed 00:00:00.19
+Time Elapsed 00:00:05.61

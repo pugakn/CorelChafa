@@ -50,11 +50,10 @@ bool C_Texto::HitTest(sf::Vector2i point)
 
 C_Texto::C_Texto()
 {
-	sf::RectangleShape rectangulo;
-	rectangulo.setSize(sf::Vector2f(100, 50));
-	rectangulo.setPosition(10, 20);
-	//sf::Text::getRect()
-	sf::String Text = "allahu akbar";
+	sf::RectangleShape text;
+	sf::Text texto;
+	text.setSize(sf::Vector2f(100, 50));
+	//texto.setPosition = rectangulo.setPosition;
 
 }
 
