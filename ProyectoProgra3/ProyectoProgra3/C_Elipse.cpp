@@ -90,12 +90,14 @@ void C_Elipse::Inicializar()
 	_centro = sf::Vector2f(0, 0);
 	_shape = sf::VertexArray(sf::TrianglesFan, 0);
 	std::vector<sf::Vector2f> points = CaclVertex(_ra, _rb);
+	_originalPos.push_back((sf::Vector2f(0, 0)));
 	_shape.append(sf::Vertex(sf::Vector2f(0, 0)));
 	for (auto it = points.begin(); it != points.end(); ++it)
 	{
 		_shape.append(sf::Vertex(*it));
+		_originalPos.push_back(*it);
 	}
-
+	_size = sf::Vector2f(_ra, _rb);
 	setColorLinea(_colorLinea);
 	setColorRelleno(_colorRelleno);
 	setPosicion(_posicion);
@@ -113,10 +115,13 @@ C_Elipse::C_Elipse(float ra, float rb)
 	_shape = sf::VertexArray(sf::TrianglesFan,0);
 	std::vector<sf::Vector2f> points = CaclVertex(ra, rb);
 	_shape.append(sf::Vertex(sf::Vector2f(0, 0)));
+	_originalPos.push_back((sf::Vector2f(0, 0)));
 	for (auto it = points.begin(); it != points.end(); ++it)
 	{
 		_shape.append(sf::Vertex(*it));
+		_originalPos.push_back(*it);
 	}
+	_size = sf::Vector2f(ra,rb);
 
 	//_shape[0].position.x += ra;
 }
@@ -155,8 +160,8 @@ bool C_Elipse::setPosicion(sf::Vector2f posicion)
 			_centro += posicion;
 			for (i = 0; i <= 40; i++)
 			{
-				_shape[i].position.x += posicion.x;
-				_shape[i].position.y += posicion.y;
+				_shape[i].position.x = _originalPos[i].x + posicion.x;
+				_shape[i].position.y = _originalPos[i].y + posicion.y;
 			}
 			C_Documento::Instance()->Notify();
 			return true;
@@ -169,15 +174,18 @@ void C_Elipse::setSize(sf::Vector2f size)
 {
 	if (!Bloqueado)
 	{
+		_originalPos.clear();
 		_size = size;
 		_centro = sf::Vector2f(_posicion.x, _posicion.y);
 		//_shape = sf::VertexArray(sf::TrianglesFan, 0);
 		_shape.clear();
 		std::vector<sf::Vector2f> points = CaclVertex(size.x, size.y);
 		_shape.append(sf::Vertex(sf::Vector2f(0, 0)));
+		_originalPos.push_back((sf::Vector2f(0, 0)));
 		for (auto it = points.begin(); it != points.end(); ++it)
 		{
 			_shape.append(sf::Vertex(*it));
+			_originalPos.push_back(*it);
 		}
 		C_Documento::Instance()->Notify();
 		setColorRelleno(sf::Color::Black);

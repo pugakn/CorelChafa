@@ -35,6 +35,7 @@ C_Rectangulo::C_Rectangulo(float base, float altura)
 	_rectangulo = sf::RectangleShape(sf::Vector2f(base, altura));
 	//_rectangulo.setSize(sf::Vector2f(base, altura));
 	//_rectangulo.setPosition(10, 20);
+	_size = sf::Vector2f(base,altura);
 }
 
 C_Rectangulo::C_Rectangulo()

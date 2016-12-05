@@ -120,7 +120,7 @@ void C_RRedondeado::Inicializar()
 		_shape.setPoint(i, sf::Vector2f(0 - X + radius, 0 + radius - Y));
 		_originalpos.push_back(_shape.getPoint(i));
 	}
-
+	_size = sf::Vector2f(_base, _altura);
 	setColorLinea(_colorLinea);
 	setColorRelleno(_colorRelleno);
 	setPosicion(_posicion);
@@ -167,6 +167,7 @@ C_RRedondeado::C_RRedondeado(float base, float altura)
 		_shape.setPoint(i, sf::Vector2f(0 - X + radius, 0 + radius - Y));
 		_originalpos.push_back(_shape.getPoint(i));
 	}
+	_size = sf::Vector2f(base,altura);
 }
 
 void C_RRedondeado::setColorRelleno(sf::Color color)

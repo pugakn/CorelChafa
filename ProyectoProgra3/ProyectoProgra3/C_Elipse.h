@@ -8,6 +8,7 @@ public:
 	float _ra, _rb;
 	sf::VertexArray _shape;
 	sf::Vector2f _centro;
+	vector <sf::Vector2f> _originalPos;
 public:
 	//Guardar Cargar
 	int GetCLSID();
