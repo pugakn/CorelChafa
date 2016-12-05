@@ -243,6 +243,7 @@ void C_Triangulo::setSize(sf::Vector2f size)
 {
 	if (!Bloqueado) {
 		_size = size;
+		//size.y = size.y;
 		//_l1 = size.x;
 		//_l2 = size.y;
 		C_Documento::Instance()->Notify();

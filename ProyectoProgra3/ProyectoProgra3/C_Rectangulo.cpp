@@ -22,6 +22,7 @@ void C_Rectangulo::Inicializar()
 
 void C_Rectangulo::setSize(sf::Vector2f size)
 {
+	_size = size;
 	_rectangulo.setSize(size);
 }
 
@@ -42,11 +43,14 @@ C_Rectangulo::C_Rectangulo()
 
 void C_Rectangulo::setColorRelleno(sf::Color color)
 {
+	_colorRelleno = color;
 	_rectangulo.setFillColor(color);
 }
 
 void C_Rectangulo::setColorLinea(sf::Color color)
-{	_rectangulo.setOutlineThickness(1);
+{	
+	_colorLinea = color;
+	_rectangulo.setOutlineThickness(1);
 	_rectangulo.setOutlineColor(color);
 }
 
