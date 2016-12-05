@@ -2,8 +2,6 @@
 #include "C_Capa.h"
 #include "C_Documento.h"
 
-
-
 void C_Capa::Eliminar()
 {
 	if (!_figuraActual->Bloqueado) {
@@ -54,6 +52,7 @@ int C_Capa::GetCLSID()
 void C_Capa::Guardar(ofstream & out)
 {
 	out << GetCLSID() << endl;
+	out << ID << endl;
 	out << Figuras.size() << endl;
 	out << Bloqueado << endl;
 	out << Visible << endl;
@@ -63,8 +62,6 @@ void C_Capa::Guardar(ofstream & out)
 		(*it)->Guardar(out);
 	}
 
-	
-
 	out.close();
 }
 
@@ -72,6 +69,9 @@ void C_Capa::Cargar(ifstream & in)
 {
 	string str;
 	int size;
+
+	getline(in, str);
+	ID = stoi(str);
 
 	getline(in, str);
 	size = stoi(str);
@@ -123,7 +123,6 @@ void C_Capa::SetActual(C_Figura * actual)
 C_Capa::C_Capa()
 {
 }
-
 
 C_Capa::~C_Capa()
 {

@@ -21,8 +21,7 @@ public:
 	void setColorLinea(sf::Color color);
 	bool setPosicion(sf::Vector2f vector);
 	bool HitTest(sf::Vector2i point);
-	void Dibujar(sf::RenderWindow& window) override;
-	void setSize(sf::Vector2f size)override;
+	void setSize(sf::Vector2f size);
 	C_RRedondeado();
 	~C_RRedondeado();
 };
