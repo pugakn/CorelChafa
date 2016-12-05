@@ -22,6 +22,7 @@ void C_Rectangulo::Inicializar()
 
 void C_Rectangulo::setSize(sf::Vector2f size)
 {
+	_size = size;
 	_rectangulo.setSize(size);
 }
 
@@ -34,6 +35,7 @@ C_Rectangulo::C_Rectangulo(float base, float altura)
 	_rectangulo = sf::RectangleShape(sf::Vector2f(base, altura));
 	//_rectangulo.setSize(sf::Vector2f(base, altura));
 	//_rectangulo.setPosition(10, 20);
+	_size = sf::Vector2f(base,altura);
 }
 
 C_Rectangulo::C_Rectangulo()
@@ -42,11 +44,14 @@ C_Rectangulo::C_Rectangulo()
 
 void C_Rectangulo::setColorRelleno(sf::Color color)
 {
+	_colorRelleno = color;
 	_rectangulo.setFillColor(color);
 }
 
 void C_Rectangulo::setColorLinea(sf::Color color)
-{	_rectangulo.setOutlineThickness(1);
+{	
+	_colorLinea = color;
+	_rectangulo.setOutlineThickness(1);
 	_rectangulo.setOutlineColor(color);
 }
 

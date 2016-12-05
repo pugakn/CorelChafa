@@ -113,7 +113,7 @@ void C_Triangulo::Inicializar()
 	_linea[2].position = _shape[2].position;
 	_linea[3] = _linea[0];
 
-
+	_size = sf::Vector2f(_l1, _l2);
 	this->setPosicion(origen);
 
 	setColorLinea(_colorLinea);
@@ -156,6 +156,7 @@ C_Triangulo::C_Triangulo(float l1, float l2)
 	_linea[1].position = _shape[1].position;
 	_linea[2].position = _shape[2].position;
 	_linea[3] = _linea[0];
+	_size = sf::Vector2f(l1,l2);
 
 }
 
@@ -243,6 +244,7 @@ void C_Triangulo::setSize(sf::Vector2f size)
 {
 	if (!Bloqueado) {
 		_size = size;
+		//size.y = size.y;
 		//_l1 = size.x;
 		//_l2 = size.y;
 		C_Documento::Instance()->Notify();

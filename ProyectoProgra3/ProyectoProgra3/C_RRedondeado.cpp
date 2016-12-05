@@ -120,7 +120,7 @@ void C_RRedondeado::Inicializar()
 		_shape.setPoint(i, sf::Vector2f(0 - X + radius, 0 + radius - Y));
 		_originalpos.push_back(_shape.getPoint(i));
 	}
-
+	_size = sf::Vector2f(_base, _altura);
 	setColorLinea(_colorLinea);
 	setColorRelleno(_colorRelleno);
 	setPosicion(_posicion);
@@ -167,6 +167,7 @@ C_RRedondeado::C_RRedondeado(float base, float altura)
 		_shape.setPoint(i, sf::Vector2f(0 - X + radius, 0 + radius - Y));
 		_originalpos.push_back(_shape.getPoint(i));
 	}
+	_size = sf::Vector2f(base,altura);
 }
 
 void C_RRedondeado::setColorRelleno(sf::Color color)
@@ -224,47 +225,55 @@ bool C_RRedondeado::HitTest(sf::Vector2i point)
 
 void C_RRedondeado::setSize(sf::Vector2f size)
 {
-	if (!Bloqueado)
-	{
-		_size = size;
-		float X = 0, Y = 0;
-		for (int i = 0; i<10; i++)
+	if (size.x > 10 && size.y > 10) {
+		if (!Bloqueado)
 		{
-			X += radius / 10;
-			Y = sqrt(radius*radius - X*X);
-			_shape.setPoint(i, sf::Vector2f(X + 0 + _size.x - radius, 0 - Y + radius));
-			_originalpos.push_back(_shape.getPoint(i));
-		}
-		Y = 0;
-		for (int i = 10; i<20; i++)
-		{
-			Y += radius / 10;
-			X = sqrt(radius*radius - Y*Y);
-			_shape.setPoint(i, sf::Vector2f(X + 0 + _size.x - radius, Y + 0 + _size.y - radius));
-			_originalpos.push_back(_shape.getPoint(i));
-		}
-		X = 0;
-		for (int i = 20; i<30; i++)
-		{
-			X += radius / 10;
-			Y = sqrt(radius*radius - X*X);
-			_shape.setPoint(i, sf::Vector2f(0 + radius - X, 0 + _size.y + Y - radius));
-			_originalpos.push_back(_shape.getPoint(i));
-		}
-		Y = 0;
-		for (int i = 30; i<40; i++)
-		{
-			Y += radius / 10;
-			X = sqrt(radius*radius - Y*Y);
-			_shape.setPoint(i, sf::Vector2f(0 - X + radius, 0 + radius - Y));
-			_originalpos.push_back(_shape.getPoint(i));
-		}
+			_size = size;
+			float X = 0, Y = 0;
+			for (int i = 0; i<10; i++)
+			{
+				X += radius / 10;
+				Y = sqrt(radius*radius - X*X);
+				_shape.setPoint(i, sf::Vector2f(X + 0 + _size.x - radius, 0 - Y + radius));
+				_originalpos[i] = (_shape.getPoint(i));
+			}
+			Y = 0;
+			for (int i = 10; i<20; i++)
+			{
+				Y += radius / 10;
+				X = sqrt(radius*radius - Y*Y);
+				_shape.setPoint(i, sf::Vector2f(X + 0 + _size.x - radius, Y + 0 + _size.y - radius));
+				_originalpos[i] = (_shape.getPoint(i));
+			}
+			X = 0;
+			for (int i = 20; i<30; i++)
+			{
+				X += radius / 10;
+				Y = sqrt(radius*radius - X*X);
+				_shape.setPoint(i, sf::Vector2f(0 + radius - X, 0 + _size.y + Y - radius));
+				_originalpos[i] = (_shape.getPoint(i));
+			}
+			Y = 0;
+			for (int i = 30; i<40; i++)
+			{
+				Y += radius / 10;
+				X = sqrt(radius*radius - Y*Y);
+				_shape.setPoint(i, sf::Vector2f(0 - X + radius, 0 + radius - Y));
+				_originalpos[i] = (_shape.getPoint(i));
+			}
 
-		setPosicion(_posicion);
+			setPosicion(_posicion);
 
-		C_Documento::Instance()->Notify();
+			C_Documento::Instance()->Notify();
+		}
 	}
+	
 
+}
+
+void C_RRedondeado::Dibujar(sf::RenderWindow & window)
+{
+	window.draw(_shape);
 }
 
 C_RRedondeado::C_RRedondeado()

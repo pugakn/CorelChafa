@@ -50,55 +50,70 @@ void DrawArea::Inputs(sf::Event & event, sf::RenderWindow & window)
 				}
 				break;
 			case Tools::CURVA:
-				_documento->_actual->InsertarCurva(sf::Vector2f(0, 0), sf::Vector2f(0, 50),sf::Vector2f(0,0),sf::Vector2f(0,50), "Curva", _curvaID++);
+				if (event.mouseButton.button == sf::Mouse::Left)
+					_documento->_actual->InsertarCurva(sf::Vector2f(0, 0), sf::Vector2f(0, 50),sf::Vector2f(0,0),sf::Vector2f(0,50), "Curva", _curvaID++);
 				break;
 			case Tools::ELIPSE:
-				_documento->_actual->InsertarElipse(50,50);
+				if (event.mouseButton.button == sf::Mouse::Left)
+					_documento->_actual->InsertarElipse(50,50,"Elipse", _elipseID++);
 				break;
 			case Tools::LINEA:
-				_documento->_actual->InsertarLinea(sf::Vector2f(0,0), sf::Vector2f(0, 50), "Linea", _lineaID++);
+				if (event.mouseButton.button == sf::Mouse::Left)
+					_documento->_actual->InsertarLinea(sf::Vector2f(0,0), sf::Vector2f(0, 50), "Linea", _lineaID++);
 				break;
 			case Tools::POLIGONO:
-				_documento->_actual->InsertarPoligono(5, 50, "Poligono", _poligonoID++);
+				if (event.mouseButton.button == sf::Mouse::Left) 
+					_documento->_actual->InsertarPoligono(5, 50, "Poligono", _poligonoID++);
 				break;
 			case Tools::RECTANGULO:
-				_documento->_actual->InsertarRectangulo(50, 50, "Rectangulo", _rectID++);
+				if (event.mouseButton.button == sf::Mouse::Left) 
+					_documento->_actual->InsertarRectangulo(50, 50, "Rectangulo", _rectID++);
 				break;
 			case Tools::RREDONDEADO:
-				_documento->_actual->InsertarRectanguloRed(50, 50, "Rectangulo Red", _rRectID++);
+				if (event.mouseButton.button == sf::Mouse::Left) 
+					_documento->_actual->InsertarRectanguloRed(50, 50, "Rectangulo Red", _rRectID++);
 				break;
 			case Tools::TEXTO:
 				break;
 			case Tools::TIRA:
 			{
-				if (first) {
-					_documento->_actual->InsertarTiraDeLineas((sf::Vector2f)sf::Mouse::getPosition(window), (sf::Vector2f)sf::Mouse::getPosition(window),"Tira Lineas", _tlineasID++);
-					_documento->_actual->Figuras.back()->setPosicion((sf::Vector2f)sf::Mouse::getPosition(window));
-					first = false;
+				if (event.mouseButton.button == sf::Mouse::Left) {
+					if (first) {
+						_documento->_actual->InsertarTiraDeLineas((sf::Vector2f)sf::Mouse::getPosition(window), (sf::Vector2f)sf::Mouse::getPosition(window), "Tira Lineas", _tlineasID++);
+						_documento->_actual->Figuras.back()->setPosicion((sf::Vector2f)sf::Mouse::getPosition(window));
+						first = false;
+					}
+					else {
+						((C_TiraLineas*)_documento->_actual->Figuras.back())->nuevoVertice((sf::Vector2f)sf::Mouse::getPosition(window));
+					}
 				}
 				else {
-					((C_TiraLineas*)_documento->_actual->Figuras.back())->nuevoVertice((sf::Vector2f)sf::Mouse::getPosition(window));
+					first = true;
+					((C_TiraLineas*)_documento->_actual->Figuras.back())->SetLastPointPosition(((C_TiraLineas*)_documento->_actual->Figuras.back())->_shape[((C_TiraLineas*)_documento->_actual->Figuras.back())->_shape.getVertexCount()-2].position);
 				}
+
 			}
 				break;
 			case Tools::TRIANGULO:
-				_documento->_actual->InsertarTriangulo(50, 50, "Triangle",_triangleID++);
+				if (event.mouseButton.button == sf::Mouse::Left)
+					_documento->_actual->InsertarTriangulo(50, 50, "Triangle",_triangleID++);
 				break;
 			default:
 				break;
 			}
-			if (Toolbar::_actualTool != Tools::CURSOR) {
-				
-				_buttonClicked = true;
-				_documento->_actual->Figuras.back()->setColorRelleno(_fillColor);
-				_documento->_actual->Figuras.back()->setColorLinea(_borderColor);
-				if (Toolbar::_actualTool != Tools::TIRA) {
-					initialPos = (sf::Vector2f)sf::Mouse::getPosition(window);
-					_documento->_actual->Figuras.back()->setPosicion((sf::Vector2f)sf::Mouse::getPosition(window));
+			if (event.mouseButton.button == sf::Mouse::Left) {
+				if (Toolbar::_actualTool != Tools::CURSOR) {
+
+					_buttonClicked = true;
+					_documento->_actual->Figuras.back()->setColorRelleno(_fillColor);
+					_documento->_actual->Figuras.back()->setColorLinea(_borderColor);
+					if (Toolbar::_actualTool != Tools::TIRA) {
+						initialPos = (sf::Vector2f)sf::Mouse::getPosition(window);
+						_documento->_actual->Figuras.back()->setPosicion((sf::Vector2f)sf::Mouse::getPosition(window));
+					}
 				}
 			}
 		}
-
 	}
 	if (event.type == sf::Event::MouseButtonReleased) {
 		_buttonClicked = false;
