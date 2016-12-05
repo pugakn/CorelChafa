@@ -19,8 +19,9 @@ void OptionsBar::Update()
 OptionsBar::OptionsBar()
 {
 	_background.setSize(sf::Vector2f(1366, 124));
-	_background.setFillColor(sf::Color(18, 49, 62));
-
+//	_background.setFillColor(sf::Color(18, 49, 62));
+	_texture.loadFromFile("Assets/toolbar.png");
+	_background.setTexture(&_texture);
 	/*Botones********************/
 
 	//Guardar/Cargar

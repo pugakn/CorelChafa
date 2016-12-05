@@ -9,6 +9,7 @@ private:
 	std::vector<sfButton*> _buttons;
 	sf::Vector2f _ItemsPosition;
 	sf::RectangleShape _background;
+	sf::Texture _texture;
 	ColorPicker _colorPicker;
 protected:
 	OptionsBar();
