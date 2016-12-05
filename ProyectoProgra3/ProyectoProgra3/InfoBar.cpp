@@ -52,13 +52,13 @@ InfoBar::InfoBar()
 	_font.loadFromFile("Assets/Calibri.ttf");
 	_idText.setFont(_font);
 	_idText.setString(_positionString);
-	_idText.setFillColor(sf::Color::Black);
+	_idText.setFillColor(sf::Color::White);
 	_idText.setCharacterSize(24);
 	_idText.setPosition(_ItemsPosition);
 
 	_positionTXT.setFont(_font);
 	_positionTXT.setString(_positionString);
-	_positionTXT.setFillColor(sf::Color::Black);
+	_positionTXT.setFillColor(sf::Color::White);
 	_positionTXT.setCharacterSize(24);
 	_positionTXT.setPosition(_ItemsPosition + sf::Vector2f(0,25));
 
