@@ -82,6 +82,10 @@ LayerBar::LayerBar()
 	_background.setSize(sf::Vector2f(200, 644));
 	_background.setFillColor(sf::Color(57, 57, 57));
 
+	_background2.setPosition(1316, 124);
+	_background2.setSize(sf::Vector2f(50, 644));
+	_background2.setFillColor(sf::Color(20, 20, 20));
+
 	_ItemsPosition = sf::Vector2f(1166, 124) - sf::Vector2f(0, 25);
 	_font.loadFromFile("Assets/Calibri.ttf");
 
@@ -223,8 +227,9 @@ LayerBar::LayerBar()
 
 void LayerBar::Draw(sf::RenderWindow &window)
 {
-	
+
 	window.draw(_background);
+	window.draw(_background2);
 	//auto it = _txtButtons.begin();
 	int i = 0;
 	if(_txtButtons.size()>21)
