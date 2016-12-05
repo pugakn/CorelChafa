@@ -215,7 +215,7 @@ bool C_RRedondeado::HitTest(sf::Vector2i point)
 		return false;
 
 	if (point.x < (_shape.getPoint(0).x + radius) && point.y > (_shape.getPoint(0).y)
-		&& (point.x > _shape.getPoint(0).x + radius - _base) && (point.y < _shape.getPoint(0).y + _altura))
+		&& (point.x > _shape.getPoint(0).x + radius - _size.x) && (point.y < _shape.getPoint(0).y + _size.y))
 	{
 		C_Documento::Instance()->Notify();
 		return true;
