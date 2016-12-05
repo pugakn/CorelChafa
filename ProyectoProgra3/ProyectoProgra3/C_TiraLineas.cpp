@@ -104,9 +104,14 @@ C_TiraLineas::C_TiraLineas(sf::Vector2f a, sf::Vector2f b)
 
 void C_TiraLineas::nuevoVertice(sf::Vector2f vertice)
 {
+	int i = _shape.getVertexCount();
 	_shape.append(vertice);
 	_originalPos.push_back(vertice - _shape[0].position);
-
+	float pendiente = (_shape[i-1].position.y - _shape[i-2].position.y) / (_shape[i-1].position.x - _shape[i-2].position.x);
+	float angulo = atanf(pendiente);
+	angulo = angulo * 180 / 3.141592;
+	_angulos.push_back(angulo);
+	_angulos.resize(i-1);
 }
 
 void C_TiraLineas::setColorRelleno(sf::Color color)
@@ -150,33 +155,23 @@ void C_TiraLineas::setSize(sf::Vector2f size)
 
 bool C_TiraLineas::HitTest(sf::Vector2i point)
 {
-	/*std::vector<sf::Vector3f> c;
-	int k = 0;
-	int i = 0;
-	for (; i < _shape.getVertexCount()-1; i++) {
-		c.push_back(Cross((_shape[i + 1].position + sf::Vector2f(0,15)) - (_shape[i].position + sf::Vector2f(0, 15)), (sf::Vector2f)point -( _shape[i].position + sf::Vector2f(0, 15))));
-		//if (c[k].z > 0) return false;
-		k++;
+	for (int i = 0; i < _shape.getVertexCount()-2;i++) 
+	{
+		if (fabs(_angulos[i]) >= 45) //vertical
+		{
+			if (HitTestTTriangle(_shape[i].position + sf::Vector2f(15, 0), _shape[i + 1].position + sf::Vector2f(15, 0), _shape[i].position - sf::Vector2f(15, 0), (sf::Vector2f)point))
+				return true;
+			if (HitTestTTriangle(_shape[i + 1].position + sf::Vector2f(15, 0), _shape[i + 1].position - sf::Vector2f(15, 0), _shape[i].position - sf::Vector2f(15, 0), (sf::Vector2f)point))
+				return true;
+		}
+		else //horizontal
+		{
+			if (HitTestTTriangle(_shape[i].position + sf::Vector2f(0, 15), _shape[i + 1].position + sf::Vector2f(0, 15), _shape[i].position - sf::Vector2f(0, 15), (sf::Vector2f)point))
+				return true;
+			if (HitTestTTriangle(_shape[i + 1].position + sf::Vector2f(0, 15), _shape[i + 1].position - sf::Vector2f(0, 15), _shape[i].position - sf::Vector2f(0, 15), (sf::Vector2f)point))
+				return true;
+		}
 	}
-	c.push_back(Cross((_shape[i].position - sf::Vector2f(0, 15)) - (_shape[i].position + sf::Vector2f(0, 15)), (sf::Vector2f)point - (_shape[i].position + sf::Vector2f(0, 15))));
-	//if (c[k].z > 0) return false;
-	k++;
-	for (i = _shape.getVertexCount() - 1; i > 0; i--) {
-		c.push_back(Cross((_shape[i - 1].position - sf::Vector2f(0, 15)) - (_shape[i].position - sf::Vector2f(0, 15)), (sf::Vector2f)point - (_shape[i].position - sf::Vector2f(0, 15))));
-		if (c[k].z > 0) return false;
-		k++;
-	}
-	c.push_back(Cross((_shape[0].position + sf::Vector2f(0, 15)) - (_shape[0].position - sf::Vector2f(0, 15)), (sf::Vector2f)point - (_shape[0].position - sf::Vector2f(0, 15))));
-	if (c[k ].z > 0) return false;
-	k++;*/
-
-	for (int i = 0; i < _shape.getVertexCount()-1;i++) {
-		if(HitTestTTriangle(_shape[i].position + sf::Vector2f(0, 15), _shape[i + 1].position + sf::Vector2f(0, 15), _shape[i].position - sf::Vector2f(0, 15),(sf::Vector2f)point))
-			return true;
-		if (HitTestTTriangle(_shape[i + 1].position + sf::Vector2f(0, 15), _shape[i + 1].position - sf::Vector2f(0, 15), _shape[i].position - sf::Vector2f(0, 15), (sf::Vector2f)point))
-			return true;
-	}
-	std::cout << "YEI";
 	return false;
 }
 
