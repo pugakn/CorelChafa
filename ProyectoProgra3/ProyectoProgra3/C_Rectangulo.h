@@ -15,7 +15,8 @@ public:
 	int GetCLSID();
 	void Guardar(ofstream &out);
 	void Cargar(ifstream &in);
-	//Guardar Cargar
+	void Inicializar();
+
 	//C_Rectangulo(); //float base1, float alt1
 	void setColorRelleno(sf::Color color);
 	void setColorLinea(sf::Color color);

@@ -16,6 +16,10 @@ void C_Rectangulo::Cargar(ifstream & in)
 {
 }
 
+void C_Rectangulo::Inicializar()
+{
+}
+
 C_Rectangulo::C_Rectangulo()
 {
 	//_base1 = base1;

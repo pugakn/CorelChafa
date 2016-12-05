@@ -12,21 +12,29 @@ void C_Linea::Guardar(ofstream & out)
 {
 	out << GetCLSID() << endl;
 
+	out << ID << endl;
+
 	out << _a.x << endl;
 	out << _a.y << endl;
 	out << _b.x << endl;
 	out << _a.y << endl;
 
-	out << _colorLinea.r << endl;
-	out << _colorLinea.g << endl;
-	out << _colorLinea.b << endl;
+	out << (int)_colorLinea.r << endl;
+	out << (int)_colorLinea.g << endl;
+	out << (int)_colorLinea.b << endl;
 
-	out << _colorRelleno.r << endl;
-	out << _colorRelleno.g << endl;
-	out << _colorRelleno.b << endl;
+	out << (int)_colorRelleno.r << endl;
+	out << (int)_colorRelleno.g << endl;
+	out << (int)_colorRelleno.b << endl;
 
 	out << _posicion.x << endl;
 	out << _posicion.y << endl;
+
+	out << _size.x << endl;
+	out << _size.y << endl;
+
+	out << _type << endl;
+
 	out << Bloqueado << endl;
 	out << Visible << endl;
 
@@ -36,6 +44,9 @@ void C_Linea::Guardar(ofstream & out)
 void C_Linea::Cargar(ifstream & in)
 {
 	string str;
+
+	getline(in, str);
+	ID = stoi(str);
 
 	getline(in, str);
 	_a.x = stoi(str);
@@ -66,6 +77,14 @@ void C_Linea::Cargar(ifstream & in)
 	_posicion.y = stoi(str);
 
 	getline(in, str);
+	_size.x = stoi(str);
+	getline(in, str);
+	_size.y = stoi(str);
+
+	getline(in, str);
+	_type = stoi(str);
+
+	getline(in, str);
 	Bloqueado = stoi(str);
 	getline(in, str);
 	Visible = stoi(str);
@@ -83,6 +102,9 @@ void C_Linea::Inicializar()
 	setColorLinea(_colorLinea);
 	setColorRelleno(_colorRelleno);
 	setPosicion(_posicion);
+	setID(ID);
+	setSize(_size);
+	setType(_type);
 }
 
 void C_Linea::setColorRelleno(sf::Color color)
