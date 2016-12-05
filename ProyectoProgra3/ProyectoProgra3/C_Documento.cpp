@@ -84,10 +84,13 @@ void C_Documento::Subir()
 		}
 	}
 	auto it2 = it;
-	it2++;
-	if (it2 != _lista.end())
-		_lista.splice(it2, _lista, it);
-	Notify();
+	if (it2 != _lista.end()) {
+		it2++;
+		if (it2 != _lista.end())
+			_lista.splice(it, _lista, it2);
+		Notify();
+	}
+
 }
 
 void C_Documento::Bajar()
@@ -99,10 +102,13 @@ void C_Documento::Bajar()
 		}
 	}
 	auto it2 = it;
-	it2--;
-	if (it2 != _lista.end())
-		_lista.splice(it2, _lista, it);
-	Notify();
+	if (it2 != _lista.begin()) {
+		it2--;
+		if (it2 != _lista.end())
+			_lista.splice(it2, _lista, it);
+		Notify();
+	}
+
 }
 
 int C_Documento::GetCLSID()

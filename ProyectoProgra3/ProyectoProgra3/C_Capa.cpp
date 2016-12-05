@@ -33,8 +33,8 @@ void C_Capa::Subir()
 				it2++;
 				if (it2 != Figuras.end())
 					Figuras.splice(it, Figuras, it2);
+				C_Documento::Instance()->Notify();
 			}
-			C_Documento::Instance()->Notify();
 		}
 	}
 	
@@ -55,8 +55,8 @@ void C_Capa::Bajar()
 				it2--;
 				if (it2 != Figuras.end())
 					Figuras.splice(it2, Figuras, it);
+				C_Documento::Instance()->Notify();
 			}
-			C_Documento::Instance()->Notify();
 		}
 	}
 }

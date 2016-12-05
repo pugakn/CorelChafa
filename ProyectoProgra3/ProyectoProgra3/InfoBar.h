@@ -19,7 +19,8 @@ private:
 	sf::Font _font;
 	sf::RectangleShape _background;
 	sf::Texture _texture;
-	C_Figura* _actual;
+	C_Figura *_actual;
+	sf::Vector2f _posicion;
 protected:
 	InfoBar();
 public:

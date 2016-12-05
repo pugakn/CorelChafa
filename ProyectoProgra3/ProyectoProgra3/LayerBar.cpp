@@ -12,64 +12,82 @@ LayerBar * LayerBar::Instance()
 		_instance = new LayerBar;
 	}
 	return _instance;
-
 }
 
 void LayerBar::Update()
 {
 	static int Size;
-	static C_Capa* capaActual;
-	if (Size!= C_Documento::Instance()->_actual->Figuras.size() + C_Documento::Instance()->_lista.size() || (C_Documento::Instance()->_actual != capaActual)) {
+	if (Size != C_Documento::Instance()->_actual->Figuras.size() + C_Documento::Instance()->_lista.size() || _reordenado) {
+		_reordenado = false;
 		Size = C_Documento::Instance()->_actual->Figuras.size() + C_Documento::Instance()->_lista.size();
-		capaActual = C_Documento::Instance()->_actual;
 		_txtButtons.clear();
-		sfTextButton temp ("Capa 1", _font);
+		sfTextButton temp("Capa 1", _font);
+		temp._rectangle.setSize(sf::Vector2f(150, 25));
+		temp._txt.setPosition(_ItemsPosition);
+		temp._txt.setCharacterSize(14);
+		temp._txt.setFillColor(sf::Color::Black);
+		temp.Callback = []() {
+		};
+		_txtButtons.push_back(temp);
 
-		//if (_capas->size() == 1) {
+		for (auto& layer : *_capas)
+		{
+			temp = sfTextButton("Capa " + to_string(layer->ID), _font);
 			temp._rectangle.setSize(sf::Vector2f(150, 25));
-			//temp._rectangle.setPosition(_ItemsPosition - sf::Vector2f(50,50));
-			temp._txt.setPosition(_ItemsPosition);
+			temp._rectangle.setPosition(_ItemsPosition.x, _txtButtons.back()._rectangle.getPosition().y + _txtButtons.back()._rectangle.getSize().y);
 			temp._txt.setCharacterSize(14);
 			temp._txt.setFillColor(sf::Color::Black);
-			temp.Callback = []() {
-
+			temp.Callback = [&layer]() {
+				LayerBar::Instance()->_layerSelected = true;
+				C_Documento::Instance()->SetActual(layer);
 			};
 			_txtButtons.push_back(temp);
-		//}
-
-		for (auto& layer: *_capas)
-		{
-			//if (_capas->size()>1) { //Inicializar botones de capas
-				temp =  sfTextButton("Capa " + to_string(layer->ID), _font);
-				//temp->LoadTexture("Assets/ico_cursor.png");
-				temp._rectangle.setSize(sf::Vector2f(150, 25));
-				temp._rectangle.setPosition(_ItemsPosition.x, _txtButtons.back()._rectangle.getPosition().y + _txtButtons.back()._rectangle.getSize().y);
-				//temp._txt.setPosition(_ItemsPosition.x, _txtButtons.back()._rectangle.getPosition().y + _txtButtons.back()._rectangle.getSize().y);
-				temp._txt.setCharacterSize(14);
-				temp._txt.setFillColor(sf::Color::Black);
-				temp.Callback = [&layer]() {
-					LayerBar::Instance()->_layerSelected = true;
-					C_Documento::Instance()->SetActual(layer);
-				};
-				_txtButtons.push_back(temp);
-			//}
 			// Inicializar botones de figuras
 			for (auto &it : layer->Figuras) {
-				temp =  sfTextButton(it->getType() + " " + to_string(it->getID()), _font);
-				//temp->LoadTexture("Assets/ico_cursor.png");
+				temp = sfTextButton(it->getType() + " " + to_string(it->getID()), _font);
 				temp._rectangle.setSize(sf::Vector2f(150, 25));
 				temp._rectangle.setPosition(_ItemsPosition.x, _txtButtons.back()._rectangle.getPosition().y + _txtButtons.back()._rectangle.getSize().y);
-				//temp._txt.setPosition(_ItemsPosition.x, _txtButtons.back()._rectangle.getPosition().y + _txtButtons.back()._rectangle.getSize().y);
 				temp._txt.setCharacterSize(14);
 				temp._txt.setFillColor(sf::Color::Black);
-				temp.Callback = [&it]() {
+				temp.Callback = [&it, &layer]() {
 					LayerBar::Instance()->_layerSelected = false;
+					C_Documento::Instance()->SetActual(layer);
 					C_Documento::Instance()->_actual->SetActual(it);
 				};
 				_txtButtons.push_back(temp);
 			}
 		}
 	}
+
+	/*Actualizar botones*/
+	if (_figuraActual != C_Documento::Instance()->_actual->_figuraActual) {
+		if (C_Documento::Instance()->_actual->_figuraActual != nullptr) {
+			_figuraActual = C_Documento::Instance()->_actual->_figuraActual;
+			if (C_Documento::Instance()->_actual->_figuraActual->Bloqueado)
+				_buttons[4]->LoadTexture("Assets/M_BLOQU.png");
+			else
+				_buttons[4]->LoadTexture("Assets/M_DESBLO.png");
+			if (C_Documento::Instance()->_actual->_figuraActual->Visible) {
+				_buttons[5]->LoadTexture("Assets/M_VISIBL.png");
+			}
+			else _buttons[5]->LoadTexture("Assets/M_INVIS.png");
+		}
+	}
+
+	if (_capaActual != C_Documento::Instance()->_actual) {
+		_capaActual = C_Documento::Instance()->_actual;
+		if (LayerBar::Instance()->_layerSelected == true) {
+			if (C_Documento::Instance()->_actual->Bloqueado)
+				_buttons[4]->LoadTexture("Assets/M_BLOQU.png");
+			else
+				_buttons[4]->LoadTexture("Assets/M_DESBLO.png");
+			if (C_Documento::Instance()->_actual->Visible) {
+				_buttons[5]->LoadTexture("Assets/M_VISIBL.png");
+			}
+			else _buttons[5]->LoadTexture("Assets/M_INVIS.png");
+		}
+	}
+	/*****************************/
 }
 
 
@@ -128,7 +146,8 @@ LayerBar::LayerBar()
 	button->_rectangle.setSize(sf::Vector2f(50, 50));
 	button->LoadTexture("Assets/M_ARRIBA.png");
 	button->_rectangle.setPosition(1166, 720);
-	button->Callback = []() {
+	button->Callback = [this]() {
+		_reordenado = true;
 		if (LayerBar::Instance()->_layerSelected == true)
 			C_Documento::Instance()->Subir();
 		else
@@ -140,7 +159,8 @@ LayerBar::LayerBar()
 	button->_rectangle.setSize(sf::Vector2f(50, 50));
 	button->LoadTexture("Assets/M_ABAJO.png");
 	button->_rectangle.setPosition(1166+50, 720);
-	button->Callback = []() {
+	button->Callback = [this]() {
+		_reordenado = true;
 		if (LayerBar::Instance()->_layerSelected == true)
 			C_Documento::Instance()->Bajar();
 		else
