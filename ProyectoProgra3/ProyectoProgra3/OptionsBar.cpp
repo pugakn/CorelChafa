@@ -27,18 +27,18 @@ OptionsBar::OptionsBar()
 	_ItemsPosition = sf::Vector2f(50,2);
 
 	sfButton* temp = new sfButton;
-	temp->LoadTexture("Assets/ico_cursor.png");
-	temp->_rectangle.setSize(sf::Vector2f(120, 60));
-	temp->_rectangle.setPosition(_ItemsPosition);
+	temp->LoadTexture("Assets/B_GUARD1.png");
+	temp->_rectangle.setSize(sf::Vector2f(60, 60));
+	temp->_rectangle.setPosition(sf::Vector2f(0,0));
 	temp->Callback = []() {
 		
 	};
 	_buttons.push_back(temp);
 
 	temp = new sfButton;
-	temp->LoadTexture("Assets/ico_cursor.png");
-	temp->_rectangle.setSize(sf::Vector2f(120, 60));
-	temp->_rectangle.setPosition(_ItemsPosition.x, _buttons.back()->_rectangle.getPosition().y + _buttons.back()->_rectangle.getSize().y);
+	temp->LoadTexture("Assets/B_CARGA1.png");
+	temp->_rectangle.setSize(sf::Vector2f(60, 60));
+	temp->_rectangle.setPosition(0, _buttons.back()->_rectangle.getPosition().y + _buttons.back()->_rectangle.getSize().y);
 	temp->Callback = []() {
 		
 	};
@@ -47,18 +47,18 @@ OptionsBar::OptionsBar()
 	//Mover
 		//Derecha/Izquierda
 	temp = new sfButton;
-	temp->LoadTexture("Assets/ico_cursor.png");
-	temp->_rectangle.setSize(sf::Vector2f(120, 60));
-	temp->_rectangle.setPosition(_ItemsPosition.x + 120, _ItemsPosition.y);
+	temp->LoadTexture("Assets/B_RIGHT.png");
+	temp->_rectangle.setSize(sf::Vector2f(60, 60));
+	temp->_rectangle.setPosition(_ItemsPosition.x + 240, _ItemsPosition.y + 60);
 	temp->Callback = []() {
 		if (C_Documento::Instance()->_actual->_figuraActual != nullptr)
 			C_Documento::Instance()->_actual->_figuraActual->setPosicion(C_Documento::Instance()->_actual->_figuraActual->getPosicion() + sf::Vector2f(10,0));
 	};
 	_buttons.push_back(temp);
 	temp = new sfButton;
-	temp->LoadTexture("Assets/ico_cursor.png");
-	temp->_rectangle.setSize(sf::Vector2f(120, 60));
-	temp->_rectangle.setPosition(_ItemsPosition.x + 120, _buttons.back()->_rectangle.getPosition().y + _buttons.back()->_rectangle.getSize().y);
+	temp->LoadTexture("Assets/B_LEFT.png");
+	temp->_rectangle.setSize(sf::Vector2f(60, 60));
+	temp->_rectangle.setPosition(_ItemsPosition.x + 120, _buttons.back()->_rectangle.getPosition().y );
 	temp->Callback = []() {
 		if (C_Documento::Instance()->_actual->_figuraActual != nullptr)
 			C_Documento::Instance()->_actual->_figuraActual->setPosicion(C_Documento::Instance()->_actual->_figuraActual->getPosicion() - sf::Vector2f(10, 0));
@@ -67,18 +67,18 @@ OptionsBar::OptionsBar()
 
 		//Arriba/Abajo
 	temp = new sfButton;
-	temp->LoadTexture("Assets/ico_cursor.png");
-	temp->_rectangle.setSize(sf::Vector2f(120, 60));
-	temp->_rectangle.setPosition(_ItemsPosition.x + 240, _ItemsPosition.y);
+	temp->LoadTexture("Assets/B_UP.png");
+	temp->_rectangle.setSize(sf::Vector2f(60, 60));
+	temp->_rectangle.setPosition(_ItemsPosition.x + 180, _ItemsPosition.y);
 	temp->Callback = []() {
 		if (C_Documento::Instance()->_actual->_figuraActual != nullptr)
 			C_Documento::Instance()->_actual->_figuraActual->setPosicion(C_Documento::Instance()->_actual->_figuraActual->getPosicion() - sf::Vector2f(0, 10));
 	};
 	_buttons.push_back(temp);
 	temp = new sfButton;
-	temp->LoadTexture("Assets/ico_cursor.png");
-	temp->_rectangle.setSize(sf::Vector2f(120, 60));
-	temp->_rectangle.setPosition(_ItemsPosition.x + 240, _buttons.back()->_rectangle.getPosition().y + _buttons.back()->_rectangle.getSize().y);
+	temp->LoadTexture("Assets/B_DOWN.png");
+	temp->_rectangle.setSize(sf::Vector2f(60, 60));
+	temp->_rectangle.setPosition(_ItemsPosition.x + 180, _buttons.back()->_rectangle.getPosition().y + _buttons.back()->_rectangle.getSize().y);
 	temp->Callback = []() {
 		if (C_Documento::Instance()->_actual->_figuraActual != nullptr)
 			C_Documento::Instance()->_actual->_figuraActual->setPosicion(C_Documento::Instance()->_actual->_figuraActual->getPosicion() + sf::Vector2f(0, 10));
@@ -88,8 +88,8 @@ OptionsBar::OptionsBar()
 	//Resize
 		//X
 	temp = new sfButton;
-	temp->LoadTexture("Assets/ico_cursor.png");
-	temp->_rectangle.setSize(sf::Vector2f(120, 60));
+	temp->LoadTexture("Assets/B_01.png");
+	temp->_rectangle.setSize(sf::Vector2f(60, 60));
 	temp->_rectangle.setPosition(_ItemsPosition.x + 360, _ItemsPosition.y);
 	temp->Callback = []() {
 		if (C_Documento::Instance()->_actual->_figuraActual != nullptr)
@@ -97,8 +97,8 @@ OptionsBar::OptionsBar()
 	};
 	_buttons.push_back(temp);
 	temp = new sfButton;
-	temp->LoadTexture("Assets/ico_cursor.png");
-	temp->_rectangle.setSize(sf::Vector2f(120, 60));
+	temp->LoadTexture("Assets/B_03.png");
+	temp->_rectangle.setSize(sf::Vector2f(60, 60));
 	temp->_rectangle.setPosition(_ItemsPosition.x + 360, _buttons.back()->_rectangle.getPosition().y + _buttons.back()->_rectangle.getSize().y);
 	temp->Callback = []() {
 		if (C_Documento::Instance()->_actual->_figuraActual != nullptr)
@@ -108,18 +108,18 @@ OptionsBar::OptionsBar()
 
 		//Y
 	temp = new sfButton;
-	temp->LoadTexture("Assets/ico_cursor.png");
-	temp->_rectangle.setSize(sf::Vector2f(120, 60));
-	temp->_rectangle.setPosition(_ItemsPosition.x + 480, _ItemsPosition.y);
+	temp->LoadTexture("Assets/B_02.png");
+	temp->_rectangle.setSize(sf::Vector2f(60, 60));
+	temp->_rectangle.setPosition(_ItemsPosition.x + 420, _ItemsPosition.y);
 	temp->Callback = []() {
 		if (C_Documento::Instance()->_actual->_figuraActual != nullptr)
 			C_Documento::Instance()->_actual->_figuraActual->setSize(C_Documento::Instance()->_actual->_figuraActual->getSize() - sf::Vector2f(0, 10));
 	};
 	_buttons.push_back(temp);
 	temp = new sfButton;
-	temp->LoadTexture("Assets/ico_cursor.png");
-	temp->_rectangle.setSize(sf::Vector2f(120, 60));
-	temp->_rectangle.setPosition(_ItemsPosition.x + 480, _buttons.back()->_rectangle.getPosition().y + _buttons.back()->_rectangle.getSize().y);
+	temp->LoadTexture("Assets/B_04.png");
+	temp->_rectangle.setSize(sf::Vector2f(60, 60));
+	temp->_rectangle.setPosition(_ItemsPosition.x + 420, _buttons.back()->_rectangle.getPosition().y + _buttons.back()->_rectangle.getSize().y);
 	temp->Callback = []() {
 		if (C_Documento::Instance()->_actual->_figuraActual != nullptr)
 			C_Documento::Instance()->_actual->_figuraActual->setSize(C_Documento::Instance()->_actual->_figuraActual->getSize() + sf::Vector2f(0, 10));

@@ -9,7 +9,7 @@ class LayerBar : public Observer
 {
 private:
 	static LayerBar* _instance;
-	std::vector<sfButton> _buttons;
+	std::vector<sfButton*> _buttons;
 	std::vector<sfTextButton> _txtButtons;
 	sf::Vector2f _ItemsPosition;
 	sf::RectangleShape _background;

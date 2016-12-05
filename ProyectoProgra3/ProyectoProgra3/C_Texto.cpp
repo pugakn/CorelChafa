@@ -48,6 +48,14 @@ bool C_Texto::HitTest(sf::Vector2i point)
 	return false;
 }
 
+void C_Texto::Dibujar(sf::RenderWindow & window)
+{
+}
+
+void C_Texto::Inicializar()
+{
+}
+
 C_Texto::C_Texto()
 {
 	sf::RectangleShape rectangulo;

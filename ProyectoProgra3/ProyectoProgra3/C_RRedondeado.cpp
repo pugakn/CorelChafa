@@ -146,6 +146,7 @@ bool C_RRedondeado::setPosicion(sf::Vector2f vector)
 {
 	if (vector.x > 0 && vector.y > 0)
 	{
+		_posicion = vector;
 		for (int i = 0; i < 40; i++)
 		{
 			_shape.setPoint(i, _originalpos[i] + vector - sf::Vector2f((_base / 2), (_altura / 2)));
@@ -164,6 +165,15 @@ bool C_RRedondeado::HitTest(sf::Vector2i point)
 		return true;
 	}
 	return false;
+}
+
+void C_RRedondeado::Dibujar(sf::RenderWindow & window)
+{
+	window.draw(_shape);
+}
+
+void C_RRedondeado::setSize(sf::Vector2f size)
+{
 }
 
 C_RRedondeado::C_RRedondeado()

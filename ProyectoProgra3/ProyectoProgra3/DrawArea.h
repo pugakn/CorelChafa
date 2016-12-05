@@ -12,6 +12,9 @@ private:
 	long _tlineasID = 0;
 	long _curvaID = 0;
 	long _poligonoID = 0;
+	long _rectID = 0;
+	long _rRectID = 0;
+	long _lineaID = 0;
 	C_Documento* _documento;
 	sf::Color _fillColor = sf::Color::Black;
 	sf::Color _borderColor = sf::Color::Red;

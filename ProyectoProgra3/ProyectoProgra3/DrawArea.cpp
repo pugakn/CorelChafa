@@ -50,19 +50,22 @@ void DrawArea::Inputs(sf::Event & event, sf::RenderWindow & window)
 				}
 				break;
 			case Tools::CURVA:
-				//_documento->_actual->InsertarCurva();
+				_documento->_actual->InsertarCurva(sf::Vector2f(0, 0), sf::Vector2f(0, 50),sf::Vector2f(0,0),sf::Vector2f(0,50), "Curva", _curvaID++);
 				break;
 			case Tools::ELIPSE:
 				_documento->_actual->InsertarElipse(50,50);
 				break;
 			case Tools::LINEA:
+				_documento->_actual->InsertarLinea(sf::Vector2f(0,0), sf::Vector2f(0, 50), "Linea", _lineaID++);
 				break;
 			case Tools::POLIGONO:
 				_documento->_actual->InsertarPoligono(5, 50, "Poligono", _poligonoID++);
 				break;
 			case Tools::RECTANGULO:
+				_documento->_actual->InsertarRectangulo(50, 50, "Rectangulo", _rectID++);
 				break;
 			case Tools::RREDONDEADO:
+				_documento->_actual->InsertarRectanguloRed(50, 50, "Rectangulo Red", _rRectID++);
 				break;
 			case Tools::TEXTO:
 				break;

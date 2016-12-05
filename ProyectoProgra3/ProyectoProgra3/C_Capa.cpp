@@ -129,9 +129,36 @@ C_Capa::~C_Capa()
 {
 }
 
+void C_Capa::InsertarRectangulo(float base, float altura, string type, long id)
+{
+	Figuras.push_back(new C_Rectangulo(base,altura));
+	Figuras.back()->setType(type);
+	Figuras.back()->setID(id);
+	_figuraActual = Figuras.back();
+	C_Documento::Instance()->Notify();
+}
+
+void C_Capa::InsertarRectanguloRed(float base, float altura, string type, long id)
+{
+	Figuras.push_back(new C_RRedondeado(base, altura));
+	Figuras.back()->setType(type);
+	Figuras.back()->setID(id);
+	SetActual(Figuras.back());
+	C_Documento::Instance()->Notify();
+}
+
 void C_Capa::InsertarTriangulo(float l1, float l2, string type, long id)
 {
 	Figuras.push_back(new C_Triangulo(l1,l2));
+	Figuras.back()->setType(type);
+	Figuras.back()->setID(id);
+	_figuraActual = Figuras.back();
+	C_Documento::Instance()->Notify();
+}
+
+void C_Capa::InsertarLinea(sf::Vector2f a, sf::Vector2f b, string type, long id)
+{
+	Figuras.push_back(new C_Linea(a, b));
 	Figuras.back()->setType(type);
 	Figuras.back()->setID(id);
 	_figuraActual = Figuras.back();
