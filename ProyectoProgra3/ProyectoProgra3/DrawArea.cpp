@@ -105,8 +105,8 @@ void DrawArea::Inputs(sf::Event & event, sf::RenderWindow & window)
 				if (Toolbar::_actualTool != Tools::CURSOR) {
 
 					_buttonClicked = true;
-					_documento->_actual->Figuras.back()->setColorRelleno(_fillColor);
-					_documento->_actual->Figuras.back()->setColorLinea(_borderColor);
+					//_documento->_actual->Figuras.back()->setColorRelleno(_fillColor);
+					//_documento->_actual->Figuras.back()->setColorLinea(_borderColor);
 					if (Toolbar::_actualTool != Tools::TIRA) {
 						initialPos = (sf::Vector2f)sf::Mouse::getPosition(window);
 						_documento->_actual->Figuras.back()->setPosicion((sf::Vector2f)sf::Mouse::getPosition(window));

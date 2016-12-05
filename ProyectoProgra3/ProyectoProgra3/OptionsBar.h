@@ -9,10 +9,10 @@ private:
 	std::vector<sfButton*> _buttons;
 	sf::Vector2f _ItemsPosition;
 	sf::RectangleShape _background;
-	ColorPicker _colorPicker;
 protected:
 	OptionsBar();
 public:
+	ColorPicker _colorPicker;
 	static OptionsBar* Instance();
 	void Update() override;
 	void Draw(sf::RenderWindow&);

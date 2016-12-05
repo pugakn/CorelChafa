@@ -157,7 +157,13 @@ LayerBar::LayerBar()
 				button->LoadTexture("Assets/M_DESBLO.png");
 		}
 		else {
-			C_Documento::Instance()->_actual->_figuraActual->Bloqueado = !C_Documento::Instance()->_actual->_figuraActual->Bloqueado;
+			if (C_Documento::Instance()->_actual->_figuraActual != nullptr) {
+				C_Documento::Instance()->_actual->_figuraActual->Bloqueado = !C_Documento::Instance()->_actual->_figuraActual->Bloqueado;
+				if (C_Documento::Instance()->_actual->_figuraActual->Bloqueado)
+					button->LoadTexture("Assets/M_BLOQU.png");
+				else
+					button->LoadTexture("Assets/M_DESBLO.png");
+			}
 		}
 	};
 	_buttons.push_back(button);
@@ -174,11 +180,13 @@ LayerBar::LayerBar()
 			}else button->LoadTexture("Assets/M_INVIS.png");
 		}
 		else {
-			C_Documento::Instance()->_actual->_figuraActual->Visible = !C_Documento::Instance()->_actual->_figuraActual->Visible;
-			if (C_Documento::Instance()->_actual->_figuraActual->Visible) {
-				button->LoadTexture("Assets/M_VISIBL.png");
+			if (C_Documento::Instance()->_actual->_figuraActual != nullptr){
+				C_Documento::Instance()->_actual->_figuraActual->Visible = !C_Documento::Instance()->_actual->_figuraActual->Visible;
+				if (C_Documento::Instance()->_actual->_figuraActual->Visible) {
+					button->LoadTexture("Assets/M_VISIBL.png");
+				}
+				else button->LoadTexture("Assets/M_INVIS.png");
 			}
-			else button->LoadTexture("Assets/M_INVIS.png");
 		}
 			
 	};
