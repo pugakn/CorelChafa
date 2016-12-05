@@ -87,7 +87,10 @@ void DrawArea::Inputs(sf::Event & event, sf::RenderWindow & window)
 						((C_TiraLineas*)_documento->_actual->Figuras.back())->nuevoVertice((sf::Vector2f)sf::Mouse::getPosition(window));
 					}
 				}
-				else first = true;
+				else {
+					first = true;
+					((C_TiraLineas*)_documento->_actual->Figuras.back())->SetLastPointPosition(((C_TiraLineas*)_documento->_actual->Figuras.back())->_shape[((C_TiraLineas*)_documento->_actual->Figuras.back())->_shape.getVertexCount()-2].position);
+				}
 
 			}
 				break;
