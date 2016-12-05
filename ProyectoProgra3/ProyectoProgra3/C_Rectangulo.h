@@ -7,20 +7,22 @@ class C_Rectangulo : public C_Figura
 public:
 	//C_rectangulo();
 	float _base1, _alt1;
-	sf::VertexArray _shape;
-	sf::VertexArray _linea;
 public:
 	//Guardar Cargar
-	sf::RectangleShape rectangulo;
+	sf::RectangleShape _rectangulo;
 	int GetCLSID();
 	void Guardar(ofstream &out);
 	void Cargar(ifstream &in);
-	//Guardar Cargar
+	void Inicializar();
+
 	//C_Rectangulo(); //float base1, float alt1
 	void setColorRelleno(sf::Color color);
 	void setColorLinea(sf::Color color);
 	bool setPosicion(sf::Vector2f vector);
 	bool HitTest(sf::Vector2i point);
+	void Dibujar(sf::RenderWindow& window) override;
+	void setSize(sf::Vector2f size)override;
+	C_Rectangulo(float base, float altura);
 	C_Rectangulo();
 	//{
 	//	sf::RectangleShape rectangulo;

@@ -28,11 +28,13 @@ Toolbar::Toolbar()
 	_ItemsPosition = sf::Vector2f(0,164);
 	_background.setPosition(0,124);
 	_background.setSize(sf::Vector2f(50,644));
-	_background.setFillColor(sf::Color(18,49,62));
+	//_background.setFillColor(sf::Color(18,49,62));
+	_backgroundTexture.loadFromFile("Assets/H_BARRA.png");
+	_background.setTexture(&_backgroundTexture);
 
 	//BOTONES
 	sfButton* temp = new sfButton;
-	temp->LoadTexture("Assets/ico_cursor.png");
+	temp->LoadTexture("Assets/H_SELEC.png");
 	temp->_rectangle.setSize(sf::Vector2f(50, 50));
 	temp->_rectangle.setPosition(_ItemsPosition);
 	temp->Callback = []() {
@@ -41,7 +43,7 @@ Toolbar::Toolbar()
 	_buttons.push_back(temp);
 
 	temp = new sfButton;
-	temp->LoadTexture("Assets/ico_cursor.png");
+	temp->LoadTexture("Assets/H_CURVA.png");
 	temp->_rectangle.setSize(sf::Vector2f(50, 50));
 	temp->_rectangle.setPosition(_ItemsPosition.x, _buttons.back()->_rectangle.getPosition().y + _buttons.back()->_rectangle.getSize().y);
 	temp->Callback = []() {
@@ -50,7 +52,7 @@ Toolbar::Toolbar()
 	_buttons.push_back(temp);
 
 	temp = new sfButton;
-	temp->LoadTexture("Assets/ico_cursor.png");
+	temp->LoadTexture("Assets/H_CIRCULO.png");
 	temp->_rectangle.setSize(sf::Vector2f(50, 50));
 	temp->_rectangle.setPosition(_ItemsPosition.x, _buttons.back()->_rectangle.getPosition().y + _buttons.back()->_rectangle.getSize().y);
 	temp->Callback = []() {
@@ -59,7 +61,7 @@ Toolbar::Toolbar()
 	_buttons.push_back(temp);
 
 	temp = new sfButton;
-	temp->LoadTexture("Assets/ico_cursor.png");
+	temp->LoadTexture("Assets/H_LINEA.png");
 	temp->_rectangle.setSize(sf::Vector2f(50, 50));
 	temp->_rectangle.setPosition(_ItemsPosition.x, _buttons.back()->_rectangle.getPosition().y + _buttons.back()->_rectangle.getSize().y);
 	temp->Callback = []() {
@@ -68,7 +70,7 @@ Toolbar::Toolbar()
 	_buttons.push_back(temp);
 
 	temp = new sfButton;
-	temp->LoadTexture("Assets/ico_cursor.png");
+	temp->LoadTexture("Assets/H_POLIGO.png");
 	temp->_rectangle.setSize(sf::Vector2f(50, 50));
 	temp->_rectangle.setPosition(_ItemsPosition.x, _buttons.back()->_rectangle.getPosition().y + _buttons.back()->_rectangle.getSize().y);
 	temp->Callback = []() {
@@ -77,7 +79,7 @@ Toolbar::Toolbar()
 	_buttons.push_back(temp);
 
 	temp = new sfButton;
-	temp->LoadTexture("Assets/ico_cursor.png");
+	temp->LoadTexture("Assets/H_RECT.png");
 	temp->_rectangle.setSize(sf::Vector2f(50, 50));
 	temp->_rectangle.setPosition(_ItemsPosition.x, _buttons.back()->_rectangle.getPosition().y + _buttons.back()->_rectangle.getSize().y);
 	temp->Callback = []() {
@@ -86,7 +88,7 @@ Toolbar::Toolbar()
 	_buttons.push_back(temp);
 
 	temp = new sfButton;
-	temp->LoadTexture("Assets/ico_cursor.png");
+	temp->LoadTexture("Assets/H_REDON.png");
 	temp->_rectangle.setSize(sf::Vector2f(50, 50));
 	temp->_rectangle.setPosition(_ItemsPosition.x, _buttons.back()->_rectangle.getPosition().y + _buttons.back()->_rectangle.getSize().y);
 	temp->Callback = []() {
@@ -95,7 +97,7 @@ Toolbar::Toolbar()
 	_buttons.push_back(temp);
 
 	temp = new sfButton;
-	temp->LoadTexture("Assets/ico_cursor.png");
+	temp->LoadTexture("Assets/H_TEXTO.png");
 	temp->_rectangle.setSize(sf::Vector2f(50, 50));
 	temp->_rectangle.setPosition(_ItemsPosition.x, _buttons.back()->_rectangle.getPosition().y + _buttons.back()->_rectangle.getSize().y);
 	temp->Callback = []() {
@@ -104,7 +106,7 @@ Toolbar::Toolbar()
 	_buttons.push_back(temp);
 
 	temp = new sfButton;
-	temp->LoadTexture("Assets/ico_cursor.png");
+	temp->LoadTexture("Assets/H_TIRALIN.png");
 	temp->_rectangle.setSize(sf::Vector2f(50, 50));
 	temp->_rectangle.setPosition(_ItemsPosition.x, _buttons.back()->_rectangle.getPosition().y + _buttons.back()->_rectangle.getSize().y);
 	temp->Callback = []() {
@@ -113,7 +115,7 @@ Toolbar::Toolbar()
 	_buttons.push_back(temp);
 
 	temp = new sfButton;
-	temp->LoadTexture("Assets/ico_cursor.png");
+	temp->LoadTexture("Assets/H_TRIAN.png");
 	temp->_rectangle.setSize(sf::Vector2f(50, 50));
 	temp->_rectangle.setPosition(_ItemsPosition.x, _buttons.back()->_rectangle.getPosition().y + _buttons.back()->_rectangle.getSize().y);
 	temp->Callback = []() {

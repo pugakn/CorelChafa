@@ -17,6 +17,8 @@ public:
 	void setColorLinea(sf::Color color);
 	bool setPosicion(sf::Vector2f vector);
 	bool HitTest(sf::Vector2i point);
+	void Dibujar(sf::RenderWindow& window) override;
+	void Inicializar() override;
 	C_Texto();
 	~C_Texto();
 };

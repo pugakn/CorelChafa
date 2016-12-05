@@ -13,6 +13,8 @@ void C_Curva::Guardar(ofstream & out)
 {
 	out << GetCLSID() << endl;
 
+	out << ID << endl;
+
 	out << _p1.x << endl;
 	out << _p1.y << endl;
 	out << _p2.x << endl;
@@ -22,16 +24,22 @@ void C_Curva::Guardar(ofstream & out)
 	out << _c2.x << endl;
 	out << _c2.y << endl;
 
-	out << _colorLinea.r << endl;
-	out << _colorLinea.g << endl;
-	out << _colorLinea.b << endl;
+	out << (int)_colorLinea.r << endl;
+	out << (int)_colorLinea.g << endl;
+	out << (int)_colorLinea.b << endl;
 
-	out << _colorRelleno.r << endl;
-	out << _colorRelleno.g << endl;
-	out << _colorRelleno.b << endl;
+	out << (int)_colorRelleno.r << endl;
+	out << (int)_colorRelleno.g << endl;
+	out << (int)_colorRelleno.b << endl;
 
 	out << _posicion.x << endl;
 	out << _posicion.y << endl;
+
+	out << _size.x << endl;
+	out << _size.y << endl;
+
+	out << _type << endl;
+
 	out << Bloqueado << endl;
 	out << Visible << endl;
 }
@@ -39,6 +47,9 @@ void C_Curva::Guardar(ofstream & out)
 void C_Curva::Cargar(ifstream & in)
 {
 	string str;
+
+	getline(in, str);
+	ID = stoi(str);
 
 	getline(in, str);
 	_p1.x = stoi(str);
@@ -77,6 +88,14 @@ void C_Curva::Cargar(ifstream & in)
 	_posicion.y = stoi(str);
 
 	getline(in, str);
+	_size.x = stoi(str);
+	getline(in, str);
+	_size.y = stoi(str);
+
+	getline(in, str);
+	_type = stoi(str);
+
+	getline(in, str);
 	Bloqueado = stoi(str);
 	getline(in, str);
 	Visible = stoi(str);
@@ -98,6 +117,10 @@ void C_Curva::Inicializar()
 	setColorLinea(_colorLinea);
 	setColorRelleno(_colorRelleno);
 	setPosicion(_posicion);
+	setID(ID);
+	setSize(_size);
+	setType(_type);
+	
 }
 
 C_Curva::C_Curva()

@@ -12,12 +12,12 @@ public: //private
 	list<C_Figura *> Figuras;
 	C_Figura * _figuraActual;
 public:
-	//void InsertarRectangulo();
-	//void InsertarRectanguloRed();
+	void InsertarRectangulo(float base, float altura,string type, long id);
+	void InsertarRectanguloRed(float base, float altura, string type, long id);
 	void InsertarTriangulo(float l1, float l2, string type, long id);
-	//void InsertarLinea();
+	void InsertarLinea(sf::Vector2f a, sf::Vector2f b, string type, long id);
 	void InsertarTiraDeLineas(sf::Vector2f a, sf::Vector2f b, string type, long id);
-	void InsertarElipse(float ra, float rb);
+	void InsertarElipse(float ra, float rb, string type, long id);
 	void InsertarCurva(sf::Vector2f p1, sf::Vector2f p2, sf::Vector2f c1, sf::Vector2f c2, string type, long id);
 	void InsertarPoligono(int lados, float radio, string type, long id);
 	//void InsertarTexto();

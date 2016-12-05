@@ -1,48 +1,63 @@
 #include "stdafx.h"
 #include "C_Capa.h"
 #include "C_Documento.h"
-
-
+#include "OptionsBar.h"
 
 void C_Capa::Eliminar()
 {
-	if (!_figuraActual->Bloqueado) {
-		Figuras.remove(_figuraActual);
-		delete _figuraActual;
-		_figuraActual = Figuras.back();
-		C_Documento::Instance()->Notify();
+	if (_figuraActual != nullptr) {
+		if (!_figuraActual->Bloqueado) {
+			Figuras.remove(_figuraActual);
+			delete _figuraActual;
+			if (Figuras.size() > 0)
+				_figuraActual = Figuras.back();
+			else
+				_figuraActual = nullptr;
+			C_Documento::Instance()->Notify();
+		}
 	}
 }
 
 void C_Capa::Subir()
 {
-	if (!_figuraActual->Bloqueado) {
-		auto it = Figuras.begin();
-		for (; it != Figuras.end(); ++it) {
-			if (*it == _figuraActual) {
-				break;
+	if (_figuraActual != nullptr) {
+		if (!_figuraActual->Bloqueado) {
+			auto it = Figuras.begin();
+			for (; it != Figuras.end(); ++it) {
+				if (*it == _figuraActual) {
+					break;
+				}
 			}
+			auto it2 = it;
+			if (it2 != Figuras.end()) {
+				it2++;
+				if (it2 != Figuras.end())
+					Figuras.splice(it, Figuras, it2);
+			}
+			C_Documento::Instance()->Notify();
 		}
-		auto it2 = it;
-		it2++;
-		if (it2 != Figuras.end())
-			Figuras.splice(it2, Figuras, it);
 	}
+	
 }
 
 void C_Capa::Bajar()
 {
-	if (!_figuraActual->Bloqueado) {
-		auto it = Figuras.begin();
-		for (; it != Figuras.end(); ++it) {
-			if (*it == _figuraActual) {
-				break;
+	if (_figuraActual != nullptr) {
+		if (!_figuraActual->Bloqueado) {
+			auto it = Figuras.begin();
+			for (; it != Figuras.end(); ++it) {
+				if (*it == _figuraActual) {
+					break;
+				}
 			}
+			auto it2 = it;
+			if (it2 != Figuras.begin()) {
+				it2--;
+				if (it2 != Figuras.end())
+					Figuras.splice(it2, Figuras, it);
+			}
+			C_Documento::Instance()->Notify();
 		}
-		auto it2 = it;
-		it2--;
-		if (it2 != Figuras.end())
-			Figuras.splice(it2, Figuras, it);
 	}
 }
 
@@ -54,6 +69,7 @@ int C_Capa::GetCLSID()
 void C_Capa::Guardar(ofstream & out)
 {
 	out << GetCLSID() << endl;
+	out << ID << endl;
 	out << Figuras.size() << endl;
 	out << Bloqueado << endl;
 	out << Visible << endl;
@@ -63,8 +79,6 @@ void C_Capa::Guardar(ofstream & out)
 		(*it)->Guardar(out);
 	}
 
-	
-
 	out.close();
 }
 
@@ -72,6 +86,9 @@ void C_Capa::Cargar(ifstream & in)
 {
 	string str;
 	int size;
+
+	getline(in, str);
+	ID = stoi(str);
 
 	getline(in, str);
 	size = stoi(str);
@@ -124,9 +141,30 @@ C_Capa::C_Capa()
 {
 }
 
-
 C_Capa::~C_Capa()
 {
+}
+
+void C_Capa::InsertarRectangulo(float base, float altura, string type, long id)
+{
+	Figuras.push_back(new C_Rectangulo(base,altura));
+	Figuras.back()->setType(type);
+	Figuras.back()->setID(id);
+	_figuraActual = Figuras.back();
+	_figuraActual->setColorRelleno(OptionsBar::Instance()->_colorPicker.getFillColor());
+	_figuraActual->setColorLinea(OptionsBar::Instance()->_colorPicker.getLineColor());
+	C_Documento::Instance()->Notify();
+}
+
+void C_Capa::InsertarRectanguloRed(float base, float altura, string type, long id)
+{
+	Figuras.push_back(new C_RRedondeado(base, altura));
+	Figuras.back()->setType(type);
+	Figuras.back()->setID(id);
+	SetActual(Figuras.back());
+	_figuraActual->setColorRelleno(OptionsBar::Instance()->_colorPicker.getFillColor());
+	_figuraActual->setColorLinea(OptionsBar::Instance()->_colorPicker.getLineColor());
+	C_Documento::Instance()->Notify();
 }
 
 void C_Capa::InsertarTriangulo(float l1, float l2, string type, long id)
@@ -135,6 +173,19 @@ void C_Capa::InsertarTriangulo(float l1, float l2, string type, long id)
 	Figuras.back()->setType(type);
 	Figuras.back()->setID(id);
 	_figuraActual = Figuras.back();
+	_figuraActual->setColorRelleno(OptionsBar::Instance()->_colorPicker.getFillColor());
+	_figuraActual->setColorLinea(OptionsBar::Instance()->_colorPicker.getLineColor());
+	C_Documento::Instance()->Notify();
+}
+
+void C_Capa::InsertarLinea(sf::Vector2f a, sf::Vector2f b, string type, long id)
+{
+	Figuras.push_back(new C_Linea(a, b));
+	Figuras.back()->setType(type);
+	Figuras.back()->setID(id);
+	_figuraActual = Figuras.back();
+	//_figuraActual->setColorRelleno(OptionsBar::Instance()->_colorPicker.getFillColor());
+	_figuraActual->setColorLinea(OptionsBar::Instance()->_colorPicker.getLineColor());
 	C_Documento::Instance()->Notify();
 }
 
@@ -144,12 +195,20 @@ void C_Capa::InsertarTiraDeLineas(sf::Vector2f a, sf::Vector2f b, string type, l
 	Figuras.back()->setType(type);
 	Figuras.back()->setID(id);
 	_figuraActual = Figuras.back();
+	//_figuraActual->setColorRelleno(OptionsBar::Instance()->_colorPicker.getFillColor());
+	_figuraActual->setColorLinea(OptionsBar::Instance()->_colorPicker.getLineColor());
 	C_Documento::Instance()->Notify();
 }
 
-void C_Capa::InsertarElipse(float ra, float rb)
+void C_Capa::InsertarElipse(float ra, float rb, string type, long id)
 {
 	Figuras.push_back(new C_Elipse(ra, rb));
+	Figuras.back()->setType(type);
+	Figuras.back()->setID(id);
+	_figuraActual = Figuras.back();
+	_figuraActual->setColorRelleno(OptionsBar::Instance()->_colorPicker.getFillColor());
+	_figuraActual->setColorLinea(OptionsBar::Instance()->_colorPicker.getLineColor());
+	C_Documento::Instance()->Notify();
 }
 
 void C_Capa::InsertarCurva(sf::Vector2f p1, sf::Vector2f p2, sf::Vector2f c1, sf::Vector2f c2, string type, long id)
@@ -158,6 +217,8 @@ void C_Capa::InsertarCurva(sf::Vector2f p1, sf::Vector2f p2, sf::Vector2f c1, sf
 	Figuras.back()->setType(type);
 	Figuras.back()->setID(id);
 	_figuraActual = Figuras.back();
+	//_figuraActual->setColorRelleno(OptionsBar::Instance()->_colorPicker.getFillColor());
+	_figuraActual->setColorLinea(OptionsBar::Instance()->_colorPicker.getLineColor());
 	C_Documento::Instance()->Notify();
 }
 
@@ -167,6 +228,8 @@ void C_Capa::InsertarPoligono(int lados, float radio,  string type, long id)
 	Figuras.back()->setType(type);
 	Figuras.back()->setID(id);
 	_figuraActual = Figuras.back();
+	_figuraActual->setColorRelleno(OptionsBar::Instance()->_colorPicker.getFillColor());
+	_figuraActual->setColorLinea(OptionsBar::Instance()->_colorPicker.getLineColor());
 	C_Documento::Instance()->Notify();
 }
 // TODO: SetBolqueado para todas las figuras

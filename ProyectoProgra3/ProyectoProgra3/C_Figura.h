@@ -10,8 +10,8 @@ protected:
 	string _type;
 	sf::Color _colorRelleno;
 	sf::Color _colorLinea;
-	sf::Vector2f _posicion;
-	sf::Vector2f _size;
+	sf::Vector2f _posicion = sf::Vector2f(0, 0);
+	sf::Vector2f _size = sf::Vector2f(0, 0);
 public:
 	void setType(string type);
 	string getType();

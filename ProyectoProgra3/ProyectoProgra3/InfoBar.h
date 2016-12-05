@@ -18,7 +18,7 @@ private:
 	sf::Text _borderColorTXT;
 	sf::Font _font;
 	sf::RectangleShape _background;
-
+	sf::Texture _texture;
 	C_Figura* _actual;
 protected:
 	InfoBar();

@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "ColorPicker.h"
 #include "C_Documento.h"
+#include "OptionsBar.h"
 
 
 sf::Color ColorPicker::getLineColor()
@@ -39,14 +40,24 @@ void ColorPicker::Inputs(sf::Event & event, sf::RenderWindow & window)
 			_lineColorB.setOutlineThickness(0);
 		}
 		if (_spectrum.getGlobalBounds().contains((sf::Vector2f)sf::Mouse::getPosition(window))) {
+			if (_fillColorSelected) {
+				_fillColor = (_image.getPixel(sf::Mouse::getPosition(window).x - _spectrum.getPosition().x, sf::Mouse::getPosition(window).y - _spectrum.getPosition().y));
+				_fillColorB.setFillColor(_fillColor);
+			}
+			else {
+				_lineColor = (_image.getPixel(sf::Mouse::getPosition(window).x - _spectrum.getPosition().x, sf::Mouse::getPosition(window).y - _spectrum.getPosition().y));
+				_lineColorB.setFillColor(_lineColor);
+			}
 			if (C_Documento::Instance()->_actual->_figuraActual != nullptr)
 				if (_fillColorSelected) {
-					C_Documento::Instance()->_actual->_figuraActual->setColorRelleno(_image.getPixel(sf::Mouse::getPosition(window).x - _spectrum.getPosition().x, sf::Mouse::getPosition(window).y - _spectrum.getPosition().y));
-					_fillColorB.setFillColor(_image.getPixel(sf::Mouse::getPosition(window).x - _spectrum.getPosition().x, sf::Mouse::getPosition(window).y - _spectrum.getPosition().y));
+					if (_image.getSize().x > sf::Mouse::getPosition(window).x - _spectrum.getPosition().x && _image.getSize().y > sf::Mouse::getPosition(window).y - _spectrum.getPosition().y) {
+						C_Documento::Instance()->_actual->_figuraActual->setColorRelleno(_image.getPixel(sf::Mouse::getPosition(window).x - _spectrum.getPosition().x, sf::Mouse::getPosition(window).y - _spectrum.getPosition().y));
+					}
 				}
 				else {
-					C_Documento::Instance()->_actual->_figuraActual->setColorLinea(_image.getPixel(sf::Mouse::getPosition(window).x - _spectrum.getPosition().x, sf::Mouse::getPosition(window).y - _spectrum.getPosition().y));
-					_lineColorB.setFillColor(_image.getPixel(sf::Mouse::getPosition(window).x - _spectrum.getPosition().x, sf::Mouse::getPosition(window).y - _spectrum.getPosition().y));
+					if (_image.getSize().x > sf::Mouse::getPosition(window).x - _spectrum.getPosition().x && _image.getSize().y > sf::Mouse::getPosition(window).y - _spectrum.getPosition().y) {
+						C_Documento::Instance()->_actual->_figuraActual->setColorLinea(_image.getPixel(sf::Mouse::getPosition(window).x - _spectrum.getPosition().x, sf::Mouse::getPosition(window).y - _spectrum.getPosition().y));
+					}
 				}
 		}
 	}

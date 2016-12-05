@@ -14,6 +14,8 @@ void C_Triangulo::Guardar(ofstream & out)
 {
 	out << GetCLSID() << endl;
 
+	out << ID << endl;
+
 	out << _l1 << endl;
 	out << _l2 << endl;
 
@@ -27,6 +29,12 @@ void C_Triangulo::Guardar(ofstream & out)
 
 	out << _posicion.x << endl;
 	out << _posicion.y << endl;
+
+	out << _size.x << endl;
+	out << _size.y << endl;
+
+	out << _type << endl;
+
 	out << Bloqueado << endl;
 	out << Visible << endl;
 }
@@ -34,6 +42,9 @@ void C_Triangulo::Guardar(ofstream & out)
 void C_Triangulo::Cargar(ifstream & in)
 {
 	string str;
+
+	getline(in, str);
+	ID = stoi(str);
 
 	getline(in, str);
 	_l1 = stoi(str);
@@ -58,6 +69,14 @@ void C_Triangulo::Cargar(ifstream & in)
 	_posicion.x = stoi(str);
 	getline(in, str);
 	_posicion.y = stoi(str);
+
+	getline(in, str);
+	_size.x = stoi(str);
+	getline(in, str);
+	_size.y = stoi(str);
+
+	getline(in, str);
+	_type = stoi(str);
 
 	getline(in, str);
 	Bloqueado = stoi(str);
@@ -94,12 +113,15 @@ void C_Triangulo::Inicializar()
 	_linea[2].position = _shape[2].position;
 	_linea[3] = _linea[0];
 
-
+	_size = sf::Vector2f(_l1, _l2);
 	this->setPosicion(origen);
 
 	setColorLinea(_colorLinea);
 	setColorRelleno(_colorRelleno);
 	setPosicion(_posicion);
+	setID(ID);
+	setSize(_size);
+	setType(_type);
 }
 
 C_Triangulo::C_Triangulo()
@@ -134,6 +156,7 @@ C_Triangulo::C_Triangulo(float l1, float l2)
 	_linea[1].position = _shape[1].position;
 	_linea[2].position = _shape[2].position;
 	_linea[3] = _linea[0];
+	_size = sf::Vector2f(l1,l2);
 
 }
 
@@ -156,6 +179,8 @@ bool C_Triangulo::setPosicion(sf::Vector2f posicion)
 			_linea[1].position = _originalPos[1] + posicion;
 			_linea[2].position = _originalPos[2] + posicion;
 			_linea[3].position = _originalPos[0] + posicion;
+
+			C_Documento::Instance()->Notify();
 			return true;
 		}
 	}
@@ -180,7 +205,7 @@ bool C_Triangulo::HitTest(sf::Vector2i point)
 		std::cout << "YEI";
 	}
 	return ((c1.z < 0) && (c2.z < 0) && (c3.z < 0));*/
-	if (Bloqueado)
+	if (!Visible)
 		return false;
 	if (HitTestTTriangle(_shape[0].position, _shape[1].position, _shape[2].position, (sf::Vector2f) point)) {
 		std::cout << "YEI";
@@ -197,6 +222,8 @@ void C_Triangulo::setColorRelleno(sf::Color color)
 		for (int i = 0; i < 3; i++) {
 			_shape[i].color = color;
 		}
+
+		C_Documento::Instance()->Notify();
 	}
 }
 
@@ -208,6 +235,8 @@ void C_Triangulo::setColorLinea(sf::Color color)
 		for (int i = 0; i < 4; i++) {
 			_linea[i].color = color;
 		}
+
+		C_Documento::Instance()->Notify();
 	}
 }
 
@@ -215,6 +244,7 @@ void C_Triangulo::setSize(sf::Vector2f size)
 {
 	if (!Bloqueado) {
 		_size = size;
+		//size.y = size.y;
 		//_l1 = size.x;
 		//_l2 = size.y;
 		C_Documento::Instance()->Notify();
@@ -226,6 +256,8 @@ void C_Triangulo::setSize(sf::Vector2f size)
 
 		_originalPos[1] = sf::Vector2f(_originalPos[0].x + size.x, _originalPos[1].y);
 		_originalPos[2] = sf::Vector2f(_originalPos[0].x + size.x * .5f, _originalPos[0].y + size.y);
+
+		C_Documento::Instance()->Notify();
 	}
 }
 

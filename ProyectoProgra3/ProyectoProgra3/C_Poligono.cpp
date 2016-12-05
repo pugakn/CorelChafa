@@ -15,6 +15,8 @@ void C_Poligono::Guardar(ofstream & out)
 {
 	out << GetCLSID() << endl;
 
+	out << ID << endl;
+
 	out << _lados << endl;
 	out << _radio << endl;
 
@@ -28,6 +30,12 @@ void C_Poligono::Guardar(ofstream & out)
 
 	out << _posicion.x << endl;
 	out << _posicion.y << endl;
+
+	out << _size.x << endl;
+	out << _size.y << endl;
+
+	out << _type << endl;
+
 	out << Bloqueado << endl;
 	out << Visible << endl;
 }
@@ -35,6 +43,9 @@ void C_Poligono::Guardar(ofstream & out)
 void C_Poligono::Cargar(ifstream & in)
 {
 	string str;
+
+	getline(in, str);
+	ID = stoi(str);
 
 	getline(in, str);
 	_lados = stoi(str);
@@ -61,6 +72,14 @@ void C_Poligono::Cargar(ifstream & in)
 	_posicion.y = stoi(str);
 
 	getline(in, str);
+	_size.x = stoi(str);
+	getline(in, str);
+	_size.y = stoi(str);
+
+	getline(in, str);
+	_type = stoi(str);
+
+	getline(in, str);
 	Bloqueado = stoi(str);
 	getline(in, str);
 	Visible = stoi(str);
@@ -84,6 +103,9 @@ void C_Poligono::Inicializar()
 	setColorLinea(_colorLinea);
 	setColorRelleno(_colorRelleno);
 	setPosicion(_posicion);
+	setID(ID);
+	setSize(_size);
+	setType(_type);
 }
 
 C_Poligono::C_Poligono()
@@ -114,13 +136,16 @@ C_Poligono::~C_Poligono()
 bool C_Poligono::setPosicion(sf::Vector2f posicion)
 {
 	if (posicion.x > 0 && posicion.y > 0) {
-		_posicion = posicion;
-		_shape.setPosition(posicion);
-		for (int i = 0; i < _lados; i++) {
-			_vertices[i] = _originalPos[i] + posicion;
+		if (!Bloqueado)
+		{
+			_posicion = posicion;
+			_shape.setPosition(posicion);
+			for (int i = 0; i < _lados; i++) {
+				_vertices[i] = _originalPos[i] + posicion;
+			}
+			C_Documento::Instance()->Notify();
+			return true;
 		}
-		C_Documento::Instance()->Notify();
-		return true;
 	}
 	return false;
 }
@@ -128,7 +153,9 @@ bool C_Poligono::setPosicion(sf::Vector2f posicion)
 
 bool C_Poligono::HitTest(sf::Vector2i point)
 {
-	
+	if (!Visible)
+		return false;
+
 	std::vector<sf::Vector3f> c;
 	for (int i = 0; i < _lados-1;i++) {
 		c.push_back( Cross(_vertices[i + 1] - _vertices[i], (sf::Vector2f)point - _vertices[i]));
@@ -142,26 +169,35 @@ bool C_Poligono::HitTest(sf::Vector2i point)
 
 void C_Poligono::setColorRelleno(sf::Color color)
 {
-	_colorRelleno = color;
-	_shape.setFillColor(color);
-	C_Documento::Instance()->Notify();
+	if (!Bloqueado)
+	{
+		_colorRelleno = color;
+		_shape.setFillColor(color);
+		C_Documento::Instance()->Notify();
+	}
 }
 
 void C_Poligono::setColorLinea(sf::Color color)
 {
-	_colorLinea = color;
-	_shape.setOutlineColor(color);
-	_shape.setOutlineThickness(1);
-	C_Documento::Instance()->Notify();
+	if (!Bloqueado)
+	{
+		_colorLinea = color;
+		_shape.setOutlineColor(color);
+		_shape.setOutlineThickness(1);
+		C_Documento::Instance()->Notify();
+	}
 }
 
 void C_Poligono::setSize(sf::Vector2f size)
 {
-	_size = size;
-	//_shape.setScale(size);
-	//_radio = size.x;
-	_shape.setRadius(size.x/2);
-	C_Documento::Instance()->Notify();
+	if (!Bloqueado)
+	{
+		_size = size;
+		//_shape.setScale(size);
+		//_radio = size.x;
+		_shape.setRadius(size.x / 2);
+		C_Documento::Instance()->Notify();
+	}
 }
 
 void C_Poligono::Dibujar(sf::RenderWindow & window)

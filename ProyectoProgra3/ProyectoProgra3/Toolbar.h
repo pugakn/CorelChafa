@@ -22,6 +22,7 @@ private:
 	std::vector<sfButton*> _buttons;
 	sf::RectangleShape _background;
 	sf::Vector2f _ItemsPosition;
+	sf::Texture _backgroundTexture;
 protected:
 	Toolbar();
 public:

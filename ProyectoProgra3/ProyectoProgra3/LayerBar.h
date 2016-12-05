@@ -9,10 +9,11 @@ class LayerBar : public Observer
 {
 private:
 	static LayerBar* _instance;
-	std::vector<sfButton> _buttons;
+	std::vector<sfButton*> _buttons;
 	std::vector<sfTextButton> _txtButtons;
 	sf::Vector2f _ItemsPosition;
 	sf::RectangleShape _background;
+	sf::RectangleShape _background2;
 	int _capasID = 2;
 
 	bool layerSelected = true;
