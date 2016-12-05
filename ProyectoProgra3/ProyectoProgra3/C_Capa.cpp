@@ -173,9 +173,13 @@ void C_Capa::InsertarTiraDeLineas(sf::Vector2f a, sf::Vector2f b, string type, l
 	C_Documento::Instance()->Notify();
 }
 
-void C_Capa::InsertarElipse(float ra, float rb)
+void C_Capa::InsertarElipse(float ra, float rb, string type, long id)
 {
 	Figuras.push_back(new C_Elipse(ra, rb));
+	Figuras.back()->setType(type);
+	Figuras.back()->setID(id);
+	_figuraActual = Figuras.back();
+	C_Documento::Instance()->Notify();
 }
 
 void C_Capa::InsertarCurva(sf::Vector2f p1, sf::Vector2f p2, sf::Vector2f c1, sf::Vector2f c2, string type, long id)

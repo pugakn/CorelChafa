@@ -53,7 +53,7 @@ void DrawArea::Inputs(sf::Event & event, sf::RenderWindow & window)
 				_documento->_actual->InsertarCurva(sf::Vector2f(0, 0), sf::Vector2f(0, 50),sf::Vector2f(0,0),sf::Vector2f(0,50), "Curva", _curvaID++);
 				break;
 			case Tools::ELIPSE:
-				_documento->_actual->InsertarElipse(50,50);
+				_documento->_actual->InsertarElipse(50,50,"Elipse", _elipseID++);
 				break;
 			case Tools::LINEA:
 				_documento->_actual->InsertarLinea(sf::Vector2f(0,0), sf::Vector2f(0, 50), "Linea", _lineaID++);

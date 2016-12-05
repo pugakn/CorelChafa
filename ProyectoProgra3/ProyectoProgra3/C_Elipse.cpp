@@ -150,6 +150,7 @@ bool C_Elipse::setPosicion(sf::Vector2f posicion)
 	{
 		if (!Bloqueado)
 		{
+			_posicion = posicion;
 			int i = 0;
 			_centro += posicion;
 			for (i = 0; i <= 40; i++)
@@ -168,8 +169,10 @@ void C_Elipse::setSize(sf::Vector2f size)
 {
 	if (!Bloqueado)
 	{
+		_size = size;
 		_centro = sf::Vector2f(_posicion.x, _posicion.y);
-		_shape = sf::VertexArray(sf::TrianglesFan, 0);
+		//_shape = sf::VertexArray(sf::TrianglesFan, 0);
+		_shape.clear();
 		std::vector<sf::Vector2f> points = CaclVertex(size.x, size.y);
 		_shape.append(sf::Vertex(sf::Vector2f(0, 0)));
 		for (auto it = points.begin(); it != points.end(); ++it)
@@ -177,6 +180,8 @@ void C_Elipse::setSize(sf::Vector2f size)
 			_shape.append(sf::Vertex(*it));
 		}
 		C_Documento::Instance()->Notify();
+		setColorRelleno(sf::Color::Black);
+		setPosicion(_posicion);
 	}
 }
 
