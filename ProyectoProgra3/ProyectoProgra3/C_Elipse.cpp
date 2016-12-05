@@ -180,7 +180,7 @@ std::vector <sf::Vector2f> CaclVertex(float ra, float rb)
 	for (int i = 0; i < 40; i++)
 	{
 		temp.push_back(sf::Vector2f(ra*cosf(rad), rb*sinf(rad)));
-		rad += ((3.141592f) / 19);
+		rad += ((Pi) / 19);
 	}
 	return temp;
 
