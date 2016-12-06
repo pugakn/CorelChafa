@@ -213,6 +213,12 @@ bool C_Elipse::HitTest(sf::Vector2i point)
 	if (!Visible)
 		return false;
 	float x = 0;
+	bool prueba1 = HitTestTTriangle(sf::Vector2f(_centro.x + _ra, _centro.y), sf::Vector2f(_centro.x - _ra, _centro.y), sf::Vector2f(_centro.x, _centro.y - _rb), (sf::Vector2f)point);
+	bool prueba2 = HitTestTTriangle(sf::Vector2f(_centro.x + _ra, _centro.y), sf::Vector2f(_centro.x - _ra, _centro.y), sf::Vector2f(_centro.x, _centro.y + _rb), (sf::Vector2f)point);
+	if (prueba1 == true)
+		return true;
+	if (prueba2 == true)
+		return true;
 	//float y = 0;
 	//sf::RectangleShape(sf::Vector2f(_ra,_rb));
 	//x = _ra;
