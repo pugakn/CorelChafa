@@ -98,6 +98,8 @@ void C_Linea::Inicializar()
 	_shape = sf::VertexArray(sf::Lines, 2);
 	_shape[0].position = _a;
 	_shape[1].position = _b;
+	_originalPos.push_back(_a);
+	_originalPos.push_back(_b);
 
 	setColorLinea(_colorLinea);
 	setColorRelleno(_colorRelleno);
@@ -115,23 +117,23 @@ void C_Linea::setColorRelleno(sf::Color color)
 
 void C_Linea::setColorLinea(sf::Color color)
 {
-
-	_colorLinea = color;
-	for (int i = 0; i < 2; i++) 
-	{
-		_shape[i].color = color;              
+	if (!Bloqueado && Visible) {
+		_colorLinea = color;
+		for (int i = 0; i < 2; i++)
+		{
+			_shape[i].color = color;
+		}
 	}
 }
 
 bool C_Linea::setPosicion(sf::Vector2f posicion)
 {
-	if (posicion.x > 0 && posicion.y > 0)
-	{
+	if (!Bloqueado && Visible) {
 		_posicion = posicion;
 		_shape[0].position = _originalPos[0] + posicion;
 		_shape[1].position = _originalPos[1] + posicion;
-		_a = _shape[0].position;
-		_b = _shape[1].position;
+		//_a = _shape[0].position;
+		//_b = _shape[1].position;
 		return true;
 	}
 	return false;
@@ -139,40 +141,53 @@ bool C_Linea::setPosicion(sf::Vector2f posicion)
 
 void C_Linea::setSize(sf::Vector2f size)
 {
+	if (!Bloqueado && Visible) {
+		_size = size;
+		_shape[1].position = _originalPos[1] + size;
+	}
+}
+
+void C_Linea::setLastVertexPos(sf::Vector2f pos) {
+	if (!Bloqueado && Visible) {
+		_shape[1].position = pos;
+		_originalPos[1] = pos;
+	}
 }
 
 bool C_Linea::HitTest(sf::Vector2i point)
 {
-	bool prueba1 = false, prueba2 = false;
-	if (fabs(_angulo) >= 45) //vertical
-	{
-		sf::Vector2f p1(_a.x - 15, _a.y);
-		sf::Vector2f p2(_a.x + 15, _a.y);
-		sf::Vector2f p3(_b.x - 15, _b.y);
-		sf::Vector2f p4(_b.x + 15, _b.y);
-		prueba1 = HitTestTTriangle(p4, p2, p1, (sf::Vector2f)point);
-		prueba2 = HitTestTTriangle(p3, p4, p1, (sf::Vector2f)point);
-	}
-	else //horizontal
-	{
-		sf::Vector2f p1(_a.x, _a.y - 15);
-		sf::Vector2f p2(_a.x, _a.y + 15);
-		sf::Vector2f p3(_b.x, _b.y - 15);
-		sf::Vector2f p4(_b.x, _b.y + 15);
-		prueba1 = HitTestTTriangle(p4, p2, p1, (sf::Vector2f)point);
-		prueba2 = HitTestTTriangle(p3, p4, p1, (sf::Vector2f)point);
-	}
+	if (Visible) {
+		bool prueba1 = false, prueba2 = false;
+		if (fabs(_angulo) >= 45) //vertical
+		{
+			sf::Vector2f p1(_a.x - 15, _a.y);
+			sf::Vector2f p2(_a.x + 15, _a.y);
+			sf::Vector2f p3(_b.x - 15, _b.y);
+			sf::Vector2f p4(_b.x + 15, _b.y);
+			prueba1 = HitTestTTriangle(p4, p2, p1, (sf::Vector2f)point);
+			prueba2 = HitTestTTriangle(p3, p4, p1, (sf::Vector2f)point);
+		}
+		else //horizontal
+		{
+			sf::Vector2f p1(_a.x, _a.y - 15);
+			sf::Vector2f p2(_a.x, _a.y + 15);
+			sf::Vector2f p3(_b.x, _b.y - 15);
+			sf::Vector2f p4(_b.x, _b.y + 15);
+			prueba1 = HitTestTTriangle(p4, p2, p1, (sf::Vector2f)point);
+			prueba2 = HitTestTTriangle(p3, p4, p1, (sf::Vector2f)point);
+		}
 
-	if (prueba1 == true)
-	{
-		cout << "allahu akbar";
-		return true;
-	}
+		if (prueba1 == true)
+		{
+			cout << "allahu akbar";
+			return true;
+		}
 
-	if (prueba2 == true)
-	{
-		cout << "allahu akbar";
-		return true;
+		if (prueba2 == true)
+		{
+			cout << "allahu akbar";
+			return true;
+		}
 	}
 	return false;
 }

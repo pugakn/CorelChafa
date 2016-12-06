@@ -168,7 +168,7 @@ C_Triangulo::~C_Triangulo()
 bool C_Triangulo::setPosicion(sf::Vector2f posicion)
 {
 	if (posicion.x > 0 && posicion.y > 0) {
-		if (!Bloqueado) {
+		if (!Bloqueado && Visible) {
 			_posicion = posicion;
 			C_Documento::Instance()->Notify();
 			_shape[0].position = _originalPos[0] + posicion;
@@ -215,7 +215,7 @@ bool C_Triangulo::HitTest(sf::Vector2i point)
 
 void C_Triangulo::setColorRelleno(sf::Color color)
 {
-	if (!Bloqueado) {
+	if (!Bloqueado && Visible) {
 		_colorRelleno = color;
 		C_Documento::Instance()->Notify();
 		for (int i = 0; i < 3; i++) {
@@ -228,7 +228,7 @@ void C_Triangulo::setColorRelleno(sf::Color color)
 
 void C_Triangulo::setColorLinea(sf::Color color)
 {
-	if (!Bloqueado) {
+	if (!Bloqueado && Visible) {
 		_colorLinea = color;
 		C_Documento::Instance()->Notify();
 		for (int i = 0; i < 4; i++) {
@@ -241,7 +241,7 @@ void C_Triangulo::setColorLinea(sf::Color color)
 
 void C_Triangulo::setSize(sf::Vector2f size)
 {
-	if (!Bloqueado) {
+	if (!Bloqueado && Visible) {
 		_size = size;
 		//size.y = size.y;
 		//_l1 = size.x;

@@ -172,7 +172,7 @@ C_RRedondeado::C_RRedondeado(float base, float altura)
 
 void C_RRedondeado::setColorRelleno(sf::Color color)
 {
-	if (!Bloqueado)
+	if (!Bloqueado && Visible) 
 	{
 		_shape.setFillColor(color);
 		C_Documento::Instance()->Notify();
@@ -181,7 +181,7 @@ void C_RRedondeado::setColorRelleno(sf::Color color)
 
 void C_RRedondeado::setColorLinea(sf::Color color)
 {
-	if (!Bloqueado)
+	if (!Bloqueado && Visible) 
 	{
 		_shape.setOutlineColor(color);
 		_shape.setOutlineThickness(1);
@@ -193,7 +193,7 @@ bool C_RRedondeado::setPosicion(sf::Vector2f vector)
 {
 	if (vector.x > 0 && vector.y > 0)
 	{
-		if (!Bloqueado)
+		if (!Bloqueado && Visible) 
 		{
 			_posicion = vector;
 			for (int i = 0; i < 40; i++)
@@ -226,7 +226,7 @@ bool C_RRedondeado::HitTest(sf::Vector2i point)
 void C_RRedondeado::setSize(sf::Vector2f size)
 {
 	if (size.x > 10 && size.y > 10) {
-		if (!Bloqueado)
+		if (!Bloqueado && Visible) 
 		{
 			_size = size;
 			float X = 0, Y = 0;

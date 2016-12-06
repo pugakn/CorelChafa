@@ -25,6 +25,9 @@ public:
 	bool setPosicion(sf::Vector2f posicion);
 	void setSize(sf::Vector2f size);
 	void Dibujar(sf::RenderWindow& window);
+	void setP2(sf::Vector2f pos);
+	void setC1(sf::Vector2f pos);
+	void setC2(sf::Vector2f pos);
 
 };
 

@@ -128,11 +128,13 @@ C_Elipse::C_Elipse(float ra, float rb)
 
 void C_Elipse::setColorRelleno(sf::Color color)
 {
-	for ( unsigned it = 0; it < _shape.getVertexCount(); ++it)
-	{
-		_shape[it].color = color;
+	if (!Bloqueado && Visible) {
+		for (unsigned it = 0; it < _shape.getVertexCount(); ++it)
+		{
+			_shape[it].color = color;
+		}
+		C_Documento::Instance()->Notify();
 	}
-	C_Documento::Instance()->Notify();
 }
 
 void C_Elipse::setColorLinea(sf::Color color)
@@ -151,20 +153,22 @@ void C_Elipse::setColorLinea(sf::Color color)
 
 bool C_Elipse::setPosicion(sf::Vector2f posicion)
 {
-	if (posicion.x > 0 && posicion.y > 0)
-	{
-		if (!Bloqueado)
+	if (!Bloqueado && Visible) {
+		if (posicion.x > 0 && posicion.y > 0)
 		{
-			_posicion = posicion;
-			int i = 0;
-			_centro += posicion;
-			for (i = 0; i <= 40; i++)
+			if (!Bloqueado)
 			{
-				_shape[i].position.x = _originalPos[i].x + posicion.x;
-				_shape[i].position.y = _originalPos[i].y + posicion.y;
+				_posicion = posicion;
+				int i = 0;
+				_centro += posicion;
+				for (i = 0; i <= 40; i++)
+				{
+					_shape[i].position.x = _originalPos[i].x + posicion.x;
+					_shape[i].position.y = _originalPos[i].y + posicion.y;
+				}
+				C_Documento::Instance()->Notify();
+				return true;
 			}
-			C_Documento::Instance()->Notify();
-			return true;
 		}
 	}
 	return false;
@@ -172,7 +176,7 @@ bool C_Elipse::setPosicion(sf::Vector2f posicion)
 
 void C_Elipse::setSize(sf::Vector2f size)
 {
-	if (!Bloqueado)
+	if (!Bloqueado && Visible)
 	{
 		_originalPos.clear();
 		_size = size;

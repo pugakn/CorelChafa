@@ -17,7 +17,9 @@ LayerBar * LayerBar::Instance()
 void LayerBar::Update()
 {
 	static int Size;
-	if (Size != C_Documento::Instance()->_actual->Figuras.size() + C_Documento::Instance()->_lista.size() || _reordenado) {
+	if (Size != C_Documento::Instance()->_actual->Figuras.size() + C_Documento::Instance()->_lista.size() || _reordenado ||
+		_capaActual != C_Documento::Instance()->_actual) {
+		_capaActual = C_Documento::Instance()->_actual;
 		_reordenado = false;
 		Size = C_Documento::Instance()->_actual->Figuras.size() + C_Documento::Instance()->_lista.size();
 		_txtButtons.clear();
@@ -37,9 +39,12 @@ void LayerBar::Update()
 			temp._rectangle.setPosition(_ItemsPosition.x, _txtButtons.back()._rectangle.getPosition().y + _txtButtons.back()._rectangle.getSize().y);
 			temp._txt.setCharacterSize(14);
 			temp._txt.setFillColor(sf::Color::Black);
-			temp.Callback = [&layer]() {
+			temp.Callback = [&layer,this]() {
+				breakCicle = true;
 				LayerBar::Instance()->_layerSelected = true;
 				C_Documento::Instance()->SetActual(layer);
+				//C_Documento::Instance()->_actual->SetActual(nullptr);
+				return;
 			};
 			_txtButtons.push_back(temp);
 			// Inicializar botones de figuras
@@ -49,7 +54,8 @@ void LayerBar::Update()
 				temp._rectangle.setPosition(_ItemsPosition.x, _txtButtons.back()._rectangle.getPosition().y + _txtButtons.back()._rectangle.getSize().y);
 				temp._txt.setCharacterSize(14);
 				temp._txt.setFillColor(sf::Color::Black);
-				temp.Callback = [&it, &layer]() {
+				temp.Callback = [&it, &layer,this]() {
+					//breakCicle = true;
 					LayerBar::Instance()->_layerSelected = false;
 					C_Documento::Instance()->SetActual(layer);
 					C_Documento::Instance()->_actual->SetActual(it);
@@ -148,6 +154,7 @@ LayerBar::LayerBar()
 	button->_rectangle.setPosition(1166, 720);
 	button->Callback = [this]() {
 		_reordenado = true;
+		breakCicle = true;
 		if (LayerBar::Instance()->_layerSelected == true)
 			C_Documento::Instance()->Subir();
 		else
@@ -161,6 +168,7 @@ LayerBar::LayerBar()
 	button->_rectangle.setPosition(1166+50, 720);
 	button->Callback = [this]() {
 		_reordenado = true;
+		breakCicle = true;
 		if (LayerBar::Instance()->_layerSelected == true)
 			C_Documento::Instance()->Bajar();
 		else
@@ -313,6 +321,10 @@ void LayerBar::Inputs(sf::Event & event, sf::RenderWindow & window)
 		{
 			if (item.HitTest(sf::Mouse::getPosition(window)))
 			{
+				if (breakCicle) {
+					breakCicle = false;
+					break;
+				}
 				item.Callback();
 			}
 		}

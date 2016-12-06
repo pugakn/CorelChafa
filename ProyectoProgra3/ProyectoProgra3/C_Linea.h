@@ -21,6 +21,7 @@ public:
 	bool HitTest(sf::Vector2i point) override;
 	void C_Linea::setSize(sf::Vector2f size) override;
 	void Dibujar(sf::RenderWindow& window);
+	void setLastVertexPos(sf::Vector2f pos);
 	C_Linea(sf::Vector2f a, sf::Vector2f b);
 	C_Linea();
 	~C_Linea();

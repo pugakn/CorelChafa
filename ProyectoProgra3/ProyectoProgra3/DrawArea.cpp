@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "DrawArea.h"
 #include "Toolbar.h"
+#include "LayerBar.h"
 
 DrawArea* DrawArea::_instance = 0;
 DrawArea::DrawArea()
@@ -34,6 +35,7 @@ void DrawArea::Draw(sf::RenderWindow & window)
 void DrawArea::Inputs(sf::Event & event, sf::RenderWindow & window)
 {
 	static bool first = true;//TODO: Fix
+	static int curvaStep=0;
 	static sf::Vector2f initialPos;
 	static sf::Vector2f deltPos;
 	if (event.type == sf::Event::MouseButtonPressed) {
@@ -41,41 +43,72 @@ void DrawArea::Inputs(sf::Event & event, sf::RenderWindow & window)
 			switch (Toolbar::_actualTool)
 			{
 			case Tools::CURSOR:
+				curvaStep = 0;
 				for (auto& it : C_Documento::Instance()->_lista) {
 					for (auto& item : it->Figuras) {
-						if (item->HitTest(sf::Mouse::getPosition(window)) && !item->Bloqueado) {
+						if (item->HitTest(sf::Mouse::getPosition(window)) && !item->Bloqueado  && item->Visible) {
 							C_Documento::Instance()->_actual->SetActual(item);
+							LayerBar::Instance()->_layerSelected = false;
 						}
 					}
 				}
 				break;
 			case Tools::CURVA:
-				if (event.mouseButton.button == sf::Mouse::Left)
-					_documento->_actual->InsertarCurva(sf::Vector2f(0, 0), sf::Vector2f(0, 50),sf::Vector2f(0,0),sf::Vector2f(0,50), "Curva", _curvaID++);
+				if (event.mouseButton.button == sf::Mouse::Left) {
+					if (curvaStep == 0) {
+						_documento->_actual->InsertarCurva((sf::Vector2f)sf::Mouse::getPosition(window), (sf::Vector2f)sf::Mouse::getPosition(window), (sf::Vector2f)sf::Mouse::getPosition(window), (sf::Vector2f)sf::Mouse::getPosition(window), "Curva", _curvaID++);
+						curvaStep++;
+					}else
+					if (curvaStep == 1) {
+						((C_Curva*)_documento->_actual->Figuras.back())->setP2((sf::Vector2f)sf::Mouse::getPosition(window));
+						curvaStep++;
+					}else
+					if (curvaStep == 2) {
+						((C_Curva*)_documento->_actual->Figuras.back())->setC1((sf::Vector2f)sf::Mouse::getPosition(window));
+						curvaStep++;
+					}else
+					if (curvaStep == 3) {
+						((C_Curva*)_documento->_actual->Figuras.back())->setC2((sf::Vector2f)sf::Mouse::getPosition(window));
+						curvaStep = 0;
+					}
+				}
+
 				break;
 			case Tools::ELIPSE:
+				curvaStep = 0;
 				if (event.mouseButton.button == sf::Mouse::Left)
 					_documento->_actual->InsertarElipse(50,50,"Elipse", _elipseID++);
 				break;
 			case Tools::LINEA:
 				if (event.mouseButton.button == sf::Mouse::Left)
-					_documento->_actual->InsertarLinea(sf::Vector2f(0,0), sf::Vector2f(0, 50), "Linea", _lineaID++);
+					if (first) {
+						first = false;
+						_documento->_actual->InsertarLinea((sf::Vector2f)sf::Mouse::getPosition(window), (sf::Vector2f)sf::Mouse::getPosition(window), "Linea", _lineaID++);
+					}
+					else {
+						first = true;
+					}
 				break;
 			case Tools::POLIGONO:
+				curvaStep = 0;
 				if (event.mouseButton.button == sf::Mouse::Left) 
 					_documento->_actual->InsertarPoligono(5, 50, "Poligono", _poligonoID++);
 				break;
 			case Tools::RECTANGULO:
+				curvaStep = 0;
 				if (event.mouseButton.button == sf::Mouse::Left) 
 					_documento->_actual->InsertarRectangulo(50, 50, "Rectangulo", _rectID++);
 				break;
 			case Tools::RREDONDEADO:
+				curvaStep = 0;
 				if (event.mouseButton.button == sf::Mouse::Left) 
 					_documento->_actual->InsertarRectanguloRed(50, 50, "Rectangulo Red", _rRectID++);
 				break;
 			case Tools::TEXTO:
+				curvaStep = 0;
 				break;
 			case Tools::TIRA:
+				curvaStep = 0;
 			{
 				if (event.mouseButton.button == sf::Mouse::Left) {
 					if (first) {
@@ -95,6 +128,7 @@ void DrawArea::Inputs(sf::Event & event, sf::RenderWindow & window)
 			}
 				break;
 			case Tools::TRIANGULO:
+				curvaStep = 0;
 				if (event.mouseButton.button == sf::Mouse::Left)
 					_documento->_actual->InsertarTriangulo(50, 50, "Triangle",_triangleID++);
 				break;
@@ -107,7 +141,7 @@ void DrawArea::Inputs(sf::Event & event, sf::RenderWindow & window)
 					_buttonClicked = true;
 					//_documento->_actual->Figuras.back()->setColorRelleno(_fillColor);
 					//_documento->_actual->Figuras.back()->setColorLinea(_borderColor);
-					if (Toolbar::_actualTool != Tools::TIRA) {
+					if (Toolbar::_actualTool != Tools::TIRA && Toolbar::_actualTool != Tools::LINEA && Toolbar::_actualTool != Tools::CURVA) {
 						initialPos = (sf::Vector2f)sf::Mouse::getPosition(window);
 						_documento->_actual->Figuras.back()->setPosicion((sf::Vector2f)sf::Mouse::getPosition(window));
 					}
@@ -122,7 +156,9 @@ void DrawArea::Inputs(sf::Event & event, sf::RenderWindow & window)
 		if (Toolbar::_actualTool == Tools::TIRA && !first) {
 			((C_TiraLineas*)_documento->_actual->Figuras.back())->SetLastPointPosition((sf::Vector2f)sf::Mouse::getPosition(window));
 		}
-		else
+		else if (Toolbar::_actualTool == Tools::LINEA && !first) {
+			((C_Linea*)_documento->_actual->Figuras.back())->setLastVertexPos((sf::Vector2f)sf::Mouse::getPosition(window));
+		}else
 		if (_buttonClicked) {
 			deltPos = (sf::Vector2f)sf::Mouse::getPosition(window) - initialPos;
 			_documento->_actual->Figuras.back()->setSize(deltPos);

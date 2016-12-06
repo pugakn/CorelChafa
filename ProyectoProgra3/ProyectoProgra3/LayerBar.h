@@ -24,6 +24,7 @@ private:
 	C_Capa *_capaActual;
 	C_Figura* _figuraActual;
 	bool _reordenado = false;
+	bool breakCicle = false;
 protected:
 	LayerBar();
 public:
