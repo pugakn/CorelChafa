@@ -50,8 +50,7 @@ bool C_Texto::setPosicion(sf::Vector2f vector)
 bool C_Texto::HitTest(sf::Vector2i point)
 {
 	if (Visible) {
-		sf::Vector2f v2 = _texto.getPosition() + _rectangulo2.getSize(); //los _rectangulos no tenian el guion bajo pero daba error si no se los ponia
-		if (point.x >= _rectangulo2.getPosition().x && point.x <= _rectangulo2.getPosition().x + _rectangulo2.getSize().x && point.y >= _rectangulo2.getPosition().y && point.y <= _rectangulo2.getPosition().y + _rectangulo2.getSize().y)
+		if (_texto.getGlobalBounds().contains((sf::Vector2f)point))
 		{
 			cout << "allahuakbar";
 			return true;
