@@ -37,7 +37,10 @@ void DrawArea::Inputs(sf::Event & event, sf::RenderWindow & window)
 	static int curvaStep=0;
 	static sf::Vector2f initialPos;
 	static sf::Vector2f deltPos;
-	if (event.type == sf::Event::MouseButtonPressed) {
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return)) //ojala que no arruine otras cosas
+		return;
+	if (event.type == sf::Event::MouseButtonPressed) 
+	{
 		if (_drawAreaLimits.contains((sf::Vector2f)sf::Mouse::getPosition(window))) {
 			switch (Toolbar::_actualTool)
 			{
