@@ -2,6 +2,7 @@
 #include "C_Capa.h"
 #include "C_Documento.h"
 #include "OptionsBar.h"
+#include <algorithm>
 
 void C_Capa::Eliminar()
 {
@@ -31,8 +32,22 @@ void C_Capa::Subir()
 			auto it2 = it;
 			if (it2 != Figuras.end()) {
 				it2++;
-				if (it2 != Figuras.end())
+				if (it2 != Figuras.end()) {
 					Figuras.splice(it, Figuras, it2);
+				}
+				else {
+					auto item = std::find(C_Documento::Instance()->_lista.begin(), C_Documento::Instance()->_lista.end(), this);
+					if (item != C_Documento::Instance()->_lista.end()) {
+						auto item2 = item;
+						item2++;
+						if (item2 != C_Documento::Instance()->_lista.end()) {
+							(*item2)->Figuras.push_front(*it);
+							Figuras.remove(*it);
+							SetActual(nullptr);
+						}
+					}
+				}
+
 				C_Documento::Instance()->Notify();
 			}
 		}
@@ -53,10 +68,23 @@ void C_Capa::Bajar()
 			auto it2 = it;
 			if (it2 != Figuras.begin()) {
 				it2--;
-				if (it2 != Figuras.end())
+				if (it2 != Figuras.end()) {
 					Figuras.splice(it2, Figuras, it);
-				C_Documento::Instance()->Notify();
+				}
 			}
+			else {
+				auto item = std::find(C_Documento::Instance()->_lista.begin(), C_Documento::Instance()->_lista.end(), this);
+				if (item != C_Documento::Instance()->_lista.begin()) {
+					auto item2 = item;
+					item2--;
+					//if (item2 != C_Documento::Instance()->_lista.begin()) {
+					(*item2)->Figuras.push_back(*it);
+					Figuras.remove(*it);
+					SetActual(nullptr);
+					//}
+				}
+			}
+			C_Documento::Instance()->Notify();
 		}
 	}
 }

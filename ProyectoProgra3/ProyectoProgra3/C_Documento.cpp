@@ -124,3 +124,5 @@ void C_Documento::Guardar(ofstream & out)
 void C_Documento::Cargar(ifstream & in)
 {
 }
+
+
