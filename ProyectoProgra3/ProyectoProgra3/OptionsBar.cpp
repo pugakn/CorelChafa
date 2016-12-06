@@ -31,7 +31,7 @@ OptionsBar::OptionsBar()
 	temp->_rectangle.setSize(sf::Vector2f(120, 60));
 	temp->_rectangle.setPosition(_ItemsPosition);
 	temp->Callback = []() {
-		
+
 	};
 	_buttons.push_back(temp);
 

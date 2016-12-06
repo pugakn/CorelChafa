@@ -57,6 +57,23 @@ int main()
 		/***************************/
 		window.display();
 		}
+
+	string archivo;
+	cin >> archivo;
+	/*ofstream out;
+	out.open(archivo, ios_base::out);
+	if (out.is_open())
+	{
+		out << 5 << endl;
+		out.close();
+	}*/
+
+	ifstream file(archivo);
+	string str;
+	while (getline(file, str))
+	{
+		cout << str << endl;
+	}
     return 0;
 }
 
