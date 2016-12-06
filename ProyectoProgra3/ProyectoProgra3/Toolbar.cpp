@@ -173,7 +173,13 @@ int Toolbar::Poliwindow()
 	}
 	realNum = atoi(s.c_str());
 	std::cout << realNum;
-	return realNum;
+	realNum = abs(realNum);
+	if (realNum <= 2 && realNum >= 0)
+		return 5;
+	if (realNum >= -30 && realNum <= 30)
+		return realNum;
+	else
+		return 5;
 }
 
 void Toolbar::Inputs(sf::Event & event, sf::RenderWindow& window)

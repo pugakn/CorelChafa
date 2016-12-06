@@ -21,7 +21,7 @@ using namespace std;
 
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(1366, 768), "Tocino hiperespacial",sf::Style::Close);
+	sf::RenderWindow window(sf::VideoMode(1366, 768), "Editor Profesional de gráficos vectoriales T.H.",sf::Style::Close);
 	window.setFramerateLimit(60);
 	C_Documento* document = C_Documento::Instance();
 
