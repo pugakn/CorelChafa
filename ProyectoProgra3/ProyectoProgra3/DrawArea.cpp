@@ -10,11 +10,10 @@ DrawArea::DrawArea()
 	_drawAreaLimits.left = 50;
 	_drawAreaLimits.height = 600;
 	_drawAreaLimits.width = 1024;
-
+	
 	//Inicializar documento
 	_documento = C_Documento::Instance();
 	_documento->Inicializar();
-
 
 }
 
@@ -90,9 +89,14 @@ void DrawArea::Inputs(sf::Event & event, sf::RenderWindow & window)
 					}
 				break;
 			case Tools::POLIGONO:
+<<<<<<< HEAD
 				curvaStep = 0;
 				if (event.mouseButton.button == sf::Mouse::Left) 
 					_documento->_actual->InsertarPoligono(5, 50, "Poligono", _poligonoID++);
+=======
+				if (event.mouseButton.button == sf::Mouse::Left)
+					_documento->_actual->InsertarPoligono(Toolbar::Instance()->_polilados, 50, "Poligono", _poligonoID++);
+>>>>>>> refs/remotes/origin/HitTIraLineas_V2
 				break;
 			case Tools::RECTANGULO:
 				curvaStep = 0;
