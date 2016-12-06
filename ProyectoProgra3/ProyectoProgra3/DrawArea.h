@@ -15,6 +15,7 @@ private:
 	long _rectID = 0;
 	long _rRectID = 0;
 	long _lineaID = 0;
+	long _textID = 0;
 	C_Documento* _documento;
 	sf::Color _fillColor = sf::Color::Black;
 	sf::Color _borderColor = sf::Color::Red;

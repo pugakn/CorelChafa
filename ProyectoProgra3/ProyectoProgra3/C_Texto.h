@@ -8,6 +8,8 @@ public:
 	sf::VertexArray _shape;
 	sf::VertexArray _linea;
 	sf::Text _texto;
+	sf::Font _font;
+	string textString;
 	float _base2, _alt2;
 	//Guardar Cargar
 	sf::RectangleShape _rectangulo2;
@@ -21,7 +23,8 @@ public:
 	bool HitTest(sf::Vector2i point);
 	void Dibujar(sf::RenderWindow& window) override;
 	void Inicializar() override;
-	C_Texto(float base, float altura);
+	void setSize(sf::Vector2f size) override;
+	C_Texto(int size);
 	~C_Texto();
 };
 

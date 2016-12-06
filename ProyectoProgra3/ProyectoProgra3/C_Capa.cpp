@@ -232,5 +232,15 @@ void C_Capa::InsertarPoligono(int lados, float radio,  string type, long id)
 	_figuraActual->setColorLinea(OptionsBar::Instance()->_colorPicker.getLineColor());
 	C_Documento::Instance()->Notify();
 }
+void C_Capa::InsertarTexto(int size, string type, long id)
+{
+	Figuras.push_back(new C_Texto(size));
+	Figuras.back()->setType(type);
+	Figuras.back()->setID(id);
+	SetActual(Figuras.back());
+	_figuraActual->setColorRelleno(OptionsBar::Instance()->_colorPicker.getFillColor());
+	_figuraActual->setColorLinea(OptionsBar::Instance()->_colorPicker.getLineColor());
+	C_Documento::Instance()->Notify();
+}
 // TODO: SetBolqueado para todas las figuras
 // TODO: Error al eliminar capa por figura actual

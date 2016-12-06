@@ -20,7 +20,7 @@ public:
 	void InsertarElipse(float ra, float rb, string type, long id);
 	void InsertarCurva(sf::Vector2f p1, sf::Vector2f p2, sf::Vector2f c1, sf::Vector2f c2, string type, long id);
 	void InsertarPoligono(int lados, float radio, string type, long id);
-	//void InsertarTexto();
+	void InsertarTexto(int size, string type, long id);
 
 	void Eliminar();
 	void Subir();
