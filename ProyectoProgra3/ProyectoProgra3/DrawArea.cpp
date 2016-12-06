@@ -9,11 +9,10 @@ DrawArea::DrawArea()
 	_drawAreaLimits.left = 50;
 	_drawAreaLimits.height = 600;
 	_drawAreaLimits.width = 1024;
-
+	
 	//Inicializar documento
 	_documento = C_Documento::Instance();
 	_documento->Inicializar();
-
 
 }
 
@@ -62,8 +61,8 @@ void DrawArea::Inputs(sf::Event & event, sf::RenderWindow & window)
 					_documento->_actual->InsertarLinea(sf::Vector2f(0,0), sf::Vector2f(0, 50), "Linea", _lineaID++);
 				break;
 			case Tools::POLIGONO:
-				if (event.mouseButton.button == sf::Mouse::Left) 
-					_documento->_actual->InsertarPoligono(5, 50, "Poligono", _poligonoID++);
+				if (event.mouseButton.button == sf::Mouse::Left)
+					_documento->_actual->InsertarPoligono(Toolbar::Instance()->_polilados, 50, "Poligono", _poligonoID++);
 				break;
 			case Tools::RECTANGULO:
 				if (event.mouseButton.button == sf::Mouse::Left) 

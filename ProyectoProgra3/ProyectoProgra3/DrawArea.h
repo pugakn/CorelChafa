@@ -24,6 +24,7 @@ public:
 	static DrawArea* Instance();
 	void Draw(sf::RenderWindow& window);
 	void Inputs(sf::Event& event, sf::RenderWindow& window);
+	int _poligonolados;
 	~DrawArea();
 };
 
