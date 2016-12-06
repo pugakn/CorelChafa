@@ -144,13 +144,21 @@ void C_Linea::setSize(sf::Vector2f size)
 	if (!Bloqueado && Visible) {
 		_size = size;
 		_shape[1].position = _originalPos[1] + size;
+		_b = _shape[1].position;
+		_pendiente = (_b.y - _a.y) / (_b.x - _a.x);
+		_angulo = atanf(_pendiente);
+		_angulo = _angulo * 180 / 3.141592;
 	}
 }
 
 void C_Linea::setLastVertexPos(sf::Vector2f pos) {
 	if (!Bloqueado && Visible) {
+		_b = pos;
 		_shape[1].position = pos;
 		_originalPos[1] = pos;
+		_pendiente = (_b.y - _a.y) / (_b.x - _a.x);
+		_angulo = atanf(_pendiente);
+		_angulo = _angulo * 180 / 3.141592;
 	}
 }
 
