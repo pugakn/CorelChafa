@@ -10,6 +10,7 @@ public:
 	sf::Vector2f _centro;
 	vector <sf::Vector2f> _originalPos;
 	sf::VertexArray Lines;
+	//sf::RectangleShape _ElipseHitTest;
 public:
 	//Guardar Cargar
 	int GetCLSID();

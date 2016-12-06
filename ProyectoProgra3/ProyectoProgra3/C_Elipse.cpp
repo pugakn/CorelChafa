@@ -3,6 +3,7 @@
 #include "C_Documento.h"
 #include <iostream>
 #include "OptionsBar.h"
+#include <stdlib.h>
 #define Pi 3.141592
 
 int C_Elipse::GetCLSID()
@@ -109,7 +110,6 @@ void C_Elipse::Inicializar()
 
 C_Elipse::C_Elipse(float ra, float rb)
 {
-
 	_ra = ra;
 	_rb = rb;
 	_centro = sf::Vector2f(0, 0);
@@ -168,6 +168,11 @@ bool C_Elipse::setPosicion(sf::Vector2f posicion)
 				Lines[i].position.x = _originalPos[i + 1].x + posicion.x;
 				Lines[i].position.y = _originalPos[i + 1].y + posicion.y;
 			}
+				//_centro.x = _originalPos[i + 1].x + posicion.x; // es esto
+				//_centro.y = _originalPos[i + 1].y + posicion.y; // es esto
+			
+
+
 			C_Documento::Instance()->Notify();
 			return true;
 		}
@@ -207,18 +212,36 @@ bool C_Elipse::HitTest(sf::Vector2i point)
 {
 	if (!Visible)
 		return false;
+	float x = 0;
+	//float y = 0;
+	//sf::RectangleShape(sf::Vector2f(_ra,_rb));
+	//x = _ra;
+	//y = _rb;
+	//if (x <= _ra && y <= _rb)
+	//{
+	//	return true;
+	//}
 
-	//sf::Vector2f _centro;
-	sf::Vector2f foco1(_centro.x - abs(sqrt((_ra*_ra) - (_rb*_rb))), abs(_centro.y));
-	sf::Vector2f foco2(_centro.x + abs(sqrt((_ra*_ra) - (_rb*_rb))), abs(_centro.y));
-	sf::Vector2f v1 = (sf::Vector2f) point - foco1;
-	sf::Vector2f v2 = (sf::Vector2f) point - foco2;
-	float distancia = sqrt((v1.x*v1.x) + (v1.y*v1.y)) + sqrt((v2.x*v2.x) + (v2.y*v2.y));
-	if (distancia < _ra)
-	{
-		std::cout << "allahu akbar";
-		return true;
-	}
+		//sf::Vector2f v1 = _rectangulo.getPosition();
+		//sf::Vector2f v2 = _rectangulo.getPosition() + _rectangulo.getSize();
+		//if (point.x >= _rectangulo.getPosition().x && point.x <= _rectangulo.getPosition().x + _rectangulo.getSize().x && point.y >= _rectangulo.getPosition().y && point.y <= _rectangulo.getPosition().y + _rectangulo.getSize().y)
+		//{
+		//	cout << "allahuakbar";
+		//	return true;
+		//}
+	
+
+	////sf::Vector2f _centro;
+	//sf::Vector2f foco1(_centro.x - abs(sqrtf((_ra*_ra) - (_rb*_rb))), abs(_centro.y));
+	//sf::Vector2f foco2(_centro.x + abs(sqrtf((_ra*_ra) - (_rb*_rb))), abs(_centro.y));
+	//sf::Vector2f v1 = (sf::Vector2f) point - foco1;
+	//sf::Vector2f v2 = (sf::Vector2f) point - foco2;
+	//float distancia = sqrtf((v1.x*v1.x) + (v1.y*v1.y)) + sqrtf((v2.x*v2.x) + (v2.y*v2.y));
+	//if (distancia < _ra)
+	//{
+	//	std::cout << "allahu akbar";
+	//	return true;
+	//}
 	return false;
 }
 
