@@ -77,7 +77,7 @@ void C_Poligono::Cargar(ifstream & in)
 	_size.y = stoi(str);
 
 	getline(in, str);
-	_type = stoi(str);
+	_type = str;
 
 	getline(in, str);
 	Bloqueado = stoi(str);
@@ -91,7 +91,6 @@ void C_Poligono::Cargar(ifstream & in)
 void C_Poligono::Inicializar()
 {
 	_shape = sf::CircleShape(_radio, _lados);
-	_originalPos.clear();
 	_originalPos.resize(_lados);
 	for (int i = 0; i < _lados; i++) {
 		float rad = (3.141592f) * 2 / _lados * i;
@@ -116,7 +115,6 @@ C_Poligono::C_Poligono(int lados, float radio)
 {
 	_lados = lados;
 	_radio = radio;
-	ID = 9;
 	_shape = sf::CircleShape(radio, lados);
 	_originalPos.clear();
 	_originalPos.resize(_lados);

@@ -6,15 +6,103 @@
 
 int C_Texto::GetCLSID()
 {
-	return 0;
+	return ClassID_Texto;
 }
 
 void C_Texto::Guardar(ofstream & out)
 {
+	out << GetCLSID() << endl;
+
+	out << ID << endl;
+
+	out << _base2 << endl;
+	out << _alt2 << endl;
+	out << textString << endl;
+
+	out << (int)_colorLinea.r << endl;
+	out << (int)_colorLinea.g << endl;
+	out << (int)_colorLinea.b << endl;
+
+	out << (int)_colorRelleno.r << endl;
+	out << (int)_colorRelleno.g << endl;
+	out << (int)_colorRelleno.b << endl;
+
+	out << _posicion.x << endl;
+	out << _posicion.y << endl;
+
+	out << _size.x << endl;
+	out << _size.y << endl;
+
+	out << _type << endl;
+
+	out << Bloqueado << endl;
+	out << Visible << endl;
 }
 
 void C_Texto::Cargar(ifstream & in)
 {
+	string str;
+
+	getline(in, str);
+	ID = stoi(str);
+
+	getline(in, str);
+	_base2 = stoi(str);
+	getline(in, str);
+	_alt2 = stoi(str);
+
+	getline(in, str);
+	textString = str;
+
+	getline(in, str);
+	_colorLinea.r = stoi(str);
+	getline(in, str);
+	_colorLinea.g = stoi(str);
+	getline(in, str);
+	_colorLinea.b = stoi(str);
+
+	getline(in, str);
+	_colorRelleno.r = stoi(str);
+	getline(in, str);
+	_colorRelleno.g = stoi(str);
+	getline(in, str);
+	_colorRelleno.b = stoi(str);
+
+	getline(in, str);
+	_posicion.x = stoi(str);
+	getline(in, str);
+	_posicion.y = stoi(str);
+
+	getline(in, str);
+	_size.x = stoi(str);
+	getline(in, str);
+	_size.y = stoi(str);
+
+	getline(in, str);
+	_type = str;
+
+	getline(in, str);
+	Bloqueado = stoi(str);
+	getline(in, str);
+	Visible = stoi(str);
+
+	Inicializar();
+}
+
+void C_Texto::Inicializar()
+{
+	_font.loadFromFile("Assets/calibri.ttf");
+	_texto.setFont(_font);
+	_texto.setCharacterSize(500);
+	_texto.setString("TEXTO");
+	_texto.setFillColor(sf::Color::Black);
+
+	setColorLinea(_colorLinea);
+	setColorRelleno(_colorRelleno);
+	setPosicion(_posicion);
+	setID(ID);
+	setSize(_size);
+	setType(_type);
 }
 
 void C_Texto::setColorRelleno(sf::Color color)
@@ -64,10 +152,6 @@ void C_Texto::Dibujar(sf::RenderWindow & window)
 	window.draw(_texto);
 }
 
-void C_Texto::Inicializar()
-{
-}
-
 void C_Texto::setSize(sf::Vector2f size)
 {
 	if (!Bloqueado && Visible) {
@@ -88,6 +172,10 @@ C_Texto::C_Texto(int size)
 	_texto.setString("TEXTO");
 	_texto.setFillColor(sf::Color::Black);
 
+}
+
+C_Texto::C_Texto()
+{
 }
 
 

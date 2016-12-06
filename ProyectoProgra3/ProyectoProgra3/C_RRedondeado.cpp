@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "C_RRedondeado.h"
 #include "C_Documento.h"
+#include <iostream>
+using namespace std;
 
 
 int C_RRedondeado::GetCLSID()
@@ -35,6 +37,7 @@ void C_RRedondeado::Guardar(ofstream & out)
 
 	out << Bloqueado << endl;
 	out << Visible << endl;
+
 }
 
 void C_RRedondeado::Cargar(ifstream & in)
@@ -74,12 +77,20 @@ void C_RRedondeado::Cargar(ifstream & in)
 	_size.y = stoi(str);
 
 	getline(in, str);
-	_type = stoi(str);
+	_type = str;
 
 	getline(in, str);
 	Bloqueado = stoi(str);
 	getline(in, str);
 	Visible = stoi(str);
+
+	cout << endl << endl << endl << endl;
+	cout << _colorLinea.r << endl;
+	cout << _colorLinea.g << endl;
+	cout << _colorLinea.b << endl;
+	cout << _colorRelleno.r << endl;
+	cout << _colorRelleno.g << endl;
+	cout << _colorRelleno.b << endl;
 
 	Inicializar();
 }
@@ -120,7 +131,15 @@ void C_RRedondeado::Inicializar()
 		_shape.setPoint(i, sf::Vector2f(0 - X + radius, 0 + radius - Y));
 		_originalpos.push_back(_shape.getPoint(i));
 	}
-	_size = sf::Vector2f(_base, _altura);
+
+	cout << endl << endl << endl << endl;
+	cout << _colorLinea.r << endl;
+	cout << _colorLinea.g << endl;
+	cout << _colorLinea.b << endl;
+	cout << _colorRelleno.r << endl;
+	cout << _colorRelleno.g << endl;
+	cout << _colorRelleno.b << endl;
+
 	setColorLinea(_colorLinea);
 	setColorRelleno(_colorRelleno);
 	setPosicion(_posicion);
@@ -174,6 +193,7 @@ void C_RRedondeado::setColorRelleno(sf::Color color)
 {
 	if (!Bloqueado && Visible) 
 	{
+		_colorRelleno = color;
 		_shape.setFillColor(color);
 		C_Documento::Instance()->Notify();
 	}
@@ -183,6 +203,7 @@ void C_RRedondeado::setColorLinea(sf::Color color)
 {
 	if (!Bloqueado && Visible) 
 	{
+		_colorLinea = color;
 		_shape.setOutlineColor(color);
 		_shape.setOutlineThickness(1);
 		C_Documento::Instance()->Notify();

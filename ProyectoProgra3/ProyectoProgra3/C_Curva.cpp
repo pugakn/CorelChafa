@@ -25,6 +25,8 @@ void C_Curva::Guardar(ofstream & out)
 	out << _c2.x << endl;
 	out << _c2.y << endl;
 
+
+
 	out << (int)_colorLinea.r << endl;
 	out << (int)_colorLinea.g << endl;
 	out << (int)_colorLinea.b << endl;
@@ -94,7 +96,7 @@ void C_Curva::Cargar(ifstream & in)
 	_size.y = stoi(str);
 
 	getline(in, str);
-	_type = stoi(str);
+	_type = str;
 
 	getline(in, str);
 	Bloqueado = stoi(str);
@@ -217,8 +219,11 @@ bool C_Curva::setPosicion(sf::Vector2f posicion)
 
 void C_Curva::setSize(sf::Vector2f size)
 {
-
-	C_Documento::Instance()->Notify();
+	if (!Bloqueado)
+	{
+		_size = size;
+		C_Documento::Instance()->Notify();
+	}
 }
 
 void C_Curva::Dibujar(sf::RenderWindow& window)
