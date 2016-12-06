@@ -22,8 +22,8 @@ void InfoBar::Update()
 		if (_actual != C_Documento::Instance()->_actual->_figuraActual || (_posicion != C_Documento::Instance()->_actual->_figuraActual->getPosicion())) {
 			_actual = C_Documento::Instance()->_actual->_figuraActual;
 			_posicion = _actual->getPosicion();
-			_positionString = "POSICION: [" + to_string(_actual->getPosicion().x)
-				+ "," + to_string(_actual->getPosicion().y) + "]";
+			_positionString = "POSICION: [" + to_string(_actual->getPosicion().x - 50)
+				+ "," + to_string(_actual->getPosicion().y - 124) + "]";
 			_positionTXT.setString(_positionString);
 			_idString = "FIGURA: " + _actual->getType() +" " + to_string(_actual->getID());
 			_idText.setString(_idString);

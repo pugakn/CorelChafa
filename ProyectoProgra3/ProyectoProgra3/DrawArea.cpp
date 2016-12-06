@@ -6,10 +6,10 @@
 DrawArea* DrawArea::_instance = 0;
 DrawArea::DrawArea()
 {
-	_drawAreaLimits.top = 136;
+	_drawAreaLimits.top = 124;
 	_drawAreaLimits.left = 50;
 	_drawAreaLimits.height = 600;
-	_drawAreaLimits.width = 1024;
+	_drawAreaLimits.width = 1092;
 	
 	//Inicializar documento
 	_documento = C_Documento::Instance();
