@@ -35,8 +35,22 @@ void DrawArea::Inputs(sf::Event & event, sf::RenderWindow & window)
 {
 	static bool first = true;//TODO: Fix
 	static int curvaStep=0;
+	static bool textActive = false;
 	static sf::Vector2f initialPos;
 	static sf::Vector2f deltPos;
+	static string text;
+	if (textActive)
+		if (event.type == sf::Event::TextEntered) {
+			if (event.text.unicode == 13) {
+				textActive = false;
+				text.clear();
+			}
+			else {
+				text += event.text.unicode;
+				((C_Texto*)_documento->_actual->Figuras.back())->textString = text;
+				((C_Texto*)_documento->_actual->Figuras.back())->_texto.setString(((C_Texto*)_documento->_actual->Figuras.back())->textString);
+			}
+		}
 	if (event.type == sf::Event::MouseButtonPressed) {
 		if (_drawAreaLimits.contains((sf::Vector2f)sf::Mouse::getPosition(window))) {
 			switch (Toolbar::_actualTool)
@@ -105,6 +119,11 @@ void DrawArea::Inputs(sf::Event & event, sf::RenderWindow & window)
 				break;
 			case Tools::TEXTO:
 				curvaStep = 0;
+				if (!textActive) {
+					textActive = true;
+					_documento->_actual->InsertarTexto(35, "Texto", _textID++);
+				}
+
 				break;
 			case Tools::TIRA:
 				curvaStep = 0;
