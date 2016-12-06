@@ -2,6 +2,7 @@
 #include "C_Elipse.h"
 #include "C_Documento.h"
 #include <iostream>
+#include "OptionsBar.h"
 #define Pi 3.141592
 
 int C_Elipse::GetCLSID()
@@ -91,7 +92,7 @@ void C_Elipse::Inicializar()
 	_shape = sf::VertexArray(sf::TrianglesFan, 0);
 	std::vector<sf::Vector2f> points = CaclVertex(_ra, _rb);
 	_originalPos.push_back((sf::Vector2f(0, 0)));
-	_shape.append(sf::Vertex(sf::Vector2f(0, 0)));
+	_shape.append(sf::Vertex(sf::Vector2f(0, 0))); //mete vertices
 	for (auto it = points.begin(); it != points.end(); ++it)
 	{
 		_shape.append(sf::Vertex(*it));
@@ -111,64 +112,64 @@ C_Elipse::C_Elipse(float ra, float rb)
 
 	_ra = ra;
 	_rb = rb;
-	_centro = sf::Vector2f(0,0);
-	_shape = sf::VertexArray(sf::TrianglesFan,0);
+	_centro = sf::Vector2f(0, 0);
+	_shape = sf::VertexArray(sf::TrianglesFan, 0);
+	Lines = sf::VertexArray(sf::LinesStrip, 0);
 	std::vector<sf::Vector2f> points = CaclVertex(ra, rb);
 	_shape.append(sf::Vertex(sf::Vector2f(0, 0)));
 	_originalPos.push_back((sf::Vector2f(0, 0)));
 	for (auto it = points.begin(); it != points.end(); ++it)
 	{
 		_shape.append(sf::Vertex(*it));
+		Lines.append(sf::Vertex(*it));
 		_originalPos.push_back(*it);
 	}
-	_size = sf::Vector2f(ra,rb);
+	_size = sf::Vector2f(ra, rb);
 
 	//_shape[0].position.x += ra;
 }
 
 void C_Elipse::setColorRelleno(sf::Color color)
 {
-	if (!Bloqueado && Visible) {
-		for (unsigned it = 0; it < _shape.getVertexCount(); ++it)
-		{
-			_shape[it].color = color;
-		}
-		C_Documento::Instance()->Notify();
+	for (unsigned it = 0; it < _shape.getVertexCount(); ++it)
+	{
+		_shape[it].color = color;
 	}
+	C_Documento::Instance()->Notify();
 }
 
 void C_Elipse::setColorLinea(sf::Color color)
 {
+	_colorLinea = color;
+	for (unsigned it = 0; it < Lines.getVertexCount(); ++it)
+	{
+		Lines[it].color = color;
+	}
+	C_Documento::Instance()->Notify();
 
-	//std::vector<sf::Vector2f> temp;
-	////sf::VertexArray(sf::LinesStrip, /**/);
-	//for (int i = 0; i < 40; i++)
-	//{
-	//	float rad = (3.141592f * 2 / 40 * i);
-	//	_shape[i].color = color;  //?
-	//	//temp.push_back(sf::Vector2f(ra*cosf(rad), rb*sinf(rad)));
-	//}
-	
 }
 
 bool C_Elipse::setPosicion(sf::Vector2f posicion)
 {
-	if (!Bloqueado && Visible) {
-		if (posicion.x > 0 && posicion.y > 0)
+	if (posicion.x > 0 && posicion.y > 0)
+	{
+		if (!Bloqueado)
 		{
-			if (!Bloqueado)
+			_posicion = posicion;
+			int i = 0;
+			_centro += posicion;
+			for (i = 0; i <= 40; i++)
 			{
-				_posicion = posicion;
-				int i = 0;
-				_centro += posicion;
-				for (i = 0; i <= 40; i++)
-				{
-					_shape[i].position.x = _originalPos[i].x + posicion.x;
-					_shape[i].position.y = _originalPos[i].y + posicion.y;
-				}
-				C_Documento::Instance()->Notify();
-				return true;
+				_shape[i].position.x = _originalPos[i].x + posicion.x;
+				_shape[i].position.y = _originalPos[i].y + posicion.y;
 			}
+			for (i = 0; i <= 39; i++)
+			{
+				Lines[i].position.x = _originalPos[i + 1].x + posicion.x;
+				Lines[i].position.y = _originalPos[i + 1].y + posicion.y;
+			}
+			C_Documento::Instance()->Notify();
+			return true;
 		}
 	}
 	return false;
@@ -176,23 +177,28 @@ bool C_Elipse::setPosicion(sf::Vector2f posicion)
 
 void C_Elipse::setSize(sf::Vector2f size)
 {
-	if (!Bloqueado && Visible)
+	if (!Bloqueado)
 	{
 		_originalPos.clear();
 		_size = size;
 		_centro = sf::Vector2f(_posicion.x, _posicion.y);
 		//_shape = sf::VertexArray(sf::TrianglesFan, 0);
 		_shape.clear();
+		Lines.clear();
+		_ra = size.x;
+		_rb = size.y;
 		std::vector<sf::Vector2f> points = CaclVertex(size.x, size.y);
 		_shape.append(sf::Vertex(sf::Vector2f(0, 0)));
 		_originalPos.push_back((sf::Vector2f(0, 0)));
 		for (auto it = points.begin(); it != points.end(); ++it)
 		{
 			_shape.append(sf::Vertex(*it));
+			Lines.append(sf::Vertex(*it));
 			_originalPos.push_back(*it);
 		}
 		C_Documento::Instance()->Notify();
-		setColorRelleno(sf::Color::Black);
+		setColorRelleno(OptionsBar::Instance()->_colorPicker.getFillColor());
+		setColorLinea(OptionsBar::Instance()->_colorPicker.getLineColor());
 		setPosicion(_posicion);
 	}
 }
@@ -203,11 +209,11 @@ bool C_Elipse::HitTest(sf::Vector2i point)
 		return false;
 
 	//sf::Vector2f _centro;
-	sf::Vector2f foco1(_centro.x - abs( sqrt((_ra*_ra) - (_rb*_rb))),abs(_centro.y));
+	sf::Vector2f foco1(_centro.x - abs(sqrt((_ra*_ra) - (_rb*_rb))), abs(_centro.y));
 	sf::Vector2f foco2(_centro.x + abs(sqrt((_ra*_ra) - (_rb*_rb))), abs(_centro.y));
 	sf::Vector2f v1 = (sf::Vector2f) point - foco1;
 	sf::Vector2f v2 = (sf::Vector2f) point - foco2;
-	float distancia = sqrt((v1.x*v1.x) + (v1.y*v1.y))+ sqrt((v2.x*v2.x) + (v2.y*v2.y));
+	float distancia = sqrt((v1.x*v1.x) + (v1.y*v1.y)) + sqrt((v2.x*v2.x) + (v2.y*v2.y));
 	if (distancia < _ra)
 	{
 		std::cout << "allahu akbar";
@@ -219,6 +225,7 @@ bool C_Elipse::HitTest(sf::Vector2i point)
 void C_Elipse::Dibujar(sf::RenderWindow & window)
 {
 	window.draw(_shape);
+	window.draw(Lines);
 }
 
 C_Elipse::C_Elipse()

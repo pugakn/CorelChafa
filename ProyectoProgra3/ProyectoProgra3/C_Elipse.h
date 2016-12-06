@@ -9,6 +9,7 @@ public:
 	sf::VertexArray _shape;
 	sf::Vector2f _centro;
 	vector <sf::Vector2f> _originalPos;
+	sf::VertexArray Lines;
 public:
 	//Guardar Cargar
 	int GetCLSID();
