@@ -6,10 +6,10 @@
 DrawArea* DrawArea::_instance = 0;
 DrawArea::DrawArea()
 {
-	_drawAreaLimits.top = 136;
+	_drawAreaLimits.top = 124;
 	_drawAreaLimits.left = 50;
 	_drawAreaLimits.height = 600;
-	_drawAreaLimits.width = 1024;
+	_drawAreaLimits.width = 1092;
 	
 	//Inicializar documento
 	_documento = C_Documento::Instance();
@@ -52,6 +52,10 @@ void DrawArea::Inputs(sf::Event & event, sf::RenderWindow & window)
 			}
 		}
 	if (event.type == sf::Event::MouseButtonPressed) {
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return)) //ojala que no arruine otras cosas
+		return;
+	//if (event.type == sf::Event::MouseButtonPressed) 
+	//{
 		if (_drawAreaLimits.contains((sf::Vector2f)sf::Mouse::getPosition(window))) {
 			switch (Toolbar::_actualTool)
 			{

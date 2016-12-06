@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "C_Linea.h"
 #include <iostream>
+#include "C_Documento.h"
 
 
 int C_Linea::GetCLSID()
@@ -123,6 +124,7 @@ void C_Linea::setColorLinea(sf::Color color)
 		{
 			_shape[i].color = color;
 		}
+		C_Documento::Instance()->Notify();
 	}
 }
 
@@ -134,6 +136,7 @@ bool C_Linea::setPosicion(sf::Vector2f posicion)
 		_shape[1].position = _originalPos[1] + posicion;
 		//_a = _shape[0].position;
 		//_b = _shape[1].position;
+		C_Documento::Instance()->Notify();
 		return true;
 	}
 	return false;
@@ -148,6 +151,7 @@ void C_Linea::setSize(sf::Vector2f size)
 		_pendiente = (_b.y - _a.y) / (_b.x - _a.x);
 		_angulo = atanf(_pendiente);
 		_angulo = _angulo * 180 / 3.141592;
+		C_Documento::Instance()->Notify();
 	}
 }
 

@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "C_Rectangulo.h"
 #include <iostream>
+#include "C_Documento.h"
 
 
 int C_Rectangulo::GetCLSID()
@@ -25,6 +26,7 @@ void C_Rectangulo::setSize(sf::Vector2f size)
 	if (!Bloqueado && Visible) {
 		_size = size;
 		_rectangulo.setSize(size);
+		C_Documento::Instance()->Notify();
 	}
 }
 
@@ -49,6 +51,7 @@ void C_Rectangulo::setColorRelleno(sf::Color color)
 	if (!Bloqueado && Visible) {
 		_colorRelleno = color;
 		_rectangulo.setFillColor(color);
+		C_Documento::Instance()->Notify();
 	}
 }
 
@@ -58,6 +61,7 @@ void C_Rectangulo::setColorLinea(sf::Color color)
 		_colorLinea = color;
 		_rectangulo.setOutlineThickness(1);
 		_rectangulo.setOutlineColor(color);
+		C_Documento::Instance()->Notify();
 	}
 }
 
@@ -66,7 +70,7 @@ bool C_Rectangulo::setPosicion(sf::Vector2f vector)
 	if (!Bloqueado && Visible) {
 		_posicion = vector;
 		_rectangulo.setPosition(vector);
-
+		C_Documento::Instance()->Notify();
 		return true;
 	}
 	return false;

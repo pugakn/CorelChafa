@@ -11,6 +11,7 @@ private:
 	friend class DrawArea;
 	friend class OptionsBar;
 	friend class ColorPicker;
+	friend class C_Capa;
 	std::list<C_Capa*> _lista;
 	C_Capa* _actual;
 protected:
