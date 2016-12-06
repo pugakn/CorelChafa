@@ -19,13 +19,13 @@ void C_Triangulo::Guardar(ofstream & out)
 	out << _l1 << endl;
 	out << _l2 << endl;
 
-	out << _colorLinea.r << endl;
-	out << _colorLinea.g << endl;
-	out << _colorLinea.b << endl;
+	out << (int)_colorLinea.r << endl;
+	out << (int)_colorLinea.g << endl;
+	out << (int)_colorLinea.b << endl;
 
-	out << _colorRelleno.r << endl;
-	out << _colorRelleno.g << endl;
-	out << _colorRelleno.b << endl;
+	out << (int)_colorRelleno.r << endl;
+	out << (int)_colorRelleno.g << endl;
+	out << (int)_colorRelleno.b << endl;
 
 	out << _posicion.x << endl;
 	out << _posicion.y << endl;
@@ -76,7 +76,7 @@ void C_Triangulo::Cargar(ifstream & in)
 	_size.y = stoi(str);
 
 	getline(in, str);
-	_type = stoi(str);
+	_type = str;
 
 	getline(in, str);
 	Bloqueado = stoi(str);
@@ -90,13 +90,11 @@ void C_Triangulo::Inicializar()
 {
 	sf::Vector2f origen(500, 500);
 
-	_posicion = sf::Vector2f(0, 0);
 	_shape = sf::VertexArray(sf::Triangles, 3);
 	_shape[0].position = sf::Vector2f(_l1 * -.5f, 0);
 	_shape[1].position = sf::Vector2f(_l1 * .5f, 0);
 	_shape[2].position = sf::Vector2f(_l1 * .5f, -_l2);
 
-	_originalPos.clear();
 	_originalPos.resize(3);
 	_originalPos[0] = _shape[0].position - _shape[0].position;
 	_originalPos[1] = _shape[1].position - _shape[0].position;
@@ -112,9 +110,6 @@ void C_Triangulo::Inicializar()
 	_linea[1].position = _shape[1].position;
 	_linea[2].position = _shape[2].position;
 	_linea[3] = _linea[0];
-
-	_size = sf::Vector2f(_l1, _l2);
-	this->setPosicion(origen);
 
 	setColorLinea(_colorLinea);
 	setColorRelleno(_colorRelleno);

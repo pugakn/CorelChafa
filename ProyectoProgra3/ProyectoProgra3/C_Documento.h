@@ -2,6 +2,7 @@
 #include "C_Dibujable.h"
 #include "C_Capa.h"
 #include "Subject.h"
+#define ClassID_Documento 11
 class C_Documento : public Subject
 {
 private:
@@ -25,7 +26,9 @@ public:
 	int GetCLSID();
 	void Guardar(ofstream &out);
 	void Cargar(ifstream &in);
-	//Guardar Cargar
+	std::list<C_Capa*> _lista;
+	C_Capa* _actual;
+
 	void Inicializar();
 	void Dibujar(sf::RenderWindow& window);
 	void SetActual(C_Capa*);

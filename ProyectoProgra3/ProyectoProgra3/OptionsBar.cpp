@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "OptionsBar.h"
 #include "C_Documento.h"
+#include <iostream>
+using namespace std;
 
 OptionsBar* OptionsBar::_instance = 0;
 
@@ -33,6 +35,40 @@ OptionsBar::OptionsBar()
 	temp->_rectangle.setSize(sf::Vector2f(40, 40));
 	temp->_rectangle.setPosition(sf::Vector2f(40,20));
 	temp->Callback = []() {
+
+		sf::RenderWindow window(sf::VideoMode(500, 500), "Guardame ESTAAAA");
+		string nombre_archivo;
+		ofstream out;
+
+		while (window.isOpen()) {
+
+			//Event processing.
+			sf::Event event;
+			while (window.pollEvent(event)) {
+				if (event.type == sf::Event::Closed)
+					window.close();
+				if (event.type == sf::Event::TextEntered) {
+					if (event.KeyPressed == sf::Keyboard::BackSpace && nombre_archivo.size() != 0) {
+						nombre_archivo.pop_back();
+						std::cout << nombre_archivo << std::endl;
+					}
+					else if (event.text.unicode < 128 && event.text.unicode != 13) {
+						nombre_archivo.push_back((char)event.text.unicode);
+						std::cout << nombre_archivo << std::endl;
+					}
+					else if (event.text.unicode == 13)
+					{
+						out.open(nombre_archivo, ios_base::out);
+						if (out.is_open())
+						{
+							C_Documento::Instance()->Guardar(out);
+							out.close();
+						}
+						window.close();
+					}
+				}
+			}
+		}
 		
 	};
 	_buttons.push_back(temp);
@@ -42,7 +78,44 @@ OptionsBar::OptionsBar()
 	temp->_rectangle.setSize(sf::Vector2f(40, 40));
 	temp->_rectangle.setPosition(100,20);
 	temp->Callback = []() {
-		
+		sf::RenderWindow window(sf::VideoMode(500, 500), "Cargame ESTAAAA");
+		string nombre_archivo;
+
+		while (window.isOpen()) {
+
+			//Event processing.
+			sf::Event event;
+			while (window.pollEvent(event)) {
+				if (event.type == sf::Event::Closed)
+					window.close();
+				if (event.type == sf::Event::TextEntered) {
+					if (event.KeyPressed == sf::Keyboard::BackSpace && nombre_archivo.size() != 0) {
+						nombre_archivo.pop_back();
+						std::cout << nombre_archivo << std::endl;
+					}
+					else if (event.text.unicode < 128 && event.text.unicode != 13) {
+						nombre_archivo.push_back((char)event.text.unicode);
+						std::cout << nombre_archivo << std::endl;
+					}
+					else if (event.text.unicode == 13)
+					{
+
+						string str;
+						ifstream file(nombre_archivo);
+						C_Documento::Instance()->_lista.clear();
+						while (getline(file, str))
+						{
+							cout << str << endl;
+							if (str == "11")
+							{
+								C_Documento::Instance()->Cargar(file);
+							}
+						}
+						window.close();
+					}
+				}
+			}
+		}
 	};
 	_buttons.push_back(temp);
 

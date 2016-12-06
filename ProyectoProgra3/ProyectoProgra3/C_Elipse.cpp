@@ -76,7 +76,7 @@ void C_Elipse::Cargar(ifstream & in)
 	_size.y = stoi(str);
 
 	getline(in, str);
-	_type = stoi(str);
+	_type = str;
 
 	getline(in, str);
 	Bloqueado = stoi(str);
@@ -131,22 +131,28 @@ C_Elipse::C_Elipse(float ra, float rb)
 
 void C_Elipse::setColorRelleno(sf::Color color)
 {
-	for (unsigned it = 0; it < _shape.getVertexCount(); ++it)
+	if (!Bloqueado)
 	{
-		_shape[it].color = color;
+		_colorRelleno = color;
+		for (unsigned it = 0; it < _shape.getVertexCount(); ++it)
+		{
+			_shape[it].color = color;
+		}
+		C_Documento::Instance()->Notify();
 	}
-	C_Documento::Instance()->Notify();
 }
 
 void C_Elipse::setColorLinea(sf::Color color)
 {
-	_colorLinea = color;
-	for (unsigned it = 0; it < Lines.getVertexCount(); ++it)
+	if (!Bloqueado)
 	{
-		Lines[it].color = color;
+		_colorLinea = color;
+		for (unsigned it = 0; it < Lines.getVertexCount(); ++it)
+		{
+			Lines[it].color = color;
+		}
+		C_Documento::Instance()->Notify();
 	}
-	C_Documento::Instance()->Notify();
-
 }
 
 bool C_Elipse::setPosicion(sf::Vector2f posicion)

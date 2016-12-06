@@ -16,7 +16,7 @@ public:
 	int GetCLSID();
 	void Guardar(ofstream &out);
 	void Cargar(ifstream &in);
-	//Guardar Cargar
+
 	void setColorRelleno(sf::Color color);
 	void setColorLinea(sf::Color color);
 	bool setPosicion(sf::Vector2f vector);
@@ -25,6 +25,7 @@ public:
 	void Inicializar() override;
 	void setSize(sf::Vector2f size) override;
 	C_Texto(int size);
+	C_Texto();
 	~C_Texto();
 };
 

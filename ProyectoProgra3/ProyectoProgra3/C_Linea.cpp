@@ -20,6 +20,9 @@ void C_Linea::Guardar(ofstream & out)
 	out << _b.x << endl;
 	out << _a.y << endl;
 
+	out << _pendiente << endl;
+	out << _angulo << endl;
+
 	out << (int)_colorLinea.r << endl;
 	out << (int)_colorLinea.g << endl;
 	out << (int)_colorLinea.b << endl;
@@ -59,6 +62,11 @@ void C_Linea::Cargar(ifstream & in)
 	_b.y = stoi(str);
 
 	getline(in, str);
+	_pendiente = stoi(str);
+	getline(in, str);
+	_angulo = stoi(str);
+
+	getline(in, str);
 	_colorLinea.r = stoi(str);
 	getline(in, str);
 	_colorLinea.g = stoi(str);
@@ -83,12 +91,24 @@ void C_Linea::Cargar(ifstream & in)
 	_size.y = stoi(str);
 
 	getline(in, str);
-	_type = stoi(str);
+	_type = str;
 
 	getline(in, str);
 	Bloqueado = stoi(str);
 	getline(in, str);
 	Visible = stoi(str);
+
+	cout << endl << endl << endl << endl;
+	cout << _size.x << endl;
+	cout << _size.y << endl;
+	cout << _posicion.x << endl;
+	cout << _posicion.y << endl;
+	cout << _a.x << endl;
+	cout << _a.y << endl;
+	cout << endl;
+	cout << _b.x << endl;
+	cout << _b.y << endl;
+	cout << endl;
 
 	Inicializar();
 	
@@ -97,10 +117,21 @@ void C_Linea::Cargar(ifstream & in)
 void C_Linea::Inicializar()
 {
 	_shape = sf::VertexArray(sf::Lines, 2);
-	_shape[0].position = _a;
-	_shape[1].position = _b;
+	
 	_originalPos.push_back(_a);
 	_originalPos.push_back(_b);
+
+	cout << endl << endl << endl << endl;
+	cout << _size.x << endl;
+	cout << _size.y << endl;
+	cout << _posicion.x << endl;
+	cout << _posicion.y << endl;
+	cout << _a.x << endl;
+	cout << _a.y << endl;
+	cout << endl;
+	cout << _b.x << endl;
+	cout << _b.y << endl;
+	cout << endl;
 
 	setColorLinea(_colorLinea);
 	setColorRelleno(_colorRelleno);
@@ -108,6 +139,7 @@ void C_Linea::Inicializar()
 	setID(ID);
 	setSize(_size);
 	setType(_type);
+	
 }
 
 void C_Linea::setColorRelleno(sf::Color color)
@@ -134,9 +166,8 @@ bool C_Linea::setPosicion(sf::Vector2f posicion)
 		_posicion = posicion;
 		_shape[0].position = _originalPos[0] + posicion;
 		_shape[1].position = _originalPos[1] + posicion;
-		//_a = _shape[0].position;
-		//_b = _shape[1].position;
-		C_Documento::Instance()->Notify();
+		_a = _shape[0].position;
+		_b = _shape[1].position;
 		return true;
 	}
 	return false;
