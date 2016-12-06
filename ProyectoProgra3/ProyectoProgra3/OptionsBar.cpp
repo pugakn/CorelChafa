@@ -30,8 +30,8 @@ OptionsBar::OptionsBar()
 
 	sfButton* temp = new sfButton;
 	temp->LoadTexture("Assets/B_GUARD1.png");
-	temp->_rectangle.setSize(sf::Vector2f(60, 60));
-	temp->_rectangle.setPosition(sf::Vector2f(0,0));
+	temp->_rectangle.setSize(sf::Vector2f(40, 40));
+	temp->_rectangle.setPosition(sf::Vector2f(40,20));
 	temp->Callback = []() {
 		
 	};
@@ -39,8 +39,8 @@ OptionsBar::OptionsBar()
 
 	temp = new sfButton;
 	temp->LoadTexture("Assets/B_CARGA1.png");
-	temp->_rectangle.setSize(sf::Vector2f(60, 60));
-	temp->_rectangle.setPosition(0, _buttons.back()->_rectangle.getPosition().y + _buttons.back()->_rectangle.getSize().y);
+	temp->_rectangle.setSize(sf::Vector2f(40, 40));
+	temp->_rectangle.setPosition(100,20);
 	temp->Callback = []() {
 		
 	};
@@ -50,8 +50,8 @@ OptionsBar::OptionsBar()
 		//Derecha/Izquierda
 	temp = new sfButton;
 	temp->LoadTexture("Assets/B_RIGHT.png");
-	temp->_rectangle.setSize(sf::Vector2f(60, 60));
-	temp->_rectangle.setPosition(_ItemsPosition.x + 240, _ItemsPosition.y + 60);
+	temp->_rectangle.setSize(sf::Vector2f(40, 40));
+	temp->_rectangle.setPosition(360, 63);
 	temp->Callback = []() {
 		if (C_Documento::Instance()->_actual->_figuraActual != nullptr)
 			C_Documento::Instance()->_actual->_figuraActual->setPosicion(C_Documento::Instance()->_actual->_figuraActual->getPosicion() + sf::Vector2f(10,0));
@@ -59,8 +59,8 @@ OptionsBar::OptionsBar()
 	_buttons.push_back(temp);
 	temp = new sfButton;
 	temp->LoadTexture("Assets/B_LEFT.png");
-	temp->_rectangle.setSize(sf::Vector2f(60, 60));
-	temp->_rectangle.setPosition(_ItemsPosition.x + 120, _buttons.back()->_rectangle.getPosition().y );
+	temp->_rectangle.setSize(sf::Vector2f(40, 40));
+	temp->_rectangle.setPosition(240, 63);
 	temp->Callback = []() {
 		if (C_Documento::Instance()->_actual->_figuraActual != nullptr)
 			C_Documento::Instance()->_actual->_figuraActual->setPosicion(C_Documento::Instance()->_actual->_figuraActual->getPosicion() - sf::Vector2f(10, 0));
@@ -70,8 +70,8 @@ OptionsBar::OptionsBar()
 		//Arriba/Abajo
 	temp = new sfButton;
 	temp->LoadTexture("Assets/B_UP.png");
-	temp->_rectangle.setSize(sf::Vector2f(60, 60));
-	temp->_rectangle.setPosition(_ItemsPosition.x + 180, _ItemsPosition.y);
+	temp->_rectangle.setSize(sf::Vector2f(40, 40));
+	temp->_rectangle.setPosition(300, 20);
 	temp->Callback = []() {
 		if (C_Documento::Instance()->_actual->_figuraActual != nullptr)
 			C_Documento::Instance()->_actual->_figuraActual->setPosicion(C_Documento::Instance()->_actual->_figuraActual->getPosicion() - sf::Vector2f(0, 10));
@@ -79,8 +79,8 @@ OptionsBar::OptionsBar()
 	_buttons.push_back(temp);
 	temp = new sfButton;
 	temp->LoadTexture("Assets/B_DOWN.png");
-	temp->_rectangle.setSize(sf::Vector2f(60, 60));
-	temp->_rectangle.setPosition(_ItemsPosition.x + 180, _buttons.back()->_rectangle.getPosition().y + _buttons.back()->_rectangle.getSize().y);
+	temp->_rectangle.setSize(sf::Vector2f(40, 40));
+	temp->_rectangle.setPosition(300, 63);
 	temp->Callback = []() {
 		if (C_Documento::Instance()->_actual->_figuraActual != nullptr)
 			C_Documento::Instance()->_actual->_figuraActual->setPosicion(C_Documento::Instance()->_actual->_figuraActual->getPosicion() + sf::Vector2f(0, 10));
@@ -91,8 +91,8 @@ OptionsBar::OptionsBar()
 		//X
 	temp = new sfButton;
 	temp->LoadTexture("Assets/B_01.png");
-	temp->_rectangle.setSize(sf::Vector2f(60, 60));
-	temp->_rectangle.setPosition(_ItemsPosition.x + 360, _ItemsPosition.y);
+	temp->_rectangle.setSize(sf::Vector2f(40, 40));
+	temp->_rectangle.setPosition(495, 17);
 	temp->Callback = []() {
 		if (C_Documento::Instance()->_actual->_figuraActual != nullptr)
 			C_Documento::Instance()->_actual->_figuraActual->setSize(C_Documento::Instance()->_actual->_figuraActual->getSize()+ sf::Vector2f(10,0));
@@ -100,8 +100,8 @@ OptionsBar::OptionsBar()
 	_buttons.push_back(temp);
 	temp = new sfButton;
 	temp->LoadTexture("Assets/B_03.png");
-	temp->_rectangle.setSize(sf::Vector2f(60, 60));
-	temp->_rectangle.setPosition(_ItemsPosition.x + 360, _buttons.back()->_rectangle.getPosition().y + _buttons.back()->_rectangle.getSize().y);
+	temp->_rectangle.setSize(sf::Vector2f(40, 40));
+	temp->_rectangle.setPosition(550, 17);
 	temp->Callback = []() {
 		if (C_Documento::Instance()->_actual->_figuraActual != nullptr)
 			C_Documento::Instance()->_actual->_figuraActual->setSize(C_Documento::Instance()->_actual->_figuraActual->getSize() - sf::Vector2f(10, 0));
@@ -111,8 +111,8 @@ OptionsBar::OptionsBar()
 		//Y
 	temp = new sfButton;
 	temp->LoadTexture("Assets/B_02.png");
-	temp->_rectangle.setSize(sf::Vector2f(60, 60));
-	temp->_rectangle.setPosition(_ItemsPosition.x + 420, _ItemsPosition.y);
+	temp->_rectangle.setSize(sf::Vector2f(40, 40));
+	temp->_rectangle.setPosition(495, 65);
 	temp->Callback = []() {
 		if (C_Documento::Instance()->_actual->_figuraActual != nullptr)
 			C_Documento::Instance()->_actual->_figuraActual->setSize(C_Documento::Instance()->_actual->_figuraActual->getSize() + sf::Vector2f(0, 10));
@@ -120,8 +120,8 @@ OptionsBar::OptionsBar()
 	_buttons.push_back(temp);
 	temp = new sfButton;
 	temp->LoadTexture("Assets/B_04.png");
-	temp->_rectangle.setSize(sf::Vector2f(60, 60));
-	temp->_rectangle.setPosition(_ItemsPosition.x + 420, _buttons.back()->_rectangle.getPosition().y + _buttons.back()->_rectangle.getSize().y);
+	temp->_rectangle.setSize(sf::Vector2f(40, 40));
+	temp->_rectangle.setPosition(550, 65);
 	temp->Callback = []() {
 		if (C_Documento::Instance()->_actual->_figuraActual != nullptr)
 			C_Documento::Instance()->_actual->_figuraActual->setSize(C_Documento::Instance()->_actual->_figuraActual->getSize() - sf::Vector2f(0, 10));

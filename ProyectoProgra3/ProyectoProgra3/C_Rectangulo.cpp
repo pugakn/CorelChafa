@@ -22,8 +22,10 @@ void C_Rectangulo::Inicializar()
 
 void C_Rectangulo::setSize(sf::Vector2f size)
 {
-	_size = size;
-	_rectangulo.setSize(size);
+	if (!Bloqueado && Visible) {
+		_size = size;
+		_rectangulo.setSize(size);
+	}
 }
 
 C_Rectangulo::C_Rectangulo(float base, float altura)
@@ -44,35 +46,43 @@ C_Rectangulo::C_Rectangulo()
 
 void C_Rectangulo::setColorRelleno(sf::Color color)
 {
-	_colorRelleno = color;
-	_rectangulo.setFillColor(color);
+	if (!Bloqueado && Visible) {
+		_colorRelleno = color;
+		_rectangulo.setFillColor(color);
+	}
 }
 
 void C_Rectangulo::setColorLinea(sf::Color color)
-{	
-	_colorLinea = color;
-	_rectangulo.setOutlineThickness(1);
-	_rectangulo.setOutlineColor(color);
+{
+	if (!Bloqueado && Visible) {
+		_colorLinea = color;
+		_rectangulo.setOutlineThickness(1);
+		_rectangulo.setOutlineColor(color);
+	}
 }
 
 bool C_Rectangulo::setPosicion(sf::Vector2f vector)
 {
-	_posicion = vector;
-	_rectangulo.setPosition(vector);
+	if (!Bloqueado && Visible) {
+		_posicion = vector;
+		_rectangulo.setPosition(vector);
 
-	return true;
+		return true;
+	}
+	return false;
 }
 
 bool C_Rectangulo::HitTest(sf::Vector2i point)
 {
-	sf::Vector2f v1 = _rectangulo.getPosition();
-	sf::Vector2f v2 = _rectangulo.getPosition() + _rectangulo.getSize();
-	if (point.x >= _rectangulo.getPosition().x && point.x <= _rectangulo.getPosition().x + _rectangulo.getSize().x && point.y >= _rectangulo.getPosition().y && point.y <= _rectangulo.getPosition().y + _rectangulo.getSize().y)
-	{
-		cout << "allahuakbar";
-		return true;
+	if (Visible) {
+		sf::Vector2f v1 = _rectangulo.getPosition();
+		sf::Vector2f v2 = _rectangulo.getPosition() + _rectangulo.getSize();
+		if (point.x >= _rectangulo.getPosition().x && point.x <= _rectangulo.getPosition().x + _rectangulo.getSize().x && point.y >= _rectangulo.getPosition().y && point.y <= _rectangulo.getPosition().y + _rectangulo.getSize().y)
+		{
+			cout << "allahuakbar";
+			return true;
+		}
 	}
-		
 	return false;
 }
 

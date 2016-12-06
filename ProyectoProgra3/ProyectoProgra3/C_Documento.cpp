@@ -20,6 +20,7 @@ void C_Documento::Dibujar(sf::RenderWindow & window)
 void C_Documento::SetActual(C_Capa *actual)
 {
 	_actual = actual;
+	//C_Documento::Instance()->Notify();
 }
 
 void C_Documento::Attach(Observer & observer)
@@ -84,10 +85,13 @@ void C_Documento::Subir()
 		}
 	}
 	auto it2 = it;
-	it2++;
-	if (it2 != _lista.end())
-		_lista.splice(it2, _lista, it);
-	Notify();
+	if (it2 != _lista.end()) {
+		it2++;
+		if (it2 != _lista.end())
+			_lista.splice(it, _lista, it2);
+		Notify();
+	}
+
 }
 
 void C_Documento::Bajar()
@@ -99,10 +103,13 @@ void C_Documento::Bajar()
 		}
 	}
 	auto it2 = it;
-	it2--;
-	if (it2 != _lista.end())
-		_lista.splice(it2, _lista, it);
-	Notify();
+	if (it2 != _lista.begin()) {
+		it2--;
+		if (it2 != _lista.end())
+			_lista.splice(it2, _lista, it);
+		Notify();
+	}
+
 }
 
 int C_Documento::GetCLSID()

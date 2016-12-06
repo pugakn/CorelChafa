@@ -3,6 +3,7 @@
 #include "VECTOR.h"
 #include <iostream>
 #include "C_Documento.h"
+#include "OptionsBar.h"
 
 
 int C_TiraLineas::GetCLSID()
@@ -120,56 +121,64 @@ void C_TiraLineas::setColorRelleno(sf::Color color)
 
 void C_TiraLineas::setColorLinea(sf::Color color)
 {
-	_colorLinea = color;
-	for (unsigned i = 0; i < _shape.getVertexCount(); i++) {
-		_shape[i].color = color;
+	if (!Bloqueado && Visible) {
+		_colorLinea = color;
+		for (unsigned i = 0; i < _shape.getVertexCount(); i++) {
+			_shape[i].color = color;
+		}
+		C_Documento::Instance()->Notify();
 	}
-	C_Documento::Instance()->Notify();
 }
 
 bool C_TiraLineas::setPosicion(sf::Vector2f vector)
 {
-	_posicion = vector;
-	if (vector.x > 0 && vector.y > 0) {
-		for (unsigned i = 0; i < _shape.getVertexCount(); i++)
-		{
-			_shape[i].position = _originalPos[i] + vector;
+	if (!Bloqueado && Visible) {
+		_posicion = vector;
+		if (vector.x > 0 && vector.y > 0) {
+			for (unsigned i = 0; i < _shape.getVertexCount(); i++)
+			{
+				_shape[i].position = _originalPos[i] + vector;
+			}
+			C_Documento::Instance()->Notify();
+			return true;
 		}
-		C_Documento::Instance()->Notify();
-		return true;
 	}
 	return false;
 }
 
 void C_TiraLineas::setSize(sf::Vector2f size)
 {
-	std::vector<sf::Vector2f> pos;
-	for (unsigned i = 0; i < _shape.getVertexCount(); i++)
-		pos.push_back(_shape[i].position);
-	for (unsigned i = 1; i < _shape.getVertexCount(); i++)
-	{
-		_shape[i].position = pos[i] + sf::Vector2f(size.x/50,_shape[i].position.y);
+	if (!Bloqueado && Visible) {
+		std::vector<sf::Vector2f> pos;
+		for (unsigned i = 0; i < _shape.getVertexCount(); i++)
+			pos.push_back(_shape[i].position);
+		for (unsigned i = 1; i < _shape.getVertexCount(); i++)
+		{
+			_shape[i].position = pos[i] + sf::Vector2f(size.x / 50, _shape[i].position.y);
+		}
+		C_Documento::Instance()->Notify();
 	}
-	C_Documento::Instance()->Notify();
 }
 
 bool C_TiraLineas::HitTest(sf::Vector2i point)
 {
-	for (int i = 0; i < _shape.getVertexCount()-2;i++) 
-	{
-		if (fabs(_angulos[i]) >= 45) //vertical
+	if (Visible) {
+		for (int i = 0; i < _shape.getVertexCount() - 2; i++)
 		{
-			if (HitTestTTriangle(_shape[i].position + sf::Vector2f(15, 0), _shape[i + 1].position + sf::Vector2f(15, 0), _shape[i].position - sf::Vector2f(15, 0), (sf::Vector2f)point))
-				return true;
-			if (HitTestTTriangle(_shape[i + 1].position + sf::Vector2f(15, 0), _shape[i + 1].position - sf::Vector2f(15, 0), _shape[i].position - sf::Vector2f(15, 0), (sf::Vector2f)point))
-				return true;
-		}
-		else //horizontal
-		{
-			if (HitTestTTriangle(_shape[i].position + sf::Vector2f(0, 15), _shape[i + 1].position + sf::Vector2f(0, 15), _shape[i].position - sf::Vector2f(0, 15), (sf::Vector2f)point))
-				return true;
-			if (HitTestTTriangle(_shape[i + 1].position + sf::Vector2f(0, 15), _shape[i + 1].position - sf::Vector2f(0, 15), _shape[i].position - sf::Vector2f(0, 15), (sf::Vector2f)point))
-				return true;
+			if (fabs(_angulos[i]) >= 45) //vertical
+			{
+				if (HitTestTTriangle(_shape[i].position + sf::Vector2f(15, 0), _shape[i + 1].position + sf::Vector2f(15, 0), _shape[i].position - sf::Vector2f(15, 0), (sf::Vector2f)point))
+					return true;
+				if (HitTestTTriangle(_shape[i + 1].position + sf::Vector2f(15, 0), _shape[i + 1].position - sf::Vector2f(15, 0), _shape[i].position - sf::Vector2f(15, 0), (sf::Vector2f)point))
+					return true;
+			}
+			else //horizontal
+			{
+				if (HitTestTTriangle(_shape[i].position + sf::Vector2f(0, 15), _shape[i + 1].position + sf::Vector2f(0, 15), _shape[i].position - sf::Vector2f(0, 15), (sf::Vector2f)point))
+					return true;
+				if (HitTestTTriangle(_shape[i + 1].position + sf::Vector2f(0, 15), _shape[i + 1].position - sf::Vector2f(0, 15), _shape[i].position - sf::Vector2f(0, 15), (sf::Vector2f)point))
+					return true;
+			}
 		}
 	}
 	return false;
@@ -183,6 +192,7 @@ void C_TiraLineas::Dibujar(sf::RenderWindow & window)
 void C_TiraLineas::SetLastPointPosition(sf::Vector2f size)
 {
 	_shape[_shape.getVertexCount() - 1].position = size;
+	_shape[_shape.getVertexCount() - 1].color = OptionsBar::Instance()->_colorPicker.getLineColor();
 	C_Documento::Instance()->Notify();
 }
 

@@ -2,6 +2,7 @@
 #include "C_Curva.h"
 #include <iostream>
 #include "C_Documento.h"
+#include "OptionsBar.h"
 
 
 int C_Curva::GetCLSID()
@@ -133,6 +134,7 @@ C_Curva::C_Curva(sf::Vector2f p1, sf::Vector2f p2, sf::Vector2f c1, sf::Vector2f
 	_p2 = p2;
 	_c1 = c1;
 	_c2 = c2;
+	_posicion = p1;
 	_vertices = sf::VertexArray (sf::LinesStrip, 0);
 	std::vector<sf::Vector2f> points =
 		CalcCubicBezier(p1,p2,c1,c2,40);
@@ -169,13 +171,15 @@ std::vector<sf::Vector2f> CalcCubicBezier(
 
 bool C_Curva::HitTest(sf::Vector2i point)
 {
-	for (int i = 0; i < _vertices.getVertexCount() - 1; i++) {
-		if (HitTestTTriangle(_vertices[i].position + sf::Vector2f(0, 15), _vertices[i + 1].position + sf::Vector2f(0, 15), _vertices[i].position - sf::Vector2f(0, 15), (sf::Vector2f)point))
-			return true;
-		if (HitTestTTriangle(_vertices[i + 1].position + sf::Vector2f(0, 15), _vertices[i + 1].position - sf::Vector2f(0, 15), _vertices[i].position - sf::Vector2f(0, 15), (sf::Vector2f)point))
-			return true;
+	if (Visible) {
+		for (int i = 0; i < _vertices.getVertexCount() - 1; i++) {
+			if (HitTestTTriangle(_vertices[i].position + sf::Vector2f(0, 15), _vertices[i + 1].position + sf::Vector2f(0, 15), _vertices[i].position - sf::Vector2f(0, 15), (sf::Vector2f)point))
+				return true;
+			if (HitTestTTriangle(_vertices[i + 1].position + sf::Vector2f(0, 15), _vertices[i + 1].position - sf::Vector2f(0, 15), _vertices[i].position - sf::Vector2f(0, 15), (sf::Vector2f)point))
+				return true;
+		}
+		std::cout << "YEI";
 	}
-	std::cout << "YEI";
 	return false;
 }
 
@@ -186,22 +190,25 @@ void C_Curva::setColorRelleno(sf::Color color)
 
 void C_Curva::setColorLinea(sf::Color color)
 {
-	_colorLinea = color;
-	for (int i = 0; i < _vertices.getVertexCount(); i++)
-	{
-		_vertices[i].color = color;
+	if (!Bloqueado && Visible) {
+		_colorLinea = color;
+		for (int i = 0; i < _vertices.getVertexCount(); i++)
+		{
+			_vertices[i].color = color;
+		}
+		C_Documento::Instance()->Notify();
 	}
-	C_Documento::Instance()->Notify();
 }
 
 bool C_Curva::setPosicion(sf::Vector2f posicion)
 {
-	if (posicion.x > 0 && posicion.y > 0) {
+	if (!Bloqueado && Visible) {
 		_posicion = posicion;
 		for (int i = 0; i < _vertices.getVertexCount(); i++)
 		{
 				_vertices[i].position = _originalPos[i] + posicion;
 		}
+		//setColorLinea(sf::Color::Black);
 		C_Documento::Instance()->Notify();
 		return true;
 	}
@@ -217,4 +224,46 @@ void C_Curva::setSize(sf::Vector2f size)
 void C_Curva::Dibujar(sf::RenderWindow& window)
 {
 	window.draw(_vertices);
+}
+
+void C_Curva::setP2(sf::Vector2f pos)
+{
+	_p2 = pos;
+	_originalPos.clear();
+	_vertices = sf::VertexArray(sf::LinesStrip, 0);
+	std::vector<sf::Vector2f> points =
+		CalcCubicBezier(_p1, _p2, _c1, _c2, 40);
+	for (auto it = points.begin(); it != points.end(); ++it) {
+		_vertices.append(sf::Vertex(*it));
+		_originalPos.push_back(*it - _vertices[0].position);
+	}
+	setColorLinea(OptionsBar::Instance()->_colorPicker.getLineColor());
+}
+
+void C_Curva::setC1(sf::Vector2f pos)
+{
+	_c1 = pos;
+	_originalPos.clear();
+	_vertices = sf::VertexArray(sf::LinesStrip, 0);
+	std::vector<sf::Vector2f> points =
+		CalcCubicBezier(_p1, _p2, _c1, _c2, 40);
+	for (auto it = points.begin(); it != points.end(); ++it) {
+		_vertices.append(sf::Vertex(*it));
+		_originalPos.push_back(*it - _vertices[0].position);
+	}
+	setColorLinea(OptionsBar::Instance()->_colorPicker.getLineColor());
+}
+
+void C_Curva::setC2(sf::Vector2f pos)
+{
+	_c2 = pos;
+	_originalPos.clear();
+	_vertices = sf::VertexArray(sf::LinesStrip, 0);
+	std::vector<sf::Vector2f> points =
+		CalcCubicBezier(_p1, _p2, _c1, _c2, 40);
+	for (auto it = points.begin(); it != points.end(); ++it) {
+		_vertices.append(sf::Vertex(*it));
+		_originalPos.push_back(*it - _vertices[0].position);
+	}
+	setColorLinea(OptionsBar::Instance()->_colorPicker.getLineColor());
 }

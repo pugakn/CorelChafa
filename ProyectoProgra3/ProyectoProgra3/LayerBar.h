@@ -20,6 +20,11 @@ private:
 	list<C_Figura*>* _figuras;
 	list<C_Capa*>* _capas;
 	sf::Font _font;
+
+	C_Capa *_capaActual;
+	C_Figura* _figuraActual;
+	bool _reordenado = false;
+	bool breakCicle = false;
 protected:
 	LayerBar();
 public:

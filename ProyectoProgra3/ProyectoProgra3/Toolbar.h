@@ -1,6 +1,7 @@
 #pragma once
 #include "sfButton.h"
 #include <vector>
+#include "DrawArea.h"
 enum Tools
 {
 	CURSOR,
@@ -26,6 +27,8 @@ private:
 protected:
 	Toolbar();
 public:
+	static int Poliwindow();
+	int _polilados;
 	static Tools _actualTool;
 	static Toolbar* Instance();
 	void Draw(sf::RenderWindow&);
