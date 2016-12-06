@@ -149,6 +149,7 @@ void C_Documento::Cargar(ifstream & in)
 			_lista.push_back(newItem);
 		}
 	}
+	Notify();
 }
 
 
