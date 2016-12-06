@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "InfoBar.h"
 #include "C_Documento.h"
+#include "LayerBar.h"
 
 InfoBar* InfoBar::_instance = 0;
 
@@ -17,7 +18,14 @@ InfoBar * InfoBar::Instance()
 
 void InfoBar::Update()
 {
-	//TODO: Sólo cuando haya cambios en posicion, color,etc...
+	if (LayerBar::Instance()->_layerSelected) {
+		//if (_capaActial != C_Documento::Instance()->_actual) {
+			_capaActial = C_Documento::Instance()->_actual;
+			_positionTXT.setString("");
+			_idString = "CAPA: " + to_string(_capaActial->ID);
+			_idText.setString(_idString);
+		//}
+	}else
 	if (C_Documento::Instance()->_actual->_figuraActual != nullptr)
 		if (_actual != C_Documento::Instance()->_actual->_figuraActual || (_posicion != C_Documento::Instance()->_actual->_figuraActual->getPosicion())) {
 			_actual = C_Documento::Instance()->_actual->_figuraActual;

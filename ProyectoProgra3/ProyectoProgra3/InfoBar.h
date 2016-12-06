@@ -2,6 +2,7 @@
 #include <SFML\Graphics.hpp>
 #include "Observer.h"
 #include "C_Figura.h"
+#include "C_Capa.h"
 class InfoBar : public Observer
 {
 private:
@@ -20,6 +21,7 @@ private:
 	sf::RectangleShape _background;
 	sf::Texture _texture;
 	C_Figura *_actual;
+	C_Capa *_capaActial;
 	sf::Vector2f _posicion;
 protected:
 	InfoBar();

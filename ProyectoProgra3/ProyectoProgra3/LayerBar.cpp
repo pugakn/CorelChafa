@@ -19,7 +19,7 @@ void LayerBar::Update()
 	static int Size;
 	if (Size != C_Documento::Instance()->_actual->Figuras.size() + C_Documento::Instance()->_lista.size() || _reordenado ||
 		_capaActual != C_Documento::Instance()->_actual) {
-		_capaActual = C_Documento::Instance()->_actual;
+		//_capaActual = C_Documento::Instance()->_actual;
 		_reordenado = false;
 		Size = C_Documento::Instance()->_actual->Figuras.size() + C_Documento::Instance()->_lista.size();
 		_txtButtons.clear();
@@ -55,7 +55,7 @@ void LayerBar::Update()
 				temp._txt.setCharacterSize(14);
 				temp._txt.setFillColor(sf::Color::Black);
 				temp.Callback = [&it, &layer,this]() {
-					//breakCicle = true;
+					breakCicle = true;
 					LayerBar::Instance()->_layerSelected = false;
 					C_Documento::Instance()->SetActual(layer);
 					C_Documento::Instance()->_actual->SetActual(it);
@@ -317,15 +317,16 @@ void LayerBar::Inputs(sf::Event & event, sf::RenderWindow & window)
 				item->Callback();
 			}
 		}
-		for (auto &item : _txtButtons)
+		for (auto item = _txtButtons.begin() ; item !=  _txtButtons.end(); item++)
 		{
-			if (item.HitTest(sf::Mouse::getPosition(window)))
+			if (item->HitTest(sf::Mouse::getPosition(window)))
 			{
+				item->Callback();
 				if (breakCicle) {
 					breakCicle = false;
+					item = _txtButtons.begin();
 					break;
 				}
-				item.Callback();
 			}
 		}
 	}

@@ -20,7 +20,7 @@ void C_Documento::Dibujar(sf::RenderWindow & window)
 void C_Documento::SetActual(C_Capa *actual)
 {
 	_actual = actual;
-	//C_Documento::Instance()->Notify();
+	C_Documento::Instance()->Notify();
 }
 
 void C_Documento::Attach(Observer & observer)
